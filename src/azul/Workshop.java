@@ -9,6 +9,7 @@ public class Workshop implements Storage {
 		
 	}
 	
+	@Override
     public void remove(Bag discarded, Tile color, int count) {
 		
 	}
@@ -27,12 +28,24 @@ public class Workshop implements Storage {
 	public void add(Bag bag, Tile color, int count) {
 		
 	}
-	
-	void getTileQuantity(Tile color) {
+    
+	@Override
+	public boolean hasColor(Tile color) {
+		return false;
+	}
+
+	@Override
+	public void getTileQuantity(Tile color) {
 		
 	}
 	
-	boolean isEmpty() {
+	@Override
+	public boolean isEmpty() {
+		return false;
+		
+	}
+	
+	public boolean isFull() {
 		return false;
 		
 	}

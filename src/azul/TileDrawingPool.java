@@ -10,6 +10,11 @@ public class TileDrawingPool {
 		
 	}
 	
+	public boolean isEmpty() {
+		return false;
+		
+	}
+	
 	public class Middle implements Storage {
 		
 		public void transferToTheMiddle(Workshop workshop) {
@@ -34,6 +39,21 @@ public class TileDrawingPool {
 		@Override
 		public void add(Bag bag, Tile color, int count) {
 			
+		}
+
+		@Override
+		public void getTileQuantity(Tile color) {
+			
+		}
+
+		@Override
+		public boolean hasColor(Tile color) {
+			return false;
+		}
+
+		@Override
+		public boolean isEmpty() {
+			return false;
 		}
 		
 	}

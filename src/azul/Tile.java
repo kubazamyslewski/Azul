@@ -1,4 +1,7 @@
 package azul;
 
-public class Tile {
+/**
+ * Enum representing types of tiles
+ */
+public enum Tile {
 }

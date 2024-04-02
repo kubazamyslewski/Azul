@@ -5,6 +5,9 @@ package azul;
  */
 public class Workshop implements Storage {
 	
+	/**
+	 * Constructor for a workshop
+	 */
 	public Workshop(Bag bag) {
 		
 	}
@@ -35,8 +38,8 @@ public class Workshop implements Storage {
 	}
 
 	@Override
-	public void getTileQuantity(Tile color) {
-		
+	public int getTileQuantity(Tile color) {
+		return 0;
 	}
 	
 	@Override
@@ -45,12 +48,12 @@ public class Workshop implements Storage {
 		
 	}
 	
+	/**
+	 * Checks whether a workshop is full
+	 * @return
+	 */
 	public boolean isFull() {
 		return false;
 		
 	}
-	
-	
-	
-	
 }

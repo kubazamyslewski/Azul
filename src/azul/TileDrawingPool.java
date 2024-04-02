@@ -1,15 +1,37 @@
 package azul;
 
+/**
+ * An area on a table, that all players can take tiles from
+ */
 public class TileDrawingPool {
 	
-	public void initializeWorkshops(Bag bag, int playerCount) {
+	/**
+	 * Creates new workshops
+	 * @param playerCount
+	 */
+	public void initializeWorkshops(int playerCount) {
 		
 	}
 	
+	/**
+	 * Fills all workshops with tiles from a bag
+	 * @param bag
+	 */
+	public void fillWorkshops(Bag bag) {
+		
+	}
+	
+	/**
+	 * Initializes The Middle of The Table
+	 */
 	public void initializeMiddle(Bag bag) {
 		
 	}
 	
+	/**
+	 * Checks whether there are absolutely no tiles players can take
+	 * @return
+	 */
 	public boolean isEmpty() {
 		return false;
 		
@@ -17,6 +39,10 @@ public class TileDrawingPool {
 	
 	public class Middle implements Storage {
 		
+		/**
+		 * Transfers tiles from a workshop to The Middle of The Table
+		 * @param workshop
+		 */
 		public void transferToTheMiddle(Workshop workshop) {
 			
 		}
@@ -42,8 +68,8 @@ public class TileDrawingPool {
 		}
 
 		@Override
-		public void getTileQuantity(Tile color) {
-			
+		public int getTileQuantity(Tile color) {
+			return 0;
 		}
 
 		@Override

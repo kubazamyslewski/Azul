@@ -2,24 +2,38 @@ package gui;
 
 public class BoardGUI {
 
-    public void setMosaic(){
+    /**
+     * Updates the display of the mosaic.
+     */
+    public void setMosaic() {
 
     }
 
-    public void setWall(){
+    /**
+     * Updates the display of the wall.
+     */
+    public void setWall() {
 
     }
 
-    public void setFloor(){
+    /**
+     * Updates the display of the floor.
+     */
+    public void setFloor() {
 
     }
 
-    public void setPoints(){
+    /**
+     * Updates the display of the points.
+     */
+    public void setPoints() {
 
     }
 
-    void setSelection(){
+    /**
+     * Sets the selection.
+     */
+    void setSelection() {
 
     }
-
 }

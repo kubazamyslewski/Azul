@@ -26,7 +26,6 @@ public class Bag {
      * @param blues    Number of blue tiles.
      */
     public Bag(int blacks, int whites, int reds, int yellows, int blues) {
-        // Implementation of the constructor
     }
 
     /**
@@ -35,7 +34,6 @@ public class Bag {
      * @param box The box with tiles.
      */
     public void addToBag (Box box){
-        // Implementation of the method
     }
 
     /**
@@ -45,7 +43,7 @@ public class Bag {
      */
 
     public Tile pop() {
-        // Implementation of the method
+
         return retrievedTile;
     }
 
@@ -55,7 +53,7 @@ public class Bag {
      * @return The current number of tiles in the bag.
      */
     public int size(){
-        // Implementation of the method
+
         return 0;
     }
 
@@ -65,7 +63,7 @@ public class Bag {
      * @return true if the bag is empty, false otherwise.
      */
     public boolean isEmpty(){
-        // Implementation of the method
+
         return false;
     }
 }

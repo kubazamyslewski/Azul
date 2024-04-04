@@ -12,7 +12,7 @@ public class MouseHandler extends MouseAdapter {
      */
     @Override
     public void mouseClicked(MouseEvent e) {
-        // Mouse click handling code goes here
+
     }
 
     /**
@@ -22,6 +22,6 @@ public class MouseHandler extends MouseAdapter {
      */
     @Override
     public void mousePressed(MouseEvent e) {
-        // Mouse press handling code goes here
+
     }
 }

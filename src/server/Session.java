@@ -3,6 +3,8 @@ package server;
 import azul.*;
 import client.Client;
 
+import java.util.Queue;
+
 /**
  * Class representing current state of the game on the server.
  */
@@ -15,6 +17,7 @@ public class Session {
     private Box box;
     private Player[] players;
     private Server server;
+    private Queue<Player> playerOrder;
 
     public int getTurnCounter() {
         return turnCounter;

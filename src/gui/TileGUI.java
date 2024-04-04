@@ -5,6 +5,7 @@ import javax.swing.*;
 
 public class TileGUI extends JLabel {
     private boolean visible;
+    private Tile tile;
 
     /**
      * Constructor for the TileGUI class.

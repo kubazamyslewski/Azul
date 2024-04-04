@@ -7,7 +7,11 @@ import java.util.List;
  * Class representing the box of tiles.
  */
 public class Box {
-
+    private List<Tile> blackTiles = new ArrayList<>();
+    private List<Tile> whiteTiles = new ArrayList<>();
+    private List<Tile> redTiles = new ArrayList<>();
+    private List<Tile> yellowTiles = new ArrayList<>();
+    private List<Tile> blueTiles = new ArrayList<>();
     /**
      * Default constructor for the box.
      */

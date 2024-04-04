@@ -42,5 +42,13 @@ public class Mosaic {
      */
     public void setTile(int row, int column, Tile tile) {
     }
+
+    /**
+     * Checks if a row on the mosaic is completed.
+     * @return - Boolean value indicating if a row on the mosaic is completed.
+     */
+    public boolean isRowCompleted(){
+        return false;
+    }
 }
 

@@ -3,7 +3,7 @@ package gui;
 public class Interface {
 
 
-    PlayerView(int numberOfPlayers, boolean singleplayer, String host, int port){
+    public void PlayerView(int numberOfPlayers, boolean singleplayer, String host, int port){
 
     }
 

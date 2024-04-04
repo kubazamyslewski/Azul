@@ -1,12 +1,15 @@
 package gui;
 
 import azul.Tile;
+import azul.Workshop;
 
 
 import javax.swing.*;
 import java.awt.*;
 
 public class WorkshopGUI extends JLabel {
+
+    private Workshop workshop;
     Tile[] tiles = new Tile[4];
 
     int workshopNumber;

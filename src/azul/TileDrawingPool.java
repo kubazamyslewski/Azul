@@ -6,11 +6,17 @@ package azul;
 public class TileDrawingPool {
 	
 	/**
+	 * Initializes The Middle of The Table
+	 */
+	public Middle middle;
+	private Workshop[] workshops;
+	
+	/**
 	 * Return a table of current workshops
 	 * @return
 	 */
 	public Workshop[] getWorkshops() {
-		return new Workshop[0];
+		return workshops;
 	}
 	
 	/**
@@ -26,13 +32,6 @@ public class TileDrawingPool {
 	 * @param bag
 	 */
 	public void fillWorkshops(Bag bag) {
-		
-	}
-	
-	/**
-	 * Initializes The Middle of The Table
-	 */
-	public void initializeMiddle(Bag bag) {
 		
 	}
 	

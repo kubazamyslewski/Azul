@@ -7,6 +7,8 @@ import server.Session;
  */
 public class Player {
 	
+	private Board board;
+	
 	/**
 	 * Checks whether a player has the tile with number 1 on it
 	 * @return
@@ -18,7 +20,7 @@ public class Player {
 	
 	/**
 	 * Assigns Tile 1 to a player and removes it from another player
-	 * @param player
+	 * @param player Player from which the tile is removed
 	 */
 	void changeStartingPlayer(Player player) {
 		
@@ -45,7 +47,7 @@ public class Player {
 	 * Allows a player to Surrender
 	 * @param session
 	 */
-	void Surrender(Session session) {
+	void surrender(Session session) {
 		
 	}
 }

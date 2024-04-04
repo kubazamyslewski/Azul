@@ -9,18 +9,18 @@ public class Mosaic {
     }
 
     /**
-     * Converts the mosaic to a boolean matrix of size 5x5 where true represents a placed tile and false represents an empty spot.
+     * Converts the mosaic to a boolean matrix of size 5x5 to check where tiles are placed.
      * @return boolean[5][5]
      */
     public boolean[][] exportMosaic(){
-        return null;
+        return new boolean[5][5];
     }
 
     /**
      * Initializes the mosaic squares.
      */
     private Tile[][] createMosaic() {
-        return null;
+        return new Tile[5][5];
     }
 
     /**
@@ -30,7 +30,8 @@ public class Mosaic {
      * @return - The placed tile.
      */
     public Tile getPlacedTile(int row, int column) {
-        return null;
+        Tile tile = null;
+        return tile;
     }
 
     /**
@@ -40,6 +41,14 @@ public class Mosaic {
      * @param tile   - The tile to be placed.
      */
     public void setTile(int row, int column, Tile tile) {
+    }
+
+    /**
+     * Checks if a row on the mosaic is completed.
+     * @return - Boolean value indicating if a row on the mosaic is completed.
+     */
+    public boolean isRowCompleted(){
+        return false;
     }
 }
 

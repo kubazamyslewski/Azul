@@ -11,7 +11,7 @@ public class Player {
 	 * Checks whether a player has the tile with number 1 on it
 	 * @return
 	 */
-	public boolean hasTile1() {
+	public boolean isStartingPlayer() {
 		return false;
 		
 	}
@@ -20,7 +20,7 @@ public class Player {
 	 * Assigns Tile 1 to a player and removes it from another player
 	 * @param player
 	 */
-	void assignTile1(Player player) {
+	void changeStartingPlayer(Player player) {
 		
 	}
 	
@@ -28,7 +28,7 @@ public class Player {
 	/**
 	 * Assigns Tile 1 to a player
 	 */
-	void assignTile1() {
+	void setStartingPlayer() {
 		
 	}
 	

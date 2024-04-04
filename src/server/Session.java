@@ -11,7 +11,7 @@ public class Session {
     private int numberOfPlayers;
     private int nextRoundFirstPlayer;
     private Bag bag;
-    private Workshop[] workshops;
+    private TileDrawingPool tileDrawingPool;
     private Box box;
     private Player[] players;
     private Server server;
@@ -35,8 +35,8 @@ public class Session {
         return bag;
     }
 
-    public Workshop[] getWorkshops() {
-        return workshops;
+    public TileDrawingPool getTileDrawingPool() {
+        return tileDrawingPool;
     }
 
     public Box getBox() {
@@ -73,7 +73,4 @@ public class Session {
     public void updateBoard(){
 
     }
-
-    public
-
 }

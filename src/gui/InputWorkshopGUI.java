@@ -13,11 +13,7 @@ public class InputWorkshopGUI extends Container {
      * @param workshopGUI the WorkshopGUI object associated with this input GUI
      */
     public InputWorkshopGUI(WorkshopGUI workshopGUI) {
-        this.workshopGUI = workshopGUI;
 
-        for (int i = 0; i < 4; i++) {
-            buttons[i] = new WorkshopButton(i, this);
-        }
     }
 
     /**
@@ -39,8 +35,7 @@ public class InputWorkshopGUI extends Container {
          * @param inputWorkshopGUI  the InputWorkshopGUI object associated with this button
          */
         public WorkshopButton(int numberOfButton, gui.InputWorkshopGUI inputWorkshopGUI) {
-            this.inputWorkshopGUI = inputWorkshopGUI;
-            this.numberOfButton = numberOfButton;
+
         }
 
         /**

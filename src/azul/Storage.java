@@ -11,20 +11,20 @@ public interface Storage {
 	 * @param color
 	 * @param count
 	 */
-	public void remove(Bag discardedBag, Tile color, int count);
+	public void remove(Box box, Tile color, int count);
 	
 	/**
 	 * Removes all tiles with a given color from storage and adds it to a Bag for storing discarded tiles
 	 * @param discardedBag
 	 * @param color
 	 */
-	public void removeAll(Bag discardedBag, Tile color);
+	public void removeAll(Box box, Tile color);
 	
 	/**
 	 * Removes all tiles with a given color from storage and adds it to a Bag for storing discarded tiles
 	 * @param discardedBag
 	 */
-	public void removeAll(Bag discardedBag);
+	public void removeAll(Box box);
 	
 	/**
 	 * Adds tiles with a given color to storage by drawing them from a bag

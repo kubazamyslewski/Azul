@@ -13,17 +13,17 @@ public class Workshop implements Storage {
 	}
 	
 	@Override
-    public void remove(Bag discarded, Tile color, int count) {
+    public void remove(Box box, Tile color, int count) {
 		
 	}
 	
     @Override
-	public void removeAll(Bag discarded, Tile color) {
+	public void removeAll(Box box, Tile color) {
 		
 	}
 	
     @Override
-	public void removeAll(Bag discarded) {
+	public void removeAll(Box box) {
 		
 	}
 	

@@ -4,6 +4,8 @@ package azul;
  * Mosaic representation.
  */
 public class Mosaic {
+    private Tile tile;
+    private Tile[][] mosaic;
 
     public Mosaic() {
     }
@@ -12,15 +14,8 @@ public class Mosaic {
      * Converts the mosaic to a boolean matrix of size 5x5 to check where tiles are placed.
      * @return boolean[5][5]
      */
-    public boolean[][] exportMosaic(){
+    public boolean[][] checkMosaic(){
         return new boolean[5][5];
-    }
-
-    /**
-     * Initializes the mosaic squares.
-     */
-    private Tile[][] createMosaic() {
-        return new Tile[5][5];
     }
 
     /**
@@ -30,7 +25,6 @@ public class Mosaic {
      * @return - The placed tile.
      */
     public Tile getPlacedTile(int row, int column) {
-        Tile tile = null;
         return tile;
     }
 

@@ -1,7 +1,11 @@
 package azul;
 
+/**
+ * Class representing the area where players put tiles before putting them on mosaic
+ */
 public class Wall {
-
+    private Tile[][] wall;
+    private Tile tile;
     public Wall(){
 
     }
@@ -12,8 +16,7 @@ public class Wall {
      * @return - Tile representing the color of the row.
      */
     public Tile getColorOfTheRow(int row){
-        Tile Tile = null;
-        return Tile;
+        return tile;
     }
 
     /**
@@ -21,7 +24,6 @@ public class Wall {
      * @return - 5x5 matrix representing the wall state.
      */
     public Tile[][] exportWall() {
-        Tile[][] wall = new Tile[5][5];
         return wall;
     }
 

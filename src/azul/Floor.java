@@ -1,7 +1,7 @@
 package azul;
 
 public class Floor {
-
+    private Tile[] tiles;
     /**
      * Constructor for the Floor class.
      */
@@ -21,7 +21,6 @@ public class Floor {
      * @return - Array of tiles representing the floor state.
      */
     public Tile[] exportFloor() {
-        Tile[] tiles = new Tile[0];
         return tiles;
     }
 

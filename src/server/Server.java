@@ -10,6 +10,9 @@ public class Server implements Runnable{
     private Session session;
     private int numberOfPlayers;
     private Socket serverSocket;
+    /**
+     * Array of clients using a server
+     */
     private ArrayList<ClientManager> clients = new ArrayList<>();
     private int port;
 
@@ -55,7 +58,7 @@ public class Server implements Runnable{
      * @return String representing public IPv4 address of server
      */
     public String getPublicIP(){
-
+        return "ADRES IP";
     }
 
     /**

@@ -2,6 +2,9 @@ package azul;
 
 import java.util.List;
 
+/**
+ * An area in the middle of the table where leftover tiles from workshops go
+ */
 public class Middle implements Storage {
 
     private List middleList;

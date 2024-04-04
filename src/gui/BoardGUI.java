@@ -1,7 +1,9 @@
 package gui;
 
-public class BoardGUI {
+import azul.Board;
 
+public class BoardGUI {
+        private Board board;
     /**
      * Updates the display of the mosaic.
      */

@@ -13,6 +13,8 @@ public class Bag {
     private List<Tile> redTiles = new ArrayList<>();
     private List<Tile> yellowTiles = new ArrayList<>();
     private List<Tile> blueTiles = new ArrayList<>();
+
+    private Tile retrievedTile;
     /**
      * Constructor for the bag.
      * Creates a bag with a specified number of tiles of different colors and shuffles them.
@@ -43,7 +45,6 @@ public class Bag {
      */
 
     public Tile pop() {
-        Tile retrievedTile = null;
         // Implementation of the method
         return retrievedTile;
     }

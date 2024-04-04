@@ -11,7 +11,7 @@ public class Board {
     private Mosaic currentMosaic = new Mosaic();
     private Tile[][] mosaic;
     private Tile[] availableColours=  new Tile[5];
-    private String[] pushedToMosaic;
+    private Tile[] pushedToMosaic;
 
     /**
      * Constructor for the Board class.
@@ -19,11 +19,19 @@ public class Board {
     public Board() {
     }
 
+    public Floor getFloor() {
+        return floor;
+    }
+
+    public Wall getWall() {
+        return wall;
+    }
+
     /**
      * Gets the tiles pushed to the mosaic.
-     * @return - Array of strings representing the tiles pushed to the mosaic.
+     * @return - Array of tiles pushed to the mosaic.
      */
-    public String[] getTilesPushedToMosaic() {
+    public Tile[] getTilesPushedToMosaic() {
         return pushedToMosaic;
     }
 

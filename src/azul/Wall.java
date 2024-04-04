@@ -20,8 +20,8 @@ public class Wall {
     }
 
     /**
-     * Generates a 5x5 matrix representing the wall state (empty spot = null).
-     * @return - 5x5 matrix representing the wall state.
+     * Generates a 5x5 table representing the wall state (empty spot = null).
+     * @return - 5x5 table representing the wall state.
      */
     public Tile[][] exportWall() {
         return wall;

@@ -8,6 +8,7 @@ public class Floor {
     public Floor() {
     }
 
+
     /**
      * Returns the number of tiles placed on the floor.
      * @return - Number of tiles on the floor.

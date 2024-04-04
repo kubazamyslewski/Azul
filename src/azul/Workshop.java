@@ -1,9 +1,13 @@
 package azul;
 
+import java.util.List;
+
 /**
  * Single Workshop
  */
 public class Workshop implements Storage {
+	
+	private List workshop;
 	
 	/**
 	 * Constructor for a workshop

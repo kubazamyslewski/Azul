@@ -4,6 +4,8 @@ import server.Session;
 
 public class Score {
 	
+	private Player[] players;
+	
 	/**
 	 * Resets player's score
 	 * @param player

@@ -1,16 +1,24 @@
 package azul;
 
+import java.util.List;
+
 /**
  * An area on a table, that all players can take tiles from
  */
 public class TileDrawingPool {
 	
 	/**
+	 * Initializes The Middle of The Table
+	 */
+	public Middle middle;
+	private Workshop[] workshops;
+	
+	/**
 	 * Return a table of current workshops
 	 * @return
 	 */
 	public Workshop[] getWorkshops() {
-		return new Workshop[0];
+		return workshops;
 	}
 	
 	/**
@@ -30,13 +38,6 @@ public class TileDrawingPool {
 	}
 	
 	/**
-	 * Initializes The Middle of The Table
-	 */
-	public void initializeMiddle(Bag bag) {
-		
-	}
-	
-	/**
 	 * Checks whether there are absolutely no tiles players can take
 	 * @return
 	 */
@@ -46,6 +47,8 @@ public class TileDrawingPool {
 	}
 	
 	public class Middle implements Storage {
+		
+		private List middleList;
 		
 		/**
 		 * Transfers tiles from a workshop to The Middle of The Table

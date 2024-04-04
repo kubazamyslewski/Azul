@@ -1,12 +1,18 @@
 package azul;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Class representing the bag of tiles.
  */
 public class Bag {
-
-
+    private List<Tile> blackTiles = new ArrayList<>();
+    private List<Tile> whiteTiles = new ArrayList<>();
+    private List<Tile> redTiles = new ArrayList<>();
+    private List<Tile> yellowTiles = new ArrayList<>();
+    private List<Tile> blueTiles = new ArrayList<>();
     /**
      * Constructor for the bag.
      * Creates a bag with a specified number of tiles of different colors and shuffles them.

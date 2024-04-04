@@ -35,22 +35,7 @@ public class Board {
     public Mosaic getMosaic() {
         return null;
     }
-
-    /**
-     * Gets the value of 'start' which represents the starting player.
-     * @return - Boolean value of 'start'.
-     */
-    public boolean isStartingPlayer() {
-        return false;
-    }
-
-    /**
-     * Sets the value of 'start'.
-     * @param start - Boolean value to set 'start'.
-     */
-    public void setStartingPlayer(boolean start) {
-
-    }
+    
     /**
      * Gets available colours.
      * @return - Array of tiles representing the available colours.

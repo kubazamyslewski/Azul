@@ -5,6 +5,10 @@ package azul;
  */
 public class TileDrawingPool {
 	
+	public Workshop[] getWorkshops() {
+		return new Workshop[0];
+	}
+	
 	/**
 	 * Creates new workshops
 	 * @param playerCount

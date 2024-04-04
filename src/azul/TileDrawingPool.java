@@ -1,5 +1,7 @@
 package azul;
 
+import java.util.List;
+
 /**
  * An area on a table, that all players can take tiles from
  */
@@ -45,6 +47,8 @@ public class TileDrawingPool {
 	}
 	
 	public class Middle implements Storage {
+		
+		private List middleList;
 		
 		/**
 		 * Transfers tiles from a workshop to The Middle of The Table

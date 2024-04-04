@@ -7,11 +7,17 @@ import java.util.List;
  */
 public class TileDrawingPool {
 	
-	/**
-	 * Initializes The Middle of The Table
-	 */
+    private Tile[] availableColours=  new Tile[5];
 	public Middle middle;
 	private Workshop[] workshops;
+    
+	/**
+     * Gets available colours.
+     * @return - Array of tiles representing the available colours.
+     */
+    public Tile[] getAvailableColours() {
+        return availableColours;
+    }
 	
 	/**
 	 * Return a table of current workshops

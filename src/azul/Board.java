@@ -10,7 +10,6 @@ public class Board {
     private Mosaic fullMosaic = new Mosaic();
     private Mosaic currentMosaic = new Mosaic();
     private Tile[][] mosaic;
-    private Tile[] availableColours=  new Tile[5];
     private Tile[] pushedToMosaic;
 
     /**
@@ -55,14 +54,6 @@ public class Board {
      */
     public Mosaic getFullMosaic() {
         return fullMosaic;
-    }
-    
-    /**
-     * Gets available colours.
-     * @return - Array of tiles representing the available colours.
-     */
-    public Tile[] getAvailableColours() {
-        return availableColours;
     }
 
 }

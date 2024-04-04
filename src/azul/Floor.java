@@ -21,7 +21,8 @@ public class Floor {
      * @return - Array of tiles representing the floor state.
      */
     public Tile[] exportFloor() {
-        return null;
+        Tile[] tiles = new Tile[0];
+        return tiles;
     }
 
     /**

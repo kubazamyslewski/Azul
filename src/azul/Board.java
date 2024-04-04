@@ -17,7 +17,8 @@ public class Board {
      * @return - Array of strings representing the tiles pushed to the mosaic.
      */
     public String[] getTilesPushedToMosaic() {
-        return null;
+        String[] strings = new String[0];
+        return strings;
     }
 
     /**
@@ -25,7 +26,8 @@ public class Board {
      * @return - The temporary mosaic.
      */
     public Mosaic getTemporaryMosaic() {
-        return null;
+        Mosaic mosaic = new Mosaic();
+        return mosaic;
     }
 
     /**
@@ -33,7 +35,8 @@ public class Board {
      * @return - The mosaic.
      */
     public Mosaic getMosaic() {
-        return null;
+        Mosaic mosaic = new Mosaic();
+        return mosaic;
     }
 
     /**
@@ -56,7 +59,8 @@ public class Board {
      * @return - Array of tiles representing the available colours.
      */
     public Tile[] getAvailableColours() {
-        return null;
+        Tile[] tiles = new Tile[0];
+        return tiles;
     }
 
     /**
@@ -72,15 +76,8 @@ public class Board {
      * @return - Tile representing the color of the row.
      */
     public Tile getColorOfTheRow(int row){
-        return null;
-    }
-
-    /**
-     * Converts the mosaic into a 5x5 boolean matrix to check where are the placed tiles.
-     * @return - 5x5 boolean matrix.
-     */
-    public boolean[][] exportMosaic() {
-        return null;
+        Tile Tile = null;
+        return Tile;
     }
 
     /**
@@ -88,7 +85,8 @@ public class Board {
      * @return - 5x5 matrix representing the wall state.
      */
     public Tile[][] exportWall() {
-        return null;
+        Tile[][] wall = new Tile[5][5];
+        return wall;
     }
 
     /**
@@ -126,6 +124,7 @@ public class Board {
      * @return - Number of free spots in the row.
      */
     public int freeSpotsInRow(int rowNumber) {
+
         return 0;
     }
 
@@ -134,6 +133,7 @@ public class Board {
      * @return - Boolean value indicating if a row on the mosaic is completed.
      */
     public boolean isRowCompleted(){
+
         return false;
     }
 }

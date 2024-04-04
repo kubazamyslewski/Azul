@@ -1,5 +1,6 @@
 package azul;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,6 +27,7 @@ public class Box {
      * and the second element is the number of tiles of that color in the box. Then clears the contents of the box.
      */
     public List<Object[]> get() {
-        return null;
+        List<Object[]> result = new ArrayList<>();
+        return result;
     }
 }

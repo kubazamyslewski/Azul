@@ -1,5 +1,6 @@
 package azul;
 
+
 /**
  * Class representing the bag of tiles.
  */
@@ -34,9 +35,11 @@ public class Bag {
      *
      * @return The tile retrieved from the bag.
      */
+
     public Tile pop() {
+        Tile retrievedTile = null;
         // Implementation of the method
-        return null;
+        return retrievedTile;
     }
 
     /**

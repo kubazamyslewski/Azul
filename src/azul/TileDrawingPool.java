@@ -5,6 +5,10 @@ package azul;
  */
 public class TileDrawingPool {
 	
+	/**
+	 * Return a table of current workshops
+	 * @return
+	 */
 	public Workshop[] getWorkshops() {
 		return new Workshop[0];
 	}
@@ -52,17 +56,17 @@ public class TileDrawingPool {
 		}
 		
 		@Override
-		public void removeAll(Bag discarded, Tile color) {
+		public void removeAll(Box box, Tile color) {
 			
 		}
 		
 		@Override
-		public void removeAll(Bag discarded) {
+		public void removeAll(Box box) {
 			
 		}
 
 		@Override
-		public void remove(Bag bag, Tile color, int count) {
+		public void remove(Box box, Tile color, int count) {
 			
 		}
 

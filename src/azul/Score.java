@@ -18,7 +18,7 @@ public class Score {
 	 * @return
 	 */
 	public Player getCurrentWinner(Session session) {
-		return null;
+		return new Player();
 	}
 	
 	/**

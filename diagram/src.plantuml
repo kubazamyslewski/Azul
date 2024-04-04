@@ -1,0 +1,306 @@
+@startuml
+!theme vibrant
+
+top to bottom direction
+skinparam linetype ortho
+
+package azul{
+class Bag {
+  + Bag(int, int, int, int, int):
+  + pop(): Tile
+  + size(): int
+  + addToBag(Box): void
+   empty: boolean
+}
+
+class Board {
+  + Board():
+  - fullMosaic: Mosaic
+  - wall: Wall
+  - currentMosaic: Mosaic
+  - createMosaic(): Tile[][]
+   currentMosaic: Mosaic
+   fullMosaic: Mosaic
+   floor: Floor
+   wall: Wall
+   tilesPushedToMosaic: Tile[]
+}
+}
+package gui{
+class BoardGUI {
+  + BoardGUI():
+  + setMosaic(): void
+  + setFloor(): void
+  ~ setSelection(): void
+  + setWall(): void
+  + setPoints(): void
+}
+}
+package azul{
+class Box {
+  + Box():
+  + get(): List<Object[]>
+  + add(Tile): void
+}
+}
+package client{
+class Client {
+  + Client(String, Interface, int, Socket, Session, Player):
+  + stopClient(): void
+  + updateGUI(): void
+  + run(): void
+  + sendMove(): void
+}
+
+class ClientCommunication {
+  + ClientCommunication(Client, Socket):
+  + handleMessage(String): void
+  + run(): void
+}
+class ClientManager {
+  + ClientManager(Socket, int, Server):
+  + sendMessage(String): void
+  + endTurn(): void
+  + ok(): void
+  + run(): void
+  + wrong(): void
+  + disconnectClient(): void
+  + startTurn(): void
+}
+}
+package azul{
+class Floor {
+  + Floor():
+  + exportFloor(): Tile[]
+  + addTilesToFloor(Tile[]): void
+  + addFirstPlayerTileToFloor(): void
+  + clearFloor(): void
+  - freeSpotsOnTheFloor(): int
+   numberOfTilesOnTheFloor: int
+}
+}
+package gui{
+class InputWorkshopGUI {
+  + InputWorkshopGUI(WorkshopGUI):
+  ~ buttonPressed(int): void
+}
+class Interface {
+  + Interface():
+  ~ showBoard(int): void
+  + PlayerView(int, boolean, String, int): void
+}
+}
+package gamestate{
+class Loader {
+  + Loader():
+  + loadGame(String): void
+}
+}
+package azul{
+class Middle {
+  + Middle():
+  + removeAll(Box): void
+  + remove(Box, Tile, int): void
+  + removeAll(Box, Tile): void
+  + add(Bag, Tile, int): void
+  + transferToTheMiddle(Workshop): void
+  + getTileQuantity(Tile): int
+  + hasColor(Tile): boolean
+   empty: boolean
+}
+class Mosaic {
+  + Mosaic():
+  + getPlacedTile(int, int): Tile
+  + checkMosaic(): boolean[][]
+  + setTile(int, int, Tile): void
+   rowCompleted: boolean
+}
+}
+package gui{
+class MosaicGUI {
+  + MosaicGUI():
+  + checkPatternLines(): void
+  + setMosaic(): void
+}
+class MouseHandler {
+  + MouseHandler():
+  + mouseClicked(MouseEvent): void
+  + mousePressed(MouseEvent): void
+}
+}
+package azul{
+class Player {
+  + Player():
+  ~ takeTile(Storage): void
+  ~ changeStartingPlayer(Player): void
+  ~ setStartingPlayer(): void
+  ~ surrender(Session): void
+   startingPlayer: boolean
+}
+class Round {
+  + Round(Session):
+  + finishRound(Session): void
+  + finishLastRound(Session): void
+}
+}
+package gamestate{
+class Saver {
+  + Saver():
+  + saveGame(Board, String): void
+}
+}
+package azul{
+class Score {
+  + Score():
+  + reset(Player): void
+  + scoreRow(Player, int): void
+  + fullColor(Player): void
+  + getCurrentWinner(Session): Player
+  + floorPenalty(Player): void
+  + scoreColumn(Player, int): void
+  + scoreNewTile(Player): void
+}
+}
+package server{
+class Server {
+  + Server(int, int):
+  - session: Session
+  - port: int
+  - numberOfPlayers: int
+  - serverSocket: Socket
+  + addClientManager(ClientManager): void
+  + removeClientManager(ClientManager): void
+  + stopServer(): void
+  + run(): void
+   session: Session
+   publicIP: String
+   numberOfPlayers: int
+   serverSocket: Socket
+   port: int
+}
+class ServerCommunication {
+  + ServerCommunication(Socket, ClientManager):
+  + handleMessage(String): void
+  + run(): void
+}
+class Session {
+  + Session(int, Server):
+  + Session(int):
+  - turnCounter: int
+  - tileDrawingPool: TileDrawingPool
+  - nextRoundFirstPlayer: int
+  - box: Box
+  - bag: Bag
+  - numberOfPlayers: int
+  + getPlayer(int): Player
+  + updateBoard(): void
+   tileDrawingPool: TileDrawingPool
+   nextRoundFirstPlayer: int
+   turnCounter: int
+   numberOfPlayers: int
+   bag: Bag
+   box: Box
+}
+}
+package azul{
+interface Storage << interface >> {
+  + removeAll(Box, Tile): void
+  + remove(Box, Tile, int): void
+  + getTileQuantity(Tile): int
+  + hasColor(Tile): boolean
+  + removeAll(Box): void
+  + add(Bag, Tile, int): void
+   empty: boolean
+}
+}
+package gui{
+class TableGUI {
+  + TableGUI():
+  + setColor(): void
+  + ActivePlayerStatus(): void
+}
+}
+package azul{
+enum Tile << enumeration >> {
+  + Tile():
+  + values(): Tile[]
+  + valueOf(String): Tile
+}
+}
+package azul{
+class TileDrawingPool {
+  + TileDrawingPool():
+  - workshops: Workshop[]
+  - availableColours: Tile[]
+  + fillWorkshops(Bag): void
+  + initializeWorkshops(int): void
+   empty: boolean
+   availableColours: Tile[]
+   workshops: Workshop[]
+}
+}
+package gui{
+class TileGUI {
+  + TileGUI(boolean):
+  + changeImage(Tile): void
+  + displayThis(boolean): void
+}
+}
+package azul{
+class Workshop {
+  + Workshop(Bag):
+  + removeAll(Box): void
+  + getTileQuantity(Tile): int
+  + remove(Box, Tile, int): void
+  + hasColor(Tile): boolean
+  + add(Bag, Tile, int): void
+  + removeAll(Box, Tile): void
+   empty: boolean
+   full: boolean
+}
+}
+package gui{
+class WorkshopButton {
+  + WorkshopButton(int, InputWorkshopGUI):
+  + displayAsSelected(boolean): void
+}
+
+class WorkshopGUI {
+  + WorkshopGUI(int):
+  ~ tiles: Tile[]
+  ~ buttonPressed(int): void
+  + updateWorkshop(Tile[]): void
+  ~ updateDisplayWorkshop(): void
+  + displaySelection(Tile): void
+   tiles: Tile[]
+}
+}
+Bag                 "1" *-[#595959,plain]-> "blackTiles\n*" Tile
+Board               "1" *-[#595959,plain]-> "floorr\n1" Floor
+Board               "1" *-[#595959,plain]-> "fullMosaic\n1" Mosaic
+Board               "1" *-[#595959,plain]-> "mosaic\n*" Tile
+Box                 "1" *-[#595959,plain]-> "blackTiles\n*" Tile
+Client              "1" *-[#595959,plain]-> "GUI\n1" Interface
+Client              "1" *-[#595959,plain]-> "session\n1" Session
+ClientCommunication "1" *-[#595959,plain]-> "client\n1" Client
+ClientManager       "1" *-[#595959,plain]-> "server\n1" Server
+ClientManager       "1" *-[#595959,plain]-> "serverCommunication\n1" ServerCommunication
+InputWorkshopGUI    "1" *-[#595959,plain]-> "buttons\n*" WorkshopButton
+InputWorkshopGUI     -[#595959,dashed]->  WorkshopButton      : "«create»"
+InputWorkshopGUI    "1" *-[#595959,plain]-> "workshopGUI\n1" WorkshopGUI
+Middle               -[#008200,dashed]-^  Storage
+TileDrawingPool     "1"*-[#595959,plain]-> Middle
+Mosaic              "1" *-[#595959,plain]-> "tile\n1" Tile
+Server              "1" *-[#595959,plain]-> "clients\n*" ClientManager
+Server              "1" *-[#595959,plain]-> "session\n1" Session
+ServerCommunication "1" *-[#595959,plain]-> "clientManager\n1" ClientManager
+Session             "1" *-[#595959,plain]-> "bag\n1" Bag
+Session             "1" *-[#595959,plain]-> "box\n1" Box
+Session             "1" *-[#595959,plain]-> "players\n*" Player
+Session             "1" *-[#595959,plain]-> "server\n1" Server
+Workshop             -[#008200,dashed]-^  Storage
+WorkshopButton       +-[#820000,plain]-  InputWorkshopGUI
+WorkshopButton      "1" *-[#595959,plain]-> "inputWorkshopGUI\n1" InputWorkshopGUI
+WorkshopGUI         "1" *-[#595959,plain]-> "tiles\n*" Tile
+WorkshopGUI          -[#595959,dashed]->  Tile                : "«create»"
+@enduml

@@ -7,7 +7,7 @@ import java.util.List;
  */
 public class Workshop implements Storage {
 	
-	private List workshop;
+	private List workshopList;
 	
 	/**
 	 * Constructor for a workshop

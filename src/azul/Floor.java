@@ -1,5 +1,8 @@
 package azul;
 
+/**
+ * Part of the board for tiles that give point penalties
+ */
 public class Floor {
     private Tile[] tiles;
     /**

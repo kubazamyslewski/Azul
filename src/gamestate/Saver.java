@@ -4,6 +4,9 @@ import azul.Board;
 
 import java.io.IOException;
 
+/**
+ * Class for saving games
+ */
 public class Saver {
     /**
      * Saves the game progress to a file.

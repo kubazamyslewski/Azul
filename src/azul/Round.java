@@ -2,6 +2,9 @@ package azul;
 
 import server.Session;
 
+/**
+ * Handles a single round in the game
+ */
 public class Round {
 	
 	/**

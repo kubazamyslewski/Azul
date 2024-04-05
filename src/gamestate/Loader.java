@@ -2,6 +2,9 @@ package gamestate;
 
 import java.io.IOException;
 
+/**
+ * Class for loading saved games
+ */
 public class Loader {
 	
 	/**

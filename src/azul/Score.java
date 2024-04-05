@@ -2,6 +2,9 @@ package azul;
 
 import server.Session;
 
+/**
+ * Handles scores of all players
+ */
 public class Score {
 	
 	private Player[] players;

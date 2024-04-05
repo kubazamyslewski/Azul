@@ -21,5 +21,4 @@ public class Interface {
     void showBoard(int numberOfBoard){
 
     }
-
 }

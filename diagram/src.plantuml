@@ -57,6 +57,8 @@ class ClientCommunication {
   + handleMessage(String): void
   + run(): void
 }
+}
+package server{
 class ClientManager {
   + ClientManager(Socket, int, Server):
   + sendMessage(String): void

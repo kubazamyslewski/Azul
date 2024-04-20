@@ -1,17 +1,16 @@
 package azul;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Stack;
 
 /**
  * Class representing the box of tiles.
  */
 public class Box {
-    private List<Tile> blackTiles = new ArrayList<>();
-    private List<Tile> whiteTiles = new ArrayList<>();
-    private List<Tile> redTiles = new ArrayList<>();
-    private List<Tile> yellowTiles = new ArrayList<>();
-    private List<Tile> blueTiles = new ArrayList<>();
+    private Stack<Tile> blackTiles = new Stack<>();
+    private Stack<Tile> whiteTiles = new Stack<>();
+    private Stack<Tile> redTiles = new Stack<>();
+    private Stack<Tile> yellowTiles = new Stack<>();
+    private Stack<Tile> blueTiles = new Stack<>();
     /**
      * Default constructor for the box.
      */
@@ -27,11 +26,41 @@ public class Box {
     }
 
     /**
-     * Returns a list of two-element arrays, where the first element is the color of the tile,
-     * and the second element is the number of tiles of that color in the box. Then clears the contents of the box.
+     * Returns an array of numbers representing amounts of tiles of a specified color in the box.
+     * Then clears the contents of the box.
      */
-    public List<Object[]> get() {
-        List<Object[]> result = new ArrayList<>();
-        return result;
+    public int[] get() {
+      int[] tilesFromTheBox = new int[5];
+      int counter = 0;
+      while (!blackTiles.isEmpty()) {
+        blackTiles.pop();
+        counter++;
+      }
+      tilesFromTheBox[0] = counter;
+      counter = 0;
+      while (!whiteTiles.isEmpty()) {
+        whiteTiles.pop();
+        counter++;
+      }
+      tilesFromTheBox[1] = counter;
+      counter = 0;
+      while (!redTiles.isEmpty()) {
+        redTiles.pop();
+        counter++;
+      }
+      tilesFromTheBox[2] = 0;
+      counter = 0;
+      while (!yellowTiles.isEmpty()) {
+        yellowTiles.pop();
+        counter++;
+      }
+      tilesFromTheBox[3] = counter;
+      counter = 0;
+      while (!blueTiles.isEmpty()) {
+        blueTiles.pop();
+        counter++;
+      }
+      tilesFromTheBox[4] = counter;
+      return tilesFromTheBox;
     }
 }

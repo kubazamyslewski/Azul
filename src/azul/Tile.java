@@ -15,4 +15,8 @@ public enum Tile {
   Tile(int valueOfColour) {
     this.valueOfColour = valueOfColour;
   }
+
+  public boolean equals(Tile other) {
+    return this.valueOfColour == other.valueOfColour;
+  }
 }

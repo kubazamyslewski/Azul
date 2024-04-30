@@ -6,7 +6,7 @@ package azul;
 public interface Storage {
 	
 	/**
-	 * Removes tiles from storage and adds it to a Bag for storing discarded tiles
+	 * Removes tiles from storage and adds it to the Box for storing discarded tiles
 	 * @param discardedBag
 	 * @param color
 	 * @param count
@@ -14,14 +14,14 @@ public interface Storage {
 	public void remove(Box box, Tile color, int count);
 	
 	/**
-	 * Removes all tiles with a given color from storage and adds it to a Bag for storing discarded tiles
+	 * Removes all tiles with a given color from storage and adds it to the Box for storing discarded tiles
 	 * @param discardedBag
 	 * @param color
 	 */
 	public void removeAll(Box box, Tile color);
 	
 	/**
-	 * Removes all tiles with a given color from storage and adds it to a Bag for storing discarded tiles
+	 * Removes all tiles with a given color from storage and adds it to the Box for storing discarded tiles
 	 * @param discardedBag
 	 */
 	public void removeAll(Box box);
@@ -29,10 +29,8 @@ public interface Storage {
 	/**
 	 * Adds tiles with a given color to storage by drawing them from a bag
 	 * @param bag
-	 * @param color
-	 * @param count
 	 */
-	public void add(Bag bag, Tile color, int count);
+	public void add(Bag bag);
 	
 	/**
 	 * Gets quantity of Tiles in a single Workshop/The Middle of The Table

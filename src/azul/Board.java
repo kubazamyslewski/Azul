@@ -5,8 +5,8 @@ package azul;
  */
 
 public class Board {
-    private Floor floorr = new Floor();
-    private Wall wall = new Wall();
+    private Floor floor = new Floor();
+    private Wall wall = new Wall(this);
     private Mosaic fullMosaic = new Mosaic();
     private Mosaic currentMosaic = new Mosaic();
     private Tile[][] mosaic;
@@ -19,7 +19,7 @@ public class Board {
     }
 
     public Floor getFloor() {
-        return floorr;
+        return floor;
     }
 
     public Wall getWall() {

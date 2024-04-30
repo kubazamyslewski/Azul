@@ -30,9 +30,9 @@ public class Floor {
 
     /**
      * Adds tiles to the floor.
-     * @param tiles - Array of tiles to be added to the floor.
+     * @param tile - A tile to be added to the floor.
      */
-    public void addTilesToFloor(Tile[] tiles) {
+    public void addTileToFloor(Tile tile) {
     }
 
 

@@ -1,6 +1,8 @@
 package azul;
 
 import Exceptions.WrongTileColourException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Class representing the area where players put tiles before putting them on mosaic
@@ -14,6 +16,7 @@ public class Wall {
     private Tile[] thirdRow;
     private Tile[] fourthRow;
     private Tile[] fifthRow;
+    private List<Tile> tempStorage = new ArrayList<>();
 
     public Wall(Board parentBoard){
       this.parentBoard = parentBoard;
@@ -22,6 +25,10 @@ public class Wall {
       thirdRow = new Tile[3];
       fourthRow = new Tile[4];
       fifthRow = new Tile[5];
+    }
+    //TODO: z tej metody pobierać kafelki do addTilesToWall
+    public void addToTempStorage(Tile tile){
+        tempStorage.add(tile);
     }
 
     /**
@@ -102,7 +109,8 @@ public class Wall {
     /**
      * Pushes tiles from the wall to the mosaic.
      */
-    void pushWallToMosaic() {
+    void pushRowToMosaic() {
+
     }
 
     /**

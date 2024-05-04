@@ -1,5 +1,6 @@
 package azul;
 
+import Exceptions.ColorNotInWorkshopException;
 import java.util.Stack;
 
 /**
@@ -22,23 +23,7 @@ public class Workshop implements Storage {
 			this.add(bag);
 		}
 	}
-	
-	@Override
-    public void remove(Box box, Tile color, int count) {
 
-	}
-	
-    @Override
-	public void removeAll(Box box, Tile color) {
-		
-	}
-	
-	@Override
-	public void removeAll(Box box) {
-		
-	}
-	
-	@Override
 	public void add(Bag bag) {
 		Tile tileToAdd = bag.pop();
 		switch (tileToAdd) {
@@ -97,5 +82,38 @@ public class Workshop implements Storage {
 		return blackTiles.size() + whiteTiles.size()
 						+ redTiles.size() + yellowTiles.size()
 						+ blueTiles.size() == 4;
+	}
+	//TODO:do dokończenia przekazywanie kafelków do Middle i Wall
+	public void getTileColorFromWorkshop(Tile color) throws ColorNotInWorkshopException {
+		if(hasColor(color)) {
+			switch(color) {
+				case BLACK: while(getTileQuantity(Tile.BLACK) != 0) {
+					Tile removedTile = this.blackTiles.pop();
+					//kafelki do Wall
+				};
+				case WHITE: while(getTileQuantity(Tile.WHITE) != 0) {
+					Tile removedTile = this.whiteTiles.pop();
+					//kafelki do Wall
+				};
+				case RED: while(getTileQuantity(Tile.RED) != 0) {
+					Tile removedTile = this.redTiles.pop();
+					//kafelki do Wall
+				};
+				case YELLOW: while(getTileQuantity(Tile.YELLOW) != 0) {
+					Tile removedTile = this.yellowTiles.pop();
+					//kafelki do Wall
+				};
+				case BLUE: while(getTileQuantity(Tile.BLUE) != 0) {
+					Tile removedTile = this.blueTiles.pop();
+					//kafelki do Wall
+				};
+			}
+			for(Tile tileColor : Tile.values()){
+				while(getTileQuantity(tileColor) != 0) {
+					//kafelki do Middle
+				}
+			}
+		}
+		else throw new ColorNotInWorkshopException("There is no such color in this workshop!");
 	}
 }

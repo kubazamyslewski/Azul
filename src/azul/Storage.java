@@ -4,33 +4,27 @@ package azul;
  * Interface for classes that store tiles
  */
 public interface Storage {
-	
 	/**
 	 * Removes tiles from storage and adds it to the Box for storing discarded tiles
 	 * @param discardedBag
 	 * @param color
 	 * @param count
 	 */
-	public void remove(Box box, Tile color, int count);
+	//public void remove(Box box, Tile color, int count);
 	
 	/**
 	 * Removes all tiles with a given color from storage and adds it to the Box for storing discarded tiles
 	 * @param discardedBag
 	 * @param color
 	 */
-	public void removeAll(Box box, Tile color);
+	//public void removeAll(Box box, Tile color);
 	
 	/**
 	 * Removes all tiles with a given color from storage and adds it to the Box for storing discarded tiles
 	 * @param discardedBag
 	 */
-	public void removeAll(Box box);
-	
-	/**
-	 * Adds tiles with a given color to storage by drawing them from a bag
-	 * @param bag
-	 */
-	public void add(Bag bag);
+	//public void removeAll(Box box);
+	//te metody chyba nie są potrzebne? przynajmniej nie w każdej klasie
 	
 	/**
 	 * Gets quantity of Tiles in a single Workshop/The Middle of The Table

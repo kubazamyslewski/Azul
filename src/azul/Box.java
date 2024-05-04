@@ -20,9 +20,16 @@ public class Box {
     /**
      * Adds a tile to the contents of the box.
      *
-     * @param colour color of the tile to be added.
+     * @param color color of the tile to be added.
      */
-    public void add(Tile colour) {
+    public void add(Tile color) {
+        switch (color) {
+            case BLACK -> blackTiles.push(Tile.BLACK);
+            case WHITE -> whiteTiles.push(Tile.WHITE);
+            case RED -> redTiles.push(Tile.RED);
+            case YELLOW -> yellowTiles.push(Tile.YELLOW);
+            case BLUE -> blueTiles.push(Tile.BLUE);
+        };
     }
 
     /**

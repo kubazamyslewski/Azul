@@ -10,13 +10,13 @@ public enum Tile {
   YELLOW(4),
   BLUE(5);
 
-  int valueOfColour;
+  final int valueOfColor;
 
-  Tile(int valueOfColour) {
-    this.valueOfColour = valueOfColour;
+  Tile(int valueOfColor) {
+    this.valueOfColor = valueOfColor;
   }
 
   public boolean equals(Tile other) {
-    return this.valueOfColour == other.valueOfColour;
+    return this.valueOfColor == other.valueOfColor;
   }
 }

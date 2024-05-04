@@ -1,5 +1,6 @@
 package azul;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -7,48 +8,51 @@ import java.util.List;
  */
 public class TileDrawingPool {
 	
-    private Tile[] availableColours=  new Tile[5];
+    private List<Tile> availableColors = new ArrayList<>();
 	public Middle middle;
 	private Workshop[] workshops;
     
 	/**
-     * Gets available colours.
-     * @return - Array of tiles representing the available colours.
-     */
-    public Tile[] getAvailableColours() {
-        return availableColours;
+	 * Gets available colours.
+	 * @return - List of tiles representing the available colours.
+	 */
+    public List<Tile> getAvailableColours() {
+        return availableColors;
     }
 	
 	/**
-	 * Return a table of current workshops
-	 * @return
-	 */
+	 * Returns a table of current workshops
+     */
 	public Workshop[] getWorkshops() {
 		return workshops;
 	}
 	
 	/**
-	 * Creates new workshops
-	 * @param playerCount
+	 * Creates new workshops based on the number of players
+	 * @param playerCount number of players
 	 */
-	public void initializeWorkshops(int playerCount) {
-		
-	}
-	
-	/**
-	 * Fills all workshops with tiles from a bag
-	 * @param bag
-	 */
-	public void fillWorkshops(Bag bag) {
-		
+	public void initializeWorkshops(int playerCount, Bag bag) {
+		int workshopCount = switch (playerCount) {
+            case 2 -> 5;
+            case 3 -> 7;
+            case 4 -> 9;
+            default -> throw new IllegalArgumentException("Invalid number of players");
+        };
+        workshops = new Workshop[workshopCount];
+		for (int i = 0; i < workshopCount; i++) {
+			workshops[i] = new Workshop(bag);
+		}
 	}
 	
 	/**
 	 * Checks whether there are absolutely no tiles players can take
-	 * @return
+	 * @return true if all workshops and middle is empty, false otherwise
 	 */
 	public boolean isEmpty() {
-		return false;
-		
+		boolean isEmpty = availableColors.isEmpty();
+		for (Workshop workshop : workshops) {
+			isEmpty &= workshop.isEmpty();
+		}
+		return middle.isEmpty() && isEmpty;
 	}
 }

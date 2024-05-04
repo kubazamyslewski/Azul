@@ -1,23 +1,25 @@
 package client;
 
 import azul.*;
-
 import java.util.Scanner;
 
-/**
- * Class responsible for setting up the game.
- */
+
 public class GameSetup {
     private static int playerCount;
     private static TileDrawingPool tileDrawingPool;
 
-    /**
-     * Method to set up the game by initializing players, their boards, and the tile drawing pool.
-     */
+
     public static void setupGame() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter the number of players (2-4):");
-        playerCount = scanner.nextInt();
+
+        do {
+            System.out.print("Enter the amount of players (2-4): ");
+            playerCount = scanner.nextInt();
+            if (playerCount < 2 || playerCount > 4) {
+                System.out.println("Incorrect number of players!");
+            }
+        } while (playerCount < 2 || playerCount > 4);
+        System.out.println();
         scanner.nextLine();
         Player[] players = new Player[playerCount];
         for (int i = 0; i < playerCount; i++) {

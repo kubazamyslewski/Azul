@@ -65,6 +65,7 @@ public class TileDrawingPool {
 		return middle.isEmpty() && isEmpty;
 	}
 	public void printState() {
+		System.out.println();
 		System.out.println("Workshops:");
 		for (int i = 0; i < workshops.length; i++) {
 			Workshop workshop = workshops[i];
@@ -75,7 +76,7 @@ public class TileDrawingPool {
 								workshop.getTileQuantity(Tile.YELLOW),
 								workshop.getTileQuantity(Tile.BLUE));
 		}
-
+		System.out.println();
 		System.out.println("Middle:");
 		printTileQuantity(middle.getTileQuantity(Tile.BLACK),
 							middle.getTileQuantity(Tile.WHITE),

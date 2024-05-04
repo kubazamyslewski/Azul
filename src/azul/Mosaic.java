@@ -1,5 +1,7 @@
 package azul;
 
+import Exceptions.WrongTileColourException;
+
 /**
  * Mosaic representation.
  */
@@ -46,11 +48,113 @@ public class Mosaic {
     /**
      * Sets the tile on a specific mosaic square.
      * @param row    - Row index.
-     * @param column - Column index.
-     * @param tile   - The tile to be placed.
+     * @param color   - The tile to be placed.
      */
-    public void setTile(int row, int column, Tile tile) {
-      this.mosaic[row][column] = tile;
+    public void setTile(int row, Tile color) throws WrongTileColourException, IllegalArgumentException {
+      switch(row) {
+        case 1:
+          switch(color) {
+            case BLACK:
+              this.mosaic[row][3] = Tile.BLACK;
+              break;
+            case WHITE:
+              this.mosaic[row][4] = Tile.WHITE;
+              break;
+            case RED:
+              this.mosaic[row][2] = Tile.RED;
+              break;
+            case YELLOW:
+              this.mosaic[row][1] = Tile.YELLOW;
+              break;
+            case BLUE:
+              this.mosaic[row][0] = Tile.BLUE;
+              break;
+            default:
+              throw new WrongTileColourException("This tile color cannot be placed on the mosaic!");
+          } break;
+        case 2:
+          switch(color) {
+            case BLACK:
+              this.mosaic[row][4] = Tile.BLACK;
+              break;
+            case WHITE:
+              this.mosaic[row][0] = Tile.WHITE;
+              break;
+            case RED:
+              this.mosaic[row][3] = Tile.RED;
+              break;
+            case YELLOW:
+              this.mosaic[row][2] = Tile.YELLOW;
+              break;
+            case BLUE:
+              this.mosaic[row][1] = Tile.BLUE;
+              break;
+            default:
+              throw new WrongTileColourException("This tile color cannot be placed on the mosaic!");
+          } break;
+        case 3:
+          switch(color) {
+            case BLACK:
+              this.mosaic[row][0] = Tile.BLACK;
+              break;
+            case WHITE:
+              this.mosaic[row][1] = Tile.WHITE;
+              break;
+            case RED:
+              this.mosaic[row][4] = Tile.RED;
+              break;
+            case YELLOW:
+              this.mosaic[row][3] = Tile.YELLOW;
+              break;
+            case BLUE:
+              this.mosaic[row][2] = Tile.BLUE;
+              break;
+            default:
+              throw new WrongTileColourException("This tile color cannot be placed on the mosaic!");
+          } break;
+        case 4:
+          switch(color) {
+            case BLACK:
+              this.mosaic[row][1] = Tile.BLACK;
+              break;
+            case WHITE:
+              this.mosaic[row][2] = Tile.WHITE;
+              break;
+            case RED:
+              this.mosaic[row][0] = Tile.RED;
+              break;
+            case YELLOW:
+              this.mosaic[row][4] = Tile.YELLOW;
+              break;
+            case BLUE:
+              this.mosaic[row][3] = Tile.BLUE;
+              break;
+            default:
+              throw new WrongTileColourException("This tile color cannot be placed on the mosaic!");
+          } break;
+        case 5:
+          switch(color) {
+            case BLACK:
+              this.mosaic[row][2] = Tile.BLACK;
+              break;
+            case WHITE:
+              this.mosaic[row][3] = Tile.WHITE;
+              break;
+            case RED:
+              this.mosaic[row][1] = Tile.RED;
+              break;
+            case YELLOW:
+              this.mosaic[row][0] = Tile.YELLOW;
+              break;
+            case BLUE:
+              this.mosaic[row][4] = Tile.BLUE;
+              break;
+            default:
+              throw new WrongTileColourException("This tile color cannot be placed on the mosaic!");
+          } break;
+        default:
+          throw new IllegalArgumentException("Such row does not exist!");
+      }
     }
 
     /**
@@ -69,6 +173,19 @@ public class Mosaic {
           }
         }
         if (completionFactor) return completionFactor;
+      }
+      return false;
+    }
+
+  /**
+   * Checks whether a selected row of a mosaic contains a tile of a certain color
+   * @param row - number of a row to be checked
+   * @param color - a color for which we're looking for
+   * @return boolean stating whether the row contains a tile of this color
+   */
+  public boolean checkRowForColor(int row, Tile color) {
+      for (int i = 0; i < 5; i++) {
+        if (mosaic[row][i].equals(color)) return true;
       }
       return false;
     }

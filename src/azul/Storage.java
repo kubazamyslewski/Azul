@@ -1,5 +1,7 @@
 package azul;
 
+import Exceptions.FirstTileInWorkshopException;
+
 /**
  * Interface for classes that store tiles
  */
@@ -31,14 +33,14 @@ public interface Storage {
 	 * @param color
 	 * @return
 	 */
-	public int getTileQuantity(Tile color);
+	public int getTileQuantity(Tile color) throws FirstTileInWorkshopException;
 	
 	/**
 	 * Checks whether a single Workshop/The Middle of The Table has tiles of a given color
 	 * @param color
 	 * @return
 	 */
-	public boolean hasColor(Tile color);
+	public boolean hasColor(Tile color) throws FirstTileInWorkshopException;
 	
 	
 	/**

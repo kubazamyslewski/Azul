@@ -1,6 +1,9 @@
 package azul;
 
 import Exceptions.ColorNotInWorkshopException;
+import Exceptions.FirstTileInWorkshopException;
+import Exceptions.WrongTileColourException;
+
 import java.util.Stack;
 
 /**
@@ -46,8 +49,9 @@ public class Workshop implements Storage {
 	}
     
 	@Override
-	public boolean hasColor(Tile colour) {
+	public boolean hasColor(Tile colour) throws FirstTileInWorkshopException{
     return switch (colour) {
+			case FIRST -> throw new FirstTileInWorkshopException("First tile cannot be in a workshop!");
       case BLACK -> blackTiles.isEmpty();
       case WHITE -> whiteTiles.isEmpty();
       case RED -> redTiles.isEmpty();
@@ -57,8 +61,9 @@ public class Workshop implements Storage {
 	}
 
 	@Override
-	public int getTileQuantity(Tile colour) {
+	public int getTileQuantity(Tile colour) throws FirstTileInWorkshopException{
     return switch (colour) {
+			case FIRST -> throw new FirstTileInWorkshopException("First tile cannot be in a workshop!");
       case BLACK -> blackTiles.size();
       case WHITE -> whiteTiles.size();
       case RED -> redTiles.size();
@@ -83,35 +88,62 @@ public class Workshop implements Storage {
 						+ redTiles.size() + yellowTiles.size()
 						+ blueTiles.size() == 4;
 	}
-	//TODO:do dokończenia przekazywanie kafelków do Middle i Wall
-	public void getTileColorFromWorkshop(Tile color) throws ColorNotInWorkshopException {
+
+	/**
+	 * Takes certain color of tiles from a workshop. Then, transports them to the player's wall.
+	 * Tiles of other colors are transported to the middle.
+	 * @param color color of tiles to be transferred to the player
+	 * @param mid middle to add discarded tiles from a workshop to
+	 * @param wall wall to add tiles from a workshop to
+	 * @param row row of the wall to add the tiles to
+	 * @throws ColorNotInWorkshopException
+	 * @throws FirstTileInWorkshopException
+	 */
+	public void getTileColorFromWorkshop(Tile color, int row, Middle mid, Wall wall) throws ColorNotInWorkshopException, FirstTileInWorkshopException, WrongTileColourException {
 		if(hasColor(color)) {
 			switch(color) {
 				case BLACK: while(getTileQuantity(Tile.BLACK) != 0) {
 					Tile removedTile = this.blackTiles.pop();
-					//kafelki do Wall
-				};
+					wall.addToTempStorage(removedTile);
+				} break;
 				case WHITE: while(getTileQuantity(Tile.WHITE) != 0) {
 					Tile removedTile = this.whiteTiles.pop();
-					//kafelki do Wall
-				};
+					wall.addToTempStorage(removedTile);
+				} break;
 				case RED: while(getTileQuantity(Tile.RED) != 0) {
 					Tile removedTile = this.redTiles.pop();
-					//kafelki do Wall
-				};
+					wall.addToTempStorage(removedTile);
+				} break;
 				case YELLOW: while(getTileQuantity(Tile.YELLOW) != 0) {
 					Tile removedTile = this.yellowTiles.pop();
-					//kafelki do Wall
-				};
+					wall.addToTempStorage(removedTile);
+				} break;
 				case BLUE: while(getTileQuantity(Tile.BLUE) != 0) {
 					Tile removedTile = this.blueTiles.pop();
-					//kafelki do Wall
-				};
+					wall.addToTempStorage(removedTile);
+				} break;
 			}
+			// transfer kafelków z tempStorage na Wall
+			wall.addTilesToWall(row, wall.linkedMosaic);
+			// pozostałe kafelki do Middle
 			for(Tile tileColor : Tile.values()){
-				while(getTileQuantity(tileColor) != 0) {
-					//kafelki do Middle
-				}
+					switch(color) {
+						case BLACK: while(getTileQuantity(Tile.BLACK) != 0) {
+							mid.add(this.blackTiles.pop());
+						} break;
+						case WHITE: while(getTileQuantity(Tile.WHITE) != 0) {
+							mid.add(this.whiteTiles.pop());
+						} break;
+						case RED: while(getTileQuantity(Tile.RED) != 0) {
+							mid.add(this.redTiles.pop());
+						} break;
+						case YELLOW: while(getTileQuantity(Tile.YELLOW) != 0) {
+							mid.add(this.yellowTiles.pop());
+						} break;
+						case BLUE: while(getTileQuantity(Tile.BLUE) != 0) {
+							mid.add(this.blueTiles.pop());
+						} break;
+					}
 			}
 		}
 		else throw new ColorNotInWorkshopException("There is no such color in this workshop!");

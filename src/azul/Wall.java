@@ -1,8 +1,9 @@
 package azul;
 
 import Exceptions.WrongTileColourException;
-import java.util.ArrayList;
-import java.util.List;
+
+import java.util.Arrays;
+import java.util.Stack;
 
 /**
  * Class representing the area where players put tiles before putting them on mosaic
@@ -10,25 +11,37 @@ import java.util.List;
 public class Wall {
 
     Board parentBoard;
+    Box linkedBox;
+    Mosaic linkedMosaic;
 
     private Tile[] firstRow;
     private Tile[] secondRow;
     private Tile[] thirdRow;
     private Tile[] fourthRow;
     private Tile[] fifthRow;
-    private List<Tile> tempStorage = new ArrayList<>();
+    private final Stack<Tile> tempStorage = new Stack<>();
 
-    public Wall(Board parentBoard){
+    public Wall(Board parentBoard, Box linkedBox, Mosaic linkedMosaic){
+      this.initializeWall(parentBoard, linkedBox, linkedMosaic);
+    }
+
+    /**
+    * Initializes the wall.
+    */
+    private void initializeWall(Board parentBoard, Box linkedBox, Mosaic linkedMosaic) {
       this.parentBoard = parentBoard;
+      this.linkedBox = linkedBox;
+      this.linkedMosaic = linkedMosaic;
       firstRow = new Tile[1];
       secondRow = new Tile[2];
       thirdRow = new Tile[3];
       fourthRow = new Tile[4];
       fifthRow = new Tile[5];
     }
+
     //TODO: z tej metody pobierać kafelki do addTilesToWall
     public void addToTempStorage(Tile tile){
-        tempStorage.add(tile);
+        tempStorage.push(tile);
     }
 
     /**
@@ -71,10 +84,14 @@ public class Wall {
      * Checks whether it is possible to place certain colour of tiles on a specified row
      * and throws an exception otherwise.
      * @param row   - Row number.
-     * @param tilesToAdd - Array of tiles to be added.
      */
-    public void addTilesToWall(int row, Tile[] tilesToAdd) throws WrongTileColourException{
+    public void addTilesToWall(int row, Mosaic mosaic) throws WrongTileColourException{
       Tile colour;
+      Tile[] tilesToAdd = new Tile[tempStorage.size()];
+      for (int i = 0; i < tempStorage.size(); i++) {
+        tilesToAdd[i] = tempStorage.pop();
+      }
+
       Tile[] modifiedRow = switch (row) {
         case 1 -> this.firstRow;
         case 2 -> this.secondRow;
@@ -83,9 +100,11 @@ public class Wall {
         case 5 -> this.fifthRow;
         default -> throw new IllegalArgumentException("No such row on the wall!");
       };
+
       colour = modifiedRow[0];
-      if ((colour != null) && (!tilesToAdd[0].equals(colour)))
+      if (((colour != null) && (!tilesToAdd[0].equals(colour))) || (mosaic.checkRowForColor(row, tilesToAdd[0])))
         throw new WrongTileColourException("You cannot put this color in this row!");
+
       int tilesToAddIndex = 0;
       for (int i = 0; i < modifiedRow.length; i++) {
         if((modifiedRow[i] == null) && tilesToAddIndex < tilesToAdd.length) {
@@ -95,29 +114,117 @@ public class Wall {
       }
       while (tilesToAddIndex < tilesToAdd.length) {
         this.parentBoard.getFloor().addTileToFloor(tilesToAdd[tilesToAddIndex]);
+        tilesToAddIndex++;
       }
-    }
-
-    /**
-     * Clears specific row on the wall.
-     * @param row - Row number to be cleared.
-     */
-    private void clearRowOnWall(int row) {
-
     }
 
     /**
      * Pushes tiles from the wall to the mosaic.
      */
-    void pushRowToMosaic() {
+    public void checkWallAndPushToMosaic(Box box, Mosaic mosaic) throws WrongTileColourException {
+      for (int i = 1; i <= 5; i++) {
+        if (checkRow(i)) pushRowToMosaic(i, box, mosaic);
+      }
+    }
 
+    private boolean checkRow(int row) {
+      return switch (row) {
+        case 1 -> {
+          for (Tile t : firstRow) {
+            if (t == null) yield false;
+          }
+          yield true;
+        }
+        case 2 -> {
+          for (Tile t : secondRow) {
+            if (t == null) yield false;
+          }
+          yield true;
+        }
+        case 3 -> {
+          for (Tile t : thirdRow) {
+            if (t == null) yield false;
+          }
+          yield true;
+        }
+        case 4 -> {
+          for (Tile t : fourthRow) {
+            if (t == null) yield false;
+          }
+          yield true;
+        }
+        case 5 -> {
+          for (Tile t : fifthRow) {
+            if (t == null) yield false;
+          }
+          yield true;
+        }
+        default -> false;
+      };
     }
 
     /**
-     * Initializes the wall.
-     */
-    private void initializeWall() {
+    * pushes certain row to the mosaic
+    */
+    private void pushRowToMosaic(int row, Box box, Mosaic mosaic) throws WrongTileColourException, IllegalArgumentException{
+      Tile color = switch(row) {
+        case 1 -> firstRow[0];
+        case 2 -> secondRow[0];
+        case 3 -> thirdRow[0];
+        case 4 -> fourthRow[0];
+        case 5 -> fifthRow[0];
+        default -> throw new IllegalArgumentException("No such row exists!");
+      };
+      mosaic.setTile(row, color);
+      clearRowOnWall(row, box);
     }
+
+    /**
+    * Clears specific row on the wall.
+    * @param row - Row number to be cleared.
+    * @param box - Box to add the removed tiles to.
+    */
+    private void clearRowOnWall(int row, Box box) {
+      Tile color;
+      switch(row) {
+        case 1:
+          color = firstRow[0];
+          for (int i = 0; i < 1; i++) {
+            box.add(color);
+          }
+          Arrays.fill(firstRow, null);
+          break;
+        case 2:
+          color = secondRow[0];
+          for (int i = 0; i < 2; i++) {
+            box.add(color);
+          }
+          Arrays.fill(secondRow, null);
+          break;
+        case 3:
+          color = thirdRow[0];
+          for (int i = 0; i < 3; i++) {
+            box.add(color);
+          }
+          Arrays.fill(thirdRow, null);
+          break;
+        case 4:
+          color = fourthRow[0];
+          for (int i = 0; i < 4; i++) {
+            box.add(color);
+          }
+          Arrays.fill(fourthRow, null);
+          break;
+        case 5:
+          color = fifthRow[0];
+          for (int i = 0; i < 5; i++) {
+            box.add(color);
+          }
+          Arrays.fill(fifthRow, null);
+          break;
+      }
+    }
+
 
     /**
      * Calculates the number of free spots in a specific row on the wall.

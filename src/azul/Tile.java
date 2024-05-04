@@ -4,6 +4,7 @@ package azul;
  * Enum representing types of tiles
  */
 public enum Tile {
+  FIRST(0),
   BLACK(1),
   WHITE(2),
   RED(3),

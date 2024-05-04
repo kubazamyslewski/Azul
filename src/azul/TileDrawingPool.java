@@ -1,5 +1,7 @@
 package azul;
 
+import Exceptions.FirstTileInWorkshopException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,7 +66,7 @@ public class TileDrawingPool {
 		}
 		return middle.isEmpty() && isEmpty;
 	}
-	public void printState() {
+	public void printState() throws FirstTileInWorkshopException {
 		System.out.println();
 		System.out.println("Workshops:");
 		for (int i = 0; i < workshops.length; i++) {

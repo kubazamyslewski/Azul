@@ -11,6 +11,11 @@ public class TileDrawingPool {
     private List<Tile> availableColors = new ArrayList<>();
 	public Middle middle;
 	private Workshop[] workshops;
+
+	public TileDrawingPool(Bag bag, int playerCount) {
+		middle = new Middle();
+		initializeWorkshops(playerCount, bag);
+	}
     
 	/**
 	 * Gets available colours.
@@ -25,6 +30,10 @@ public class TileDrawingPool {
      */
 	public Workshop[] getWorkshops() {
 		return workshops;
+	}
+
+	public Middle getMiddle() {
+		return middle;
 	}
 	
 	/**
@@ -54,5 +63,32 @@ public class TileDrawingPool {
 			isEmpty &= workshop.isEmpty();
 		}
 		return middle.isEmpty() && isEmpty;
+	}
+	public void printState() {
+		System.out.println("Workshops:");
+		for (int i = 0; i < workshops.length; i++) {
+			Workshop workshop = workshops[i];
+			System.out.print("Workshop " + (i + 1) + ": ");
+			printTileQuantity(workshop.getTileQuantity(Tile.BLACK),
+								workshop.getTileQuantity(Tile.WHITE),
+								workshop.getTileQuantity(Tile.RED),
+								workshop.getTileQuantity(Tile.YELLOW),
+								workshop.getTileQuantity(Tile.BLUE));
+		}
+
+		System.out.println("Middle:");
+		printTileQuantity(middle.getTileQuantity(Tile.BLACK),
+							middle.getTileQuantity(Tile.WHITE),
+							middle.getTileQuantity(Tile.RED),
+							middle.getTileQuantity(Tile.YELLOW),
+							middle.getTileQuantity(Tile.BLUE));
+	}
+
+	public static void printTileQuantity(int tileQuantity, int tileQuantity2, int tileQuantity3, int tileQuantity4, int tileQuantity5) {
+		System.out.print("Black: " + tileQuantity + ", ");
+		System.out.print("White: " + tileQuantity2 + ", ");
+		System.out.print("Red: " + tileQuantity3 + ", ");
+		System.out.print("Yellow: " + tileQuantity4 + ", ");
+		System.out.println("Blue: " + tileQuantity5);
 	}
 }

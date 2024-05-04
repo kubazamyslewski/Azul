@@ -8,6 +8,11 @@ import server.Session;
 public class Player {
 	
 	private Board board;
+	private int playerID;
+	public Player(int playerID, Board board) {
+		this.playerID = playerID;
+		this.board = board;
+	}
 	
 	/**
 	 * Checks whether a player has the tile with number 1 on it

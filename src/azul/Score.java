@@ -22,9 +22,9 @@ public class Score {
 	 * @param session
 	 * @return
 	 */
-	public Player getCurrentWinner(Session session) {
+	/*public Player getCurrentWinner(Session session) {
 		return new Player();
-	}
+	}*/
 	
 	/**
 	 * Rewards a player with points when they place a new tile

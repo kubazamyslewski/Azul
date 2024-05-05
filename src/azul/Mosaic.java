@@ -10,9 +10,11 @@ public class Mosaic {
     /**
      * A two-dimensional array representing the square mosaic
      */
-    private Tile[][] mosaic;
+    private final Tile[][] mosaic;
+    private final Board parentBoard;
 
-    public Mosaic() {
+    public Mosaic(Board parentBoard) {
+      this.parentBoard = parentBoard;
       this.mosaic = new Tile[5][5];
       for (int i = 0; i < 5; i++) {
         for (int j = 0; j < 5; j++) {
@@ -172,7 +174,7 @@ public class Mosaic {
             break;
           }
         }
-        if (completionFactor) return completionFactor;
+        if (completionFactor) return true;
       }
       return false;
     }

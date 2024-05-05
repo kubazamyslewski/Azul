@@ -1,20 +1,27 @@
 package azul;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Stack;
 
 /**
  * Class representing the box of tiles.
  */
 public class Box {
-    private Stack<Tile> blackTiles = new Stack<>();
-    private Stack<Tile> whiteTiles = new Stack<>();
-    private Stack<Tile> redTiles = new Stack<>();
-    private Stack<Tile> yellowTiles = new Stack<>();
-    private Stack<Tile> blueTiles = new Stack<>();
+
+    /**
+    * Map representing contents of the box.
+    */
+    private final Map<Tile, Stack<Tile>> boxMap;
+
     /**
      * Default constructor for the box.
      */
     public Box() {
+      this.boxMap = new HashMap<>();
+      for (Tile color : Tile.values()) {
+        boxMap.put(color, new Stack<>());
+      }
     }
 
     /**
@@ -23,51 +30,54 @@ public class Box {
      * @param color color of the tile to be added.
      */
     public void add(Tile color) {
-        switch (color) {
-            case BLACK -> blackTiles.push(Tile.BLACK);
-            case WHITE -> whiteTiles.push(Tile.WHITE);
-            case RED -> redTiles.push(Tile.RED);
-            case YELLOW -> yellowTiles.push(Tile.YELLOW);
-            case BLUE -> blueTiles.push(Tile.BLUE);
-        };
+        this.boxMap.get(color).push(color);
     }
 
     /**
      * Returns an array of numbers representing amounts of tiles of a specified color in the box.
      * Then clears the contents of the box.
+     * @return an array representing amounts of tiles of certain colors in the box:
+     * [BLACK, WHITE, RED, YELLOW, BLUE]
      */
-    public int[] get() {
-      int[] tilesFromTheBox = new int[5];
-      int counter = 0;
-      while (!blackTiles.isEmpty()) {
-        blackTiles.pop();
-        counter++;
-      }
-      tilesFromTheBox[0] = counter;
-      counter = 0;
-      while (!whiteTiles.isEmpty()) {
-        whiteTiles.pop();
-        counter++;
-      }
-      tilesFromTheBox[1] = counter;
-      counter = 0;
-      while (!redTiles.isEmpty()) {
-        redTiles.pop();
-        counter++;
-      }
-      tilesFromTheBox[2] = 0;
-      counter = 0;
-      while (!yellowTiles.isEmpty()) {
-        yellowTiles.pop();
-        counter++;
-      }
-      tilesFromTheBox[3] = counter;
-      counter = 0;
-      while (!blueTiles.isEmpty()) {
-        blueTiles.pop();
-        counter++;
-      }
-      tilesFromTheBox[4] = counter;
-      return tilesFromTheBox;
+    public int[] retrieveContents() {
+
+        int[] tilesFromTheBox = new int[5];
+
+        int counter = 0;
+        while (!this.boxMap.get(Tile.BLACK).isEmpty()) {
+          this.boxMap.get(Tile.BLACK).pop();
+          counter++;
+        }
+        tilesFromTheBox[0] = counter;
+
+        counter = 0;
+        while (!this.boxMap.get(Tile.WHITE).isEmpty()) {
+          this.boxMap.get(Tile.WHITE).pop();
+          counter++;
+        }
+        tilesFromTheBox[1] = counter;
+
+        counter = 0;
+        while (!this.boxMap.get(Tile.RED).isEmpty()) {
+          this.boxMap.get(Tile.RED).pop();
+          counter++;
+        }
+        tilesFromTheBox[2] = counter;
+
+        counter = 0;
+        while (!this.boxMap.get(Tile.YELLOW).isEmpty()) {
+          this.boxMap.get(Tile.YELLOW).pop();
+          counter++;
+        }
+        tilesFromTheBox[3] = counter;
+
+        counter = 0;
+        while (!this.boxMap.get(Tile.BLUE).isEmpty()) {
+          this.boxMap.get(Tile.BLUE).pop();
+          counter++;
+        }
+        tilesFromTheBox[4] = counter;
+
+        return tilesFromTheBox;
     }
 }

@@ -1,5 +1,7 @@
 package azul;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 import java.util.Stack;
 
@@ -7,11 +9,12 @@ import java.util.Stack;
  * Class representing the bag of tiles.
  */
 public class Bag {
-    private final Stack<Tile> blackTiles = new Stack<>();
-    private final Stack<Tile> whiteTiles = new Stack<>();
-    private final Stack<Tile> redTiles = new Stack<>();
-    private final Stack<Tile> yellowTiles = new Stack<>();
-    private final Stack<Tile> blueTiles = new Stack<>();
+
+    /**
+    * Map representing contents of the bag.
+    */
+    private final Map<Tile, Stack<Tile>> bagMap;
+    private final Box linkedBox;
 
     /**
      * Constructor for the bag.
@@ -23,7 +26,12 @@ public class Bag {
      * @param yellows  Number of yellow tiles.
      * @param blues    Number of blue tiles.
      */
-    public Bag(int blacks, int whites, int reds, int yellows, int blues) {
+    public Bag(Box linkedBox, int blacks, int whites, int reds, int yellows, int blues) {
+      this.linkedBox = linkedBox;
+      this.bagMap = new HashMap<>();
+      for (Tile color : Tile.values()) {
+        bagMap.put(color, new Stack<>());
+      }
       addToBag(Tile.BLACK,blacks);
       addToBag(Tile.WHITE,whites);
       addToBag(Tile.RED,reds);
@@ -31,45 +39,22 @@ public class Bag {
       addToBag(Tile.BLUE,blues);
     }
 
-    private void addToBag(Tile colour, int amount) {
-      switch (colour) {
-        case BLACK:
-          for (int i = 0; i < amount; i++) {
-            this.blackTiles.push(Tile.BLACK);
-          }
-          break;
-        case WHITE:
-          for (int i = 0; i < amount; i++) {
-            this.whiteTiles.push(Tile.WHITE);
-          }
-          break;
-        case RED:
-          for (int i = 0; i < amount; i++) {
-            this.redTiles.push(Tile.RED);
-          }
-          break;
-        case YELLOW:
-          for (int i = 0; i < amount; i++) {
-            this.yellowTiles.push(Tile.YELLOW);
-          }
-          break;
-        case BLUE:
-          for (int i = 0; i < amount; i++) {
-            this.blueTiles.push(Tile.BLUE);
-          }
-          break;
-        default:
-          throw new IllegalArgumentException("No such tile exists!");
-      }
+    /**
+   * Adds a certain amount of tiles of a specified color to the bag.
+   * @param color - color of the tiles to be added
+   * @param amount - amount of the tiles to be added
+   */
+    private void addToBag(Tile color, int amount) {
+        for(int i = 0; i < amount; i++) {
+            this.bagMap.get(color).push(color);
+        }
     }
 
     /**
      * Refills the bag based on the contents of the box.
-     *
-     * @param box The box with tiles.
      */
-    public void addToBagFromTheBox (Box box){
-      int[] tilesToAdd = box.get();
+    public void addToBagFromTheBox (){
+      int[] tilesToAdd = this.linkedBox.retrieveContents();
       addToBag(Tile.BLACK, tilesToAdd[0]);
       addToBag(Tile.WHITE, tilesToAdd[1]);
       addToBag(Tile.RED, tilesToAdd[2]);
@@ -92,30 +77,30 @@ public class Bag {
         int r = random.nextInt(5) + 1;
         switch (r) {
           case 1:
-            if (blackTiles.isEmpty()) {
+            if (bagMap.get(Tile.BLACK).isEmpty()) {
               continue;
             }
-            return blackTiles.pop();
+            return bagMap.get(Tile.BLACK).pop();
           case 2:
-            if (whiteTiles.isEmpty()) {
+            if (bagMap.get(Tile.WHITE).isEmpty()) {
               continue;
             }
-            return whiteTiles.pop();
+            return bagMap.get(Tile.WHITE).pop();
           case 3:
-            if (redTiles.isEmpty()) {
+            if (bagMap.get(Tile.RED).isEmpty()) {
               continue;
             }
-            return redTiles.pop();
+            return bagMap.get(Tile.RED).pop();
           case 4:
-            if (yellowTiles.isEmpty()) {
+            if (bagMap.get(Tile.YELLOW).isEmpty()) {
               continue;
             }
-            return yellowTiles.pop();
+            return bagMap.get(Tile.YELLOW).pop();
           case 5:
-            if (blueTiles.isEmpty()) {
+            if (bagMap.get(Tile.BLUE).isEmpty()) {
               continue;
             }
-            return blueTiles.pop();
+            return bagMap.get(Tile.BLUE).pop();
         }
       }
     }
@@ -126,8 +111,11 @@ public class Bag {
      * @return The current number of tiles in the bag.
      */
     public int size(){
-      return blackTiles.size() + whiteTiles.size() + redTiles.size()
-              + yellowTiles.size() + blueTiles.size();
+      int size = 0;
+      for (Tile color : Tile.values()) {
+        size += bagMap.get(color).size();
+      }
+      return size;
     }
 
     /**
@@ -135,7 +123,5 @@ public class Bag {
      *
      * @return true if the bag is empty, false otherwise.
      */
-    public boolean isEmpty(){
-      return this.size() == 0;
-    }
+    public boolean isEmpty(){ return this.size() == 0; }
 }

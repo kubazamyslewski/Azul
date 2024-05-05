@@ -7,12 +7,15 @@ import server.Session;
  */
 public class Player {
 	
-	private Board board;
-	private int playerID;
+	private final Board playerBoard;
+	private final int playerID;
+
 	public Player(int playerID, Board board) {
 		this.playerID = playerID;
-		this.board = board;
+		this.playerBoard = board;
 	}
+
+	public Board getBoard() { return this.playerBoard; }
 	
 	/**
 	 * Checks whether a player has the tile with number 1 on it

@@ -10,13 +10,15 @@ import java.util.List;
  */
 public class TileDrawingPool {
 	
-    private List<Tile> availableColors = new ArrayList<>();
-	public Middle middle;
+	private final List<Tile> availableColors = new ArrayList<>();
+	private final Middle middle;
+	private final Bag linkedBag;
 	private Workshop[] workshops;
 
 	public TileDrawingPool(Bag bag, int playerCount) {
-		middle = new Middle();
-		initializeWorkshops(playerCount, bag);
+		this.middle = new Middle();
+		this.linkedBag = bag;
+		initializeWorkshops(playerCount, linkedBag);
 	}
     
 	/**
@@ -30,13 +32,11 @@ public class TileDrawingPool {
 	/**
 	 * Returns a table of current workshops
      */
-	public Workshop[] getWorkshops() {
-		return workshops;
-	}
+	public Workshop[] getWorkshops() { return this.workshops; }
 
-	public Middle getMiddle() {
-		return middle;
-	}
+	public Middle getMiddle() { return this.middle; }
+
+	public Bag getLinkedBag() { return this.linkedBag; }
 	
 	/**
 	 * Creates new workshops based on the number of players
@@ -51,7 +51,7 @@ public class TileDrawingPool {
         };
         workshops = new Workshop[workshopCount];
 		for (int i = 0; i < workshopCount; i++) {
-			workshops[i] = new Workshop(bag);
+			workshops[i] = new Workshop(this);
 		}
 	}
 	
@@ -59,7 +59,7 @@ public class TileDrawingPool {
 	 * Checks whether there are absolutely no tiles players can take
 	 * @return true if all workshops and middle is empty, false otherwise
 	 */
-	public boolean isEmpty() {
+	public boolean isEmpty() throws FirstTileInWorkshopException {
 		boolean isEmpty = availableColors.isEmpty();
 		for (Workshop workshop : workshops) {
 			isEmpty &= workshop.isEmpty();

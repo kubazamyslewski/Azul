@@ -1,5 +1,7 @@
 package azul;
 
+import Exceptions.WrongTileColourException;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
@@ -21,6 +23,16 @@ public class Middle implements Storage {
     public void add(Tile color) {
         Stack<Tile> tileStack = middleMap.get(color);
         tileStack.push(color);
+    }
+
+    public void getTileColorFromMiddle(Tile color, Wall wall, Floor floor) throws WrongTileColourException{
+        if (color.equals(Tile.FIRST)) throw new WrongTileColourException("First tile cannot be drawn alone!");
+        if(hasColor(color)) {
+            while(middleMap.get(color).isEmpty()) {
+                wall.addToTempStorage(middleMap.get(color).pop());
+            }
+        }
+        if(hasColor(Tile.FIRST)) floor.addTileToFloor(middleMap.get(Tile.FIRST).pop());
     }
 
     @Override

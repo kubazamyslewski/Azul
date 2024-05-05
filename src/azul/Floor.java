@@ -4,11 +4,17 @@ package azul;
  * Part of the board for tiles that give point penalties
  */
 public class Floor {
+
+    Board parentBoard;
     private Tile[] tiles;
+    int amountOfTiles;
     /**
      * Constructor for the Floor class.
      */
-    public Floor() {
+    public Floor(Board parentBoard) {
+        this.parentBoard = parentBoard;
+        this.amountOfTiles = 0;
+        this.tiles = new Tile[7];
     }
 
 
@@ -17,7 +23,7 @@ public class Floor {
      * @return - Number of tiles on the floor.
      */
     public int getNumberOfTilesOnTheFloor() {
-        return 0;
+        return this.amountOfTiles;
     }
 
     /**
@@ -33,28 +39,17 @@ public class Floor {
      * @param tile - A tile to be added to the floor.
      */
     public void addTileToFloor(Tile tile) {
+        if (amountOfTiles < tiles.length) this.tiles[this.amountOfTiles++] = tile;
+        else this.parentBoard.linkedBox.add(tile);
     }
-
-
-    /**
-     * Adds the "start" tile to the floor.
-     */
-    public void addFirstPlayerTileToFloor(){
-    }
-
 
     /**
      * Clears tiles from the floor and puts them in the box.
      */
-    public void clearFloor(){
-    }
-
-
-    /**
-     * Calculates the number of free spots on the floor.
-     * @return - Number of free spots on the floor.
-     */
-    private int freeSpotsOnTheFloor(){
-        return 0;
+    public void clearFloor(Box box){
+        for(int i = 6; i >= 0; i--) {
+            box.add(this.tiles[i]);
+            this.tiles[i] = null;
+        }
     }
 }

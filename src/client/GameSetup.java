@@ -25,7 +25,7 @@ public class GameSetup {
         scanner.nextLine();
         Player[] players = new Player[playerCount];
         for (int i = 0; i < playerCount; i++) {
-            Player player = new Player(i + 1, new Board(gameBox));
+            Player player = new Player(i + 1, new Board(gameBox),0);
         }
 
         Bag bag = new Bag(gameBox, 20, 20, 20, 20, 20); // Initial number of tiles for each color

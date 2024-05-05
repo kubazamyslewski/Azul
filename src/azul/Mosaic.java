@@ -160,36 +160,68 @@ public class Mosaic {
     }
 
     /**
-     * Checks if a row on the mosaic is completed.
-     * @return - Boolean value indicating if a row on the mosaic is completed.
+     * Checks if any row on the mosaic is completed.
+     * @return - Boolean value indicating if any row on the mosaic is completed.
      */
     public boolean isRowCompleted(){
+      return countCompletedRows() > 0;
+    }
+
+    /**
+     * Checks how many rows have been completed
+     * @return number of completed rows
+     */
+    public int countCompletedRows() {
+        boolean[][] check = checkMosaic();
+        int completedRows = 0;
+        for (int i = 0; i < 5; i++) {
+          boolean completionFactor = true;
+          for (int j = 0; j < 5; j++) {
+            if (!check[i][j]) {
+              completionFactor = false;
+              break;
+            }
+          }
+          if (completionFactor) {
+            completedRows++;
+          }
+        }
+        return completedRows;
+      }
+
+  /**
+   * Checks how many columns have been completed
+   * @return number of completed columns
+   */
+  public int countCompletedColumns() {
       boolean[][] check = checkMosaic();
-      boolean completionFactor;
-      for (int i = 0; i < 5; i++) {
-        completionFactor = true;
-        for (int j = 0; j < 5; j++) {
+      int completedColumns = 0;
+      for (int j = 0; j < 5; j++) {
+        boolean completionFactor = true;
+        for (int i = 0; i < 5; i++) {
           if (!check[i][j]) {
             completionFactor = false;
             break;
           }
         }
-        if (completionFactor) return true;
+        if (completionFactor) {
+          completedColumns++;
+        }
       }
-      return false;
+      return completedColumns;
     }
 
   /**
-   * Checks whether a selected row of a mosaic contains a tile of a certain color
-   * @param row - number of a row to be checked
-   * @param color - a color for which we're looking for
-   * @return boolean stating whether the row contains a tile of this color
-   */
-  public boolean checkRowForColor(int row, Tile color) {
-      for (int i = 0; i < 5; i++) {
-        if (mosaic[row][i].equals(color)) return true;
+     * Checks whether a selected row of a mosaic contains a tile of a certain color
+     * @param row - number of a row to be checked
+     * @param color - a color for which we're looking for
+     * @return boolean stating whether the row contains a tile of this color
+     */
+    public boolean checkRowForColor(int row, Tile color) {
+        for (int i = 0; i < 5; i++) {
+          if (mosaic[row][i].equals(color)) return true;
+        }
+        return false;
       }
-      return false;
-    }
 }
 

@@ -9,10 +9,21 @@ public class Player {
 	
 	private final Board playerBoard;
 	private final int playerID;
+	private int playerScore;
 
-	public Player(int playerID, Board board) {
+	public Player(int playerID, Board board, int score) {
 		this.playerID = playerID;
 		this.playerBoard = board;
+		this.playerScore = score;
+	}
+
+	public int getPlayerScore() {
+		return playerScore;
+	}
+
+	public void setPlayerScore(int playerScore) {
+		this.playerScore = playerScore;
+		if (this.playerScore<0){this.playerScore=0;}
 	}
 
 	public Board getBoard() { return this.playerBoard; }

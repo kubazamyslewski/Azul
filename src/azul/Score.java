@@ -37,10 +37,13 @@ public class Score {
 	
 	/**
 	 * Rewards a player with points when they place a new tile
-	 * @param player
+	 * @param player player whose move is being rewarded with points
+	 * @param row row in which a tile is being moved to the mosaic
+	 * @param color color of the tile being moved to the mosaic
 	 */
-	public void scoreNewTile(Player player) {
-		
+	public void scoreNewTile(Player player, int row, Tile color) {
+		int col = player.getBoard().getMosaic().findColumnByColor(row, color);
+		player.setPlayerScore(player.getPlayerScore() + (1 + player.getBoard().getMosaic().countTouchingTiles(row, col)));
 	}
 	
 	

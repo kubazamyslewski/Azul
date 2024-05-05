@@ -189,39 +189,108 @@ public class Mosaic {
         return completedRows;
       }
 
-  /**
-   * Checks how many columns have been completed
-   * @return number of completed columns
-   */
-  public int countCompletedColumns() {
-      boolean[][] check = checkMosaic();
-      int completedColumns = 0;
-      for (int j = 0; j < 5; j++) {
-        boolean completionFactor = true;
-        for (int i = 0; i < 5; i++) {
-          if (!check[i][j]) {
-            completionFactor = false;
-            break;
+    /**
+     * Checks how many columns have been completed
+     * @return number of completed columns
+     */
+    public int countCompletedColumns() {
+        boolean[][] check = checkMosaic();
+        int completedColumns = 0;
+        for (int j = 0; j < 5; j++) {
+          boolean completionFactor = true;
+          for (int i = 0; i < 5; i++) {
+            if (!check[i][j]) {
+              completionFactor = false;
+              break;
+            }
+          }
+          if (completionFactor) {
+            completedColumns++;
           }
         }
-        if (completionFactor) {
-          completedColumns++;
-        }
+        return completedColumns;
       }
-      return completedColumns;
-    }
 
-  /**
-     * Checks whether a selected row of a mosaic contains a tile of a certain color
-     * @param row - number of a row to be checked
-     * @param color - a color for which we're looking for
-     * @return boolean stating whether the row contains a tile of this color
-     */
+    /**
+       * Checks whether a selected row of a mosaic contains a tile of a certain color
+       * @param row - number of a row to be checked
+       * @param color - a color which we're looking for
+       * @return boolean stating whether the row contains a tile of this color
+       */
     public boolean checkRowForColor(int row, Tile color) {
         for (int i = 0; i < 5; i++) {
           if (mosaic[row][i].equals(color)) return true;
         }
         return false;
       }
+
+  /**
+   * Finds which column a color is in based on the row
+   * @param row row in which the tile is placed
+   * @param color color of the tile
+   * @return column (0-4)
+   */
+  public int findColumnByColor(int row, Tile color){
+      int column = switch (color) {
+          case BLACK -> 3;
+          case WHITE -> 4;
+          case RED -> 2;
+          case YELLOW -> 1;
+          case BLUE -> 0;
+          default -> -1;
+      };
+        for(int i = 0; i < row; i++){
+          column++;
+          if(column > 4){
+            column = 0;
+          }
+        }
+        return column;
+    }
+
+    public int countTouchingTiles(int row, int column) {
+      boolean[][] check = checkMosaic();
+      int rowCount = 0;
+      int columnCount = 0;
+      if (!check[row][column]) {
+            return 0;
+          }
+      for (int i = column - 1; i >= 0 && i < column; i++) {
+          if(!check[row][i]){
+              rowCount++;
+          }
+          else {
+              rowCount = 0;
+          }
+      }
+
+      for (int i = column + 1; i <= 5 && i > column; i++) {
+          if(!check[row][i]){
+              rowCount++;
+          }
+          else {
+              break;
+          }
+      }
+
+      for (int i = row - 1; i >= 0 && i < row; i++) {
+          if(!check[i][column]){
+              columnCount++;
+          }
+          else {
+              columnCount = 0;
+          }
+      }
+
+      for (int i = row + 1; i <= 5 && i > row; i++) {
+          if(!check[i][column]){
+              columnCount++;
+          }
+          else {
+              break;
+          }
+      }
+      return rowCount + columnCount;
+    }
 }
 

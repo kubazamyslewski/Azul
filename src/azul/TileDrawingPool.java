@@ -16,7 +16,7 @@ public class TileDrawingPool {
 	private Workshop[] workshops;
 
 	public TileDrawingPool(Bag bag, int playerCount) {
-		this.middle = new Middle();
+		this.middle = new Middle(this);
 		this.linkedBag = bag;
 		initializeWorkshops(playerCount, linkedBag);
 	}

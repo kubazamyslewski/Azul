@@ -253,8 +253,8 @@ public class Mosaic {
       int rowCount = 0;
       int columnCount = 0;
       if (!check[row][column]) {
-            return 0;
-          }
+        return 0;
+      }
       for (int i = column - 1; i >= 0 && i < column; i++) {
           if(!check[row][i]){
               rowCount++;

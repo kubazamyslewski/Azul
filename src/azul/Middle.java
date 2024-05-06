@@ -17,15 +17,20 @@ public class Middle implements Storage {
      */
     private final Map<Tile, Stack<Tile>> middleMap;
 
+    private final TileDrawingPool parentTileDrawingPool;
+
     /**
      * Constructor for the middle.
      */
-    public Middle() {
+    public Middle(TileDrawingPool parentTileDrawingPool) {
+        this.parentTileDrawingPool = parentTileDrawingPool;
         middleMap = new HashMap<>();
         for (Tile color : Tile.values()) {
             middleMap.put(color, new Stack<>());
         }
     }
+
+    public TileDrawingPool getParentTileDrawingPool() { return this.parentTileDrawingPool; }
 
     /**
      * Adds a tile of a specified color to the middle.
@@ -36,19 +41,20 @@ public class Middle implements Storage {
     /**
      * Gets a specified color of the tiles from the middle and adds them to the players wall
      * @param color - color of the tiles to be extracted from the middle
-     * @param wall - reference to wall to which the tiles of specified color from the middle should be added
-     * @param floor - reference to floor to which first tile should be added in case in which it is present
-     *                in the middle
+     * @param player - player taking the tiles
      * @throws WrongTileColourException - if specified color is FIRST tile type
      */
-    public void getTileColorFromMiddle(Tile color, Wall wall, Floor floor) throws WrongTileColourException, ColorNotInTheMiddleException{
+    public void getTileColorFromMiddle(Player player, Tile color, int row) throws WrongTileColourException, ColorNotInTheMiddleException{
         if (color.equals(Tile.FIRST)) throw new WrongTileColourException("First tile cannot be drawn alone!");
         if(hasColor(color)) {
             while(middleMap.get(color).isEmpty()) {
-                wall.addToTempStorage(middleMap.get(color).pop());
+                player.getBoard().getWall().addToTempStorage(middleMap.get(color).pop());
             }
         } else throw new ColorNotInTheMiddleException("This color is not present in the middle!");
-        if(hasColor(Tile.FIRST)) floor.addTileToFloor(middleMap.get(Tile.FIRST).pop());
+
+        player.getBoard().getWall().addTilesToWall(row);
+
+        if(hasColor(Tile.FIRST)) player.getBoard().getFloor().addTileToFloor(middleMap.get(Tile.FIRST).pop());
     }
 
     /**

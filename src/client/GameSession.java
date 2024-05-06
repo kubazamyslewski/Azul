@@ -17,7 +17,7 @@ public class GameSession {
 
     private Box linkedBox;
 
-    Scanner inputHandler = new Scanner(System.in);
+    private Scanner inputHandler = new Scanner(System.in);
 
     public GameSession() throws FirstTileInWorkshopException {
 
@@ -40,13 +40,45 @@ public class GameSession {
 
         System.out.println("Game setup complete.");
         System.out.println("Player count: " + playerCount);
-        this.linkedTileDrawingPool.printState();
 
     }
 
+    public Scanner getInputHandler() { return this.inputHandler; }
+
     public Box getLinkedBox() { return this.linkedBox; }
+
+    public TileDrawingPool getLinkedTileDrawingPool() { return this.linkedTileDrawingPool; }
+
+    public int getPlayerCount() { return playerCount; }
+
+    public void runRound() throws FirstTileInWorkshopException {
+        providersOfferPhase();
+    }
+
+    private void providersOfferPhase() throws FirstTileInWorkshopException {
+
+        System.out.println("------- Start of the providers offer phase --------");
+
+        this.linkedTileDrawingPool.printState();
+
+        this.linkedTileDrawingPool.getMiddle().add(Tile.FIRST);
+        boolean isEmpty = false;
+        do {
+            for (Player player : this.players) {
+                if(this.linkedTileDrawingPool.isEmpty()) {
+                    isEmpty = true;
+                    break;
+                }
+                player.takeTile();
+            }
+        } while (!isEmpty);
+
+    }
+
+
 
     public static void main(String[] args) throws FirstTileInWorkshopException {
         GameSession game = new GameSession();
+        game.runRound();
     }
 }

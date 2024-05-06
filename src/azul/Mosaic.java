@@ -222,7 +222,9 @@ public class Mosaic {
           if (mosaic[row][i] != null && mosaic[row][i].equals(color)) return true;
         }
         return false;
-      }
+    }
+
+
 
   /**
    * Finds which column a color is in based on the row

@@ -25,8 +25,8 @@ public class Wall {
 
       this.parentBoard = parentBoard;
       this.wallMap = new HashMap<>();
-      for (int i = 1; i < 6; i++) {
-        this.wallMap.put(i, new Tile[i]);
+      for (int i = 0; i < 5; i++) {
+        this.wallMap.put(i, new Tile[i+1]);
       }
 
     }
@@ -59,7 +59,7 @@ public class Wall {
      */
     public void addTilesToWall(int row) throws WrongTileColourException{
 
-      if (row < 1 || row > 5) throw new IllegalArgumentException("No such row on the wall!");
+      if (row < 0 || row > 4) throw new IllegalArgumentException("No such row on the wall!");
 
       Tile colour;
       Tile[] tilesToAdd = new Tile[tempStorage.size()];
@@ -85,6 +85,13 @@ public class Wall {
         this.parentBoard.getFloor().addTileToFloor(tilesToAdd[tilesToAddIndex++]);
       }
     }
+
+  public boolean checkIfRowIsSafeForColor(int row, Tile color) {
+    for (int i = 0; i < this.wallMap.get(row).length; i++) {
+      if (this.wallMap.get(row)[i] != null && !this.wallMap.get(row)[i].equals(color)) return false;
+    }
+    return true;
+  }
 
     /**
      * Pushes tiles from the wall to the mosaic.

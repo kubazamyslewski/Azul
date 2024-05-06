@@ -72,13 +72,17 @@ public class Player {
 	// add a check that blocks picking middle if its empty
 	public void takeTile() throws ColorNotInTheMiddleException, WrongTileColourException, FirstTileInWorkshopException, ColorNotInWorkshopException {
 		System.out.println("PLAYER: " + this.playerID);
-		System.out.print("Choose tile pool (middle/workshop): ");
-		String tilePool = this.game.getInputHandler().next();
+
+		this.game.getLinkedTileDrawingPool().printState();
+
+		String tilePool;
 		int colorChoice;
 		int rowChoice;
 		Tile chosenColor = null;
 		Score score = new Score(this.game.getPlayers());
 		do{
+			System.out.print("Choose tile pool (middle/workshop): ");
+			tilePool = this.game.getInputHandler().next();
 			switch(tilePool) {
 				case "workshop":
 					int workshopChoice;
@@ -110,21 +114,30 @@ public class Player {
 						if (chosenWorkshop.hasColor(chosenColor)) {
 							incorrectColor = false;
 						}
-					}
-					while (incorrectColor);
+						if (incorrectColor) System.out.println("Picked color incorrect, choose again.");
+					} while (incorrectColor);
+
+					boolean isRowCorrect = true;
 					do {
+						isRowCorrect = true;
 						System.out.print("Choose row: ");
 						rowChoice = this.game.getInputHandler().nextInt();
 						if (rowChoice < 1 || rowChoice > 5) {
 							System.out.println("This row does not exist!");
 						}
-					}
-					while (rowChoice < 1 || rowChoice > 5);
+						if (!this.getBoard().getWall().checkIfRowIsSafeForColor(rowChoice-1, chosenColor)) {
+							isRowCorrect = false;
+							System.out.println("You cannot put this color in that row!");
+						}
+					} while ((rowChoice < 1 || rowChoice > 5) || !isRowCorrect);
+					rowChoice--;
 
 					//This seems like a janky way to do this, see if it's possible to avoid this
+
 					chosenWorkshop.getTileColorFromWorkshop(this.game.getPlayers()[this.game.getIndexFromPlayerID(this.playerID)], chosenColor, rowChoice);
 					score.scoreNewTile(this.game.getPlayers()[this.game.getIndexFromPlayerID(this.playerID)], chosenColor , rowChoice);
 					break;
+
 
 				case "middle":
 					System.out.print("Choose color [1 - BLACK, 2 - WHITE, 3 - RED, 4 - YELLOW, 5 - BLUE]: ");
@@ -133,9 +146,12 @@ public class Player {
 					rowChoice = this.game.getInputHandler().nextInt();
 					this.game.getLinkedTileDrawingPool().getMiddle().getTileColorFromMiddle(this, Tile.BLACK, rowChoice);
 					break;
-				//add default should it be necessary
+
+				default:
+					System.out.println("Invalid input.");
+					break;
 			}
-		} while(tilePool.equals("workshop") || tilePool.equals("middle"));
+		} while(!(tilePool.equals("workshop") || tilePool.equals("middle")));
 
 	}
 	

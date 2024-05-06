@@ -91,7 +91,7 @@ public class Workshop implements Storage {
 
 			// pozostałe kafelki do Middle
 			for(Tile tileColor : Tile.values()) {
-				if(!this.workshopMap.get(tileColor).isEmpty()) {
+				while(!this.workshopMap.get(tileColor).isEmpty()) {
 					this.parentTileDrawingPool.getMiddle().add(this.workshopMap.get(tileColor).pop());
 				}
 			}

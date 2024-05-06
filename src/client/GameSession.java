@@ -1,6 +1,7 @@
 package client;
 
 import Exceptions.ColorNotInTheMiddleException;
+import Exceptions.ColorNotInWorkshopException;
 import Exceptions.FirstTileInWorkshopException;
 import Exceptions.WrongTileColourException;
 import azul.*;
@@ -53,11 +54,22 @@ public class GameSession {
 
     public int getPlayerCount() { return playerCount; }
 
-    public void runRound() throws FirstTileInWorkshopException, ColorNotInTheMiddleException, WrongTileColourException {
+    public Player[] getPlayers(){return this.players;}
+
+    public int getIndexFromPlayerID(int playerID) {
+        for (int i = 0; i < players.length; i++) {
+            if(players[i].getPlayerID() == playerID){
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public void runRound() throws FirstTileInWorkshopException, ColorNotInTheMiddleException, WrongTileColourException, ColorNotInWorkshopException {
         providersOfferPhase();
     }
 
-    private void providersOfferPhase() throws FirstTileInWorkshopException, ColorNotInTheMiddleException, WrongTileColourException {
+    private void providersOfferPhase() throws FirstTileInWorkshopException, ColorNotInTheMiddleException, WrongTileColourException, ColorNotInWorkshopException {
 
         System.out.println("------- Start of the providers offer phase --------");
 
@@ -79,7 +91,7 @@ public class GameSession {
 
 
 
-    public static void main(String[] args) throws FirstTileInWorkshopException, ColorNotInTheMiddleException, WrongTileColourException {
+    public static void main(String[] args) throws FirstTileInWorkshopException, ColorNotInTheMiddleException, WrongTileColourException, ColorNotInWorkshopException {
         GameSession game = new GameSession();
         game.runRound();
     }

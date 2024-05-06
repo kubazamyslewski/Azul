@@ -9,6 +9,9 @@ import Exceptions.IncorrectAmountOfTilesOnFloorException;
 public class Score {
 	
 	private Player[] players;
+	public Score(Player[] players) {
+		this.players = players;
+	}
 	
 	/**
 	 * Resets player's score
@@ -17,7 +20,7 @@ public class Score {
 	public void reset(Player player) {
 		player.setPlayerScore(0);
 	}
-	
+
 	/**
 	 * Gets the current winner
 	 * @return player with the highest score
@@ -41,7 +44,7 @@ public class Score {
 	 * @param row row in which a tile is being moved to the mosaic
 	 * @param color color of the tile being moved to the mosaic
 	 */
-	public void scoreNewTile(Player player, int row, Tile color) {
+	public void scoreNewTile(Player player, Tile color, int row) {
 		int col = player.getBoard().getMosaic().findColumnByColor(row, color);
 		player.setPlayerScore(player.getPlayerScore() + (1 + player.getBoard().getMosaic().countTouchingTiles(row, col)));
 	}

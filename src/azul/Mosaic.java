@@ -219,7 +219,7 @@ public class Mosaic {
        */
     public boolean checkRowForColor(int row, Tile color) {
         for (int i = 0; i < 5; i++) {
-          if (mosaic[row][i].equals(color)) return true;
+          if (mosaic[row][i] != null && mosaic[row][i].equals(color)) return true;
         }
         return false;
       }

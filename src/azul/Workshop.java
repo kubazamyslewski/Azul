@@ -42,8 +42,8 @@ public class Workshop implements Storage {
     
 	@Override
 	public boolean hasColor(Tile color) throws FirstTileInWorkshopException{
-    if (!this.workshopMap.get(Tile.FIRST).isEmpty()) throw new FirstTileInWorkshopException("First tile cannot be present in a workshop");
-		return workshopMap.get(color).isEmpty();
+    	if (!this.workshopMap.get(Tile.FIRST).isEmpty()) throw new FirstTileInWorkshopException("First tile cannot be present in a workshop");
+		return !workshopMap.get(color).isEmpty();
 	}
 
 	@Override
@@ -91,7 +91,9 @@ public class Workshop implements Storage {
 
 			// pozostałe kafelki do Middle
 			for(Tile tileColor : Tile.values()) {
-				this.parentTileDrawingPool.getMiddle().add(this.workshopMap.get(tileColor).pop());
+				if(!this.workshopMap.get(tileColor).isEmpty()) {
+					this.parentTileDrawingPool.getMiddle().add(this.workshopMap.get(tileColor).pop());
+				}
 			}
 
 		}

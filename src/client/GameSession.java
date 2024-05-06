@@ -53,7 +53,7 @@ public class GameSession {
 
     public int getPlayerCount() { return playerCount; }
 
-    public void runRound() throws FirstTileInWorkshopException {
+    public void runRound() throws FirstTileInWorkshopException, ColorNotInTheMiddleException, WrongTileColourException {
         providersOfferPhase();
     }
 
@@ -79,7 +79,7 @@ public class GameSession {
 
 
 
-    public static void main(String[] args) throws FirstTileInWorkshopException {
+    public static void main(String[] args) throws FirstTileInWorkshopException, ColorNotInTheMiddleException, WrongTileColourException {
         GameSession game = new GameSession();
         game.runRound();
     }

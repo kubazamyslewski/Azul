@@ -1,6 +1,8 @@
 package client;
 
+import Exceptions.ColorNotInTheMiddleException;
 import Exceptions.FirstTileInWorkshopException;
+import Exceptions.WrongTileColourException;
 import azul.*;
 import java.util.Scanner;
 
@@ -55,7 +57,7 @@ public class GameSession {
         providersOfferPhase();
     }
 
-    private void providersOfferPhase() throws FirstTileInWorkshopException {
+    private void providersOfferPhase() throws FirstTileInWorkshopException, ColorNotInTheMiddleException, WrongTileColourException {
 
         System.out.println("------- Start of the providers offer phase --------");
 

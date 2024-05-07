@@ -44,9 +44,8 @@ public class Player {
 	 * @return
 	 */
 	public boolean isStartingPlayer() {
-		return false;
-		
-	}
+        return this.playerBoard.getFloor().containsFirstTile();
+    }
 	
 	/**
 	 * Assigns Tile 1 to a player and removes it from another player

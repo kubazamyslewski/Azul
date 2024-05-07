@@ -46,15 +46,14 @@ public class Middle implements Storage {
      */
     public void getTileColorFromMiddle(Player player, Tile color, int row) throws WrongTileColourException, ColorNotInTheMiddleException{
         if (color.equals(Tile.FIRST)) throw new WrongTileColourException("First tile cannot be drawn alone!");
+        if(hasColor(Tile.FIRST)) player.getBoard().getFloor().addTileToFloor(middleMap.get(Tile.FIRST).pop());
         if(hasColor(color)) {
-            while(middleMap.get(color).isEmpty()) {
+            while(!middleMap.get(color).isEmpty()) {
                 player.getBoard().getWall().addToTempStorage(middleMap.get(color).pop());
             }
         } else throw new ColorNotInTheMiddleException("This color is not present in the middle!");
 
         player.getBoard().getWall().addTilesToWall(row);
-
-        if(hasColor(Tile.FIRST)) player.getBoard().getFloor().addTileToFloor(middleMap.get(Tile.FIRST).pop());
     }
 
     /**

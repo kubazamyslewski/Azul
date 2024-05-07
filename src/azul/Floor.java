@@ -52,4 +52,12 @@ public class Floor {
             this.amountOfTiles--;
         }
     }
+    public boolean containsFirstTile() {
+        for (int i = 0; i < amountOfTiles; i++) {
+            if (tilesOnTheFloor[i] == Tile.FIRST) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

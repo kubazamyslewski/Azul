@@ -34,7 +34,7 @@ public class Middle implements Storage {
 
     /**
      * Adds a tile of a specified color to the middle.
-     * @param color
+     * @param color color to be added
      */
     public void add(Tile color) { this.middleMap.get(color).push(color); }
 
@@ -71,7 +71,14 @@ public class Middle implements Storage {
      * @return boolean stating whether the tiles of specified color are present
      */
     @Override
-    public boolean hasColor(Tile color){ return this.middleMap.get(color).isEmpty(); }
+    public boolean hasColor(Tile color) {
+        if (this.middleMap.get(color) == null) {
+            return false;
+        } else {
+            return !this.middleMap.get(color).isEmpty();
+        }
+    }
+
 
     /**
      * Checks whether the middle is empty.
@@ -86,5 +93,7 @@ public class Middle implements Storage {
         }
         return true;
     }
-
+    public boolean colorsEmpty(){
+        return !hasColor(Tile.BLACK) && !hasColor(Tile.WHITE) && !hasColor(Tile.RED) && !hasColor(Tile.YELLOW) && !hasColor(Tile.BLUE);
+    }
 }

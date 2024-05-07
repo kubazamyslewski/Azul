@@ -67,94 +67,137 @@ public class Player {
 	/**
 	 * Allows a player to take a tile from a Workshop or The Middle of The Table
 	 */
-	//TODO: fix workshop/middle picking loop,
-	// implement picking colors from middle,
-	// add a check that blocks picking middle if its empty
+	//TODO: as of right now picking a tile from middle results in exception being thrown
 	public void takeTile() throws ColorNotInTheMiddleException, WrongTileColourException, FirstTileInWorkshopException, ColorNotInWorkshopException {
 		System.out.println("PLAYER: " + this.playerID);
-
 		this.game.getLinkedTileDrawingPool().printState();
 
 		String tilePool;
-		int colorChoice;
 		int rowChoice;
 		Tile chosenColor = null;
 		Score score = new Score(this.game.getPlayers());
-		do{
-			System.out.print("Choose tile pool (middle/workshop): ");
-			tilePool = this.game.getInputHandler().next();
-			switch(tilePool) {
+
+		do {
+			// checks whether middle is empty, if so go to picking workshop
+			if (!this.game.getLinkedTileDrawingPool().getMiddle().colorsEmpty()) {
+				System.out.print("Choose tile pool (middle/workshop): ");
+				tilePool = this.game.getInputHandler().next();
+			} else {
+				tilePool = "workshop";
+			}
+
+			switch (tilePool) {
 				case "workshop":
-					int workshopChoice;
 					Workshop chosenWorkshop = null;
-					boolean emptyWorkshop = true;
 					do {
-						System.out.print("Choose workshop (1 - " + (2 * game.getPlayerCount() + 1) + "): ");
-						workshopChoice = this.game.getInputHandler().nextInt();
-						if (workshopChoice < 1 || workshopChoice > (2 * game.getPlayerCount() + 1)) {
-							System.out.println("This workshop does not exist!");
-							continue;
-						}
-						chosenWorkshop = this.game.getLinkedTileDrawingPool().getWorkshops()[workshopChoice - 1];
-						if (!chosenWorkshop.isEmpty()) {
-							emptyWorkshop = false;
-						} else System.out.println("This workshop is empty!");
-					} while (emptyWorkshop);
+						chosenWorkshop = this.chooseWorkshop();
+					} while (chosenWorkshop.isEmpty());
 
-					//possible code repetition from here
-					boolean incorrectColor = true;
 					do {
-						System.out.print("Choose color [1 - BLACK, 2 - WHITE, 3 - RED, 4 - YELLOW, 5 - BLUE]: ");
-						colorChoice = this.game.getInputHandler().nextInt();
-						if (colorChoice < 1 || colorChoice > 5) {
-							System.out.println("Incorrect color!");
-							continue;
-						}
-						chosenColor = Tile.values()[colorChoice];
-						if (chosenWorkshop.hasColor(chosenColor)) {
-							incorrectColor = false;
-						}
-						if (incorrectColor) System.out.println("Picked color incorrect, choose again.");
-					} while (incorrectColor);
+						chosenColor = this.chooseColorFromWorkshop(chosenWorkshop);
+					} while (chosenColor == null);
 
-					boolean isRowCorrect = true;
-					do {
-						isRowCorrect = true;
-						System.out.print("Choose row: ");
-						rowChoice = this.game.getInputHandler().nextInt();
-						if (rowChoice < 1 || rowChoice > 5) {
-							System.out.println("This row does not exist!");
-						}
-						if (!this.getBoard().getWall().checkIfRowIsSafeForColor(rowChoice-1, chosenColor)) {
-							isRowCorrect = false;
-							System.out.println("You cannot put this color in that row!");
-						}
-					} while ((rowChoice < 1 || rowChoice > 5) || !isRowCorrect);
-					rowChoice--;
-
-					//This seems like a janky way to do this, see if it's possible to avoid this
+					rowChoice = this.chooseRow(chosenColor);
 
 					chosenWorkshop.getTileColorFromWorkshop(this.game.getPlayers()[this.game.getIndexFromPlayerID(this.playerID)], chosenColor, rowChoice);
-					score.scoreNewTile(this.game.getPlayers()[this.game.getIndexFromPlayerID(this.playerID)], chosenColor , rowChoice);
+					score.scoreNewTile(this.game.getPlayers()[this.game.getIndexFromPlayerID(this.playerID)], chosenColor, rowChoice);
 					break;
 
-
 				case "middle":
-					System.out.print("Choose color [1 - BLACK, 2 - WHITE, 3 - RED, 4 - YELLOW, 5 - BLUE]: ");
-					colorChoice = this.game.getInputHandler().nextInt();
-					System.out.print("Choose row: ");
-					rowChoice = this.game.getInputHandler().nextInt();
-					this.game.getLinkedTileDrawingPool().getMiddle().getTileColorFromMiddle(this, Tile.BLACK, rowChoice);
+					do {
+						chosenColor = this.chooseColorFromMiddle();
+					} while (chosenColor == null);
+
+					rowChoice = this.chooseRow(chosenColor);
+
+					this.game.getLinkedTileDrawingPool().getMiddle().getTileColorFromMiddle(this.game.getPlayers()[this.game.getIndexFromPlayerID(this.playerID)], chosenColor, rowChoice);
+					score.scoreNewTile(this.game.getPlayers()[this.game.getIndexFromPlayerID(this.playerID)], chosenColor, rowChoice);
 					break;
 
 				default:
 					System.out.println("Invalid input.");
 					break;
 			}
-		} while(!(tilePool.equals("workshop") || tilePool.equals("middle")));
 
+			System.out.println("Player " + playerID + " points: " + getPlayerScore());
+			System.out.println();
+		} while (!(tilePool.equals("workshop") || tilePool.equals("middle")));
 	}
-	
+
+	private Workshop chooseWorkshop() throws FirstTileInWorkshopException {
+		int workshopChoice;
+		Workshop chosenWorkshop = null;
+		do {
+			System.out.print("Choose workshop (1 - " + (2 * game.getPlayerCount() + 1) + "): ");
+			workshopChoice = this.game.getInputHandler().nextInt();
+			if (workshopChoice < 1 || workshopChoice > (2 * game.getPlayerCount() + 1)) {
+				System.out.println("This workshop does not exist!");
+				continue;
+			}
+			chosenWorkshop = this.game.getLinkedTileDrawingPool().getWorkshops()[workshopChoice - 1];
+			if (chosenWorkshop.isEmpty()) {
+				System.out.println("This workshop is empty!");
+			}
+		} while (chosenWorkshop == null || chosenWorkshop.isEmpty());
+
+		return chosenWorkshop;
+	}
+	private Tile chooseColorFromWorkshop(Workshop workshop) throws FirstTileInWorkshopException {
+		int colorChoice;
+		Tile chosenColor = null;
+		do {
+			System.out.print("Choose color [1 - BLACK, 2 - WHITE, 3 - RED, 4 - YELLOW, 5 - BLUE]: ");
+			colorChoice = this.game.getInputHandler().nextInt();
+			if (colorChoice < 1 || colorChoice > 5) {
+				System.out.println("Incorrect color!");
+				continue;
+			}
+			chosenColor = Tile.values()[colorChoice];
+			if (!workshop.hasColor(chosenColor)) {
+				System.out.println("Picked a color which isn't available, try again!");
+				chosenColor = null;
+			}
+		} while (chosenColor == null);
+
+		return chosenColor;
+	}
+
+	private Tile chooseColorFromMiddle() {
+		int colorChoice;
+		Tile chosenColor = null;
+		do {
+			System.out.print("Choose color [1 - BLACK, 2 - WHITE, 3 - RED, 4 - YELLOW, 5 - BLUE]: ");
+			colorChoice = this.game.getInputHandler().nextInt();
+			if (colorChoice < 1 || colorChoice > 5) {
+				System.out.println("Incorrect color!");
+				continue;
+			}
+			chosenColor = Tile.values()[colorChoice];
+			if (!this.game.getLinkedTileDrawingPool().getMiddle().hasColor(chosenColor)) {
+				System.out.println("Picked a color which isn't available, try again!");
+				chosenColor = null;
+			}
+		} while (chosenColor == null);
+
+		return chosenColor;
+	}
+	private int chooseRow(Tile chosenColor) {
+		int rowChoice;
+		boolean isRowCorrect;
+		do {
+			isRowCorrect = true;
+			System.out.print("Choose row: ");
+			rowChoice = this.game.getInputHandler().nextInt();
+			if (rowChoice < 1 || rowChoice > 5) {
+				System.out.println("This row does not exist!");
+			}
+			if (!this.getBoard().getWall().checkIfRowIsSafeForColor(rowChoice - 1, chosenColor)) {
+				isRowCorrect = false;
+				System.out.println("You cannot put this color in that row!");
+			}
+		} while ((rowChoice < 1 || rowChoice > 5) || !isRowCorrect);
+		return rowChoice - 1;
+	}
 	
 	/**
 	 * Allows a player to Surrender

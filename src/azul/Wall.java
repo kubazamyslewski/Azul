@@ -70,7 +70,7 @@ public class Wall {
       Tile[] modifiedRow = this.wallMap.get(row);
 
       colour = modifiedRow[0];
-      if (((colour != null) && (!tilesToAdd[0].equals(colour))) || (parentBoard.getMosaic().checkRowForColor(row, tilesToAdd[0])))
+      if (((colour != null) && (!tilesToAdd[0].equals(colour))) || (parentBoard.getMosaic().checkRowForColor(tilesToAdd[0], row)))
         throw new WrongTileColourException("You cannot put this color in this row!");
 
       int tilesToAddIndex = 0;

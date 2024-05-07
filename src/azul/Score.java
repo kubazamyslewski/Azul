@@ -79,7 +79,7 @@ public class Score {
 		for (Tile color: Tile.values()){
 			boolean colorInAllRows = true;
 			for (int row=0; row < 5; row++){
-				boolean colorInRow = player.getBoard().getMosaic().checkRowForColor(row, color);
+				boolean colorInRow = player.getBoard().getMosaic().checkRowForColor(color, row);
 				if (!colorInRow) {
 					colorInAllRows = false;
 					break;

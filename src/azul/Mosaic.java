@@ -212,12 +212,12 @@ public class Mosaic {
       }
 
     /**
-       * Checks whether a selected row of a mosaic contains a tile of a certain color
-       * @param row - number of a row to be checked
-       * @param color - a color which we're looking for
-       * @return boolean stating whether the row contains a tile of this color
-       */
-    public boolean checkRowForColor(int row, Tile color) {
+     * Checks whether a selected row of a mosaic contains a tile of a certain color
+     * @param color - a color which we're looking for
+     * @param row   - number of a row to be checked
+     * @return boolean stating whether the row contains a tile of this color
+     */
+    public boolean checkRowForColor(Tile color, int row) {
         for (int i = 0; i < 5; i++) {
           if (mosaic[row][i] != null && mosaic[row][i].equals(color)) return true;
         }

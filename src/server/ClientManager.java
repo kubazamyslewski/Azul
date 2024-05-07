@@ -72,7 +72,6 @@ public class ClientManager implements Runnable {
     private synchronized void startGame() {
         System.out.println("Game started");
         try {
-            //TODO: to trzeba rozkminić bo nwm czy to dobrze zczyta
             TileDrawingPool tileDrawingPool = (TileDrawingPool) inStream.readObject();
             Player player = (Player) inStream.readObject();
         }

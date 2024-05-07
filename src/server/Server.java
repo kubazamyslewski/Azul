@@ -47,7 +47,6 @@ public class Server implements Runnable{
                         connectedClients.add(clientManager);
                         clientManager.readMessages();
                         clientManager.close();
-
                     }).start();
                 }
             }

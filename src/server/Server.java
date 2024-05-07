@@ -1,46 +1,99 @@
 package server;
+import azul.*;
 
-import client.Client;
-
+import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 
 public class Server implements Runnable{
+    private ArrayList<ClientManager> connectedClients = new ArrayList<>();
 
-    private Session session;
-    private int numberOfPlayers;
-    private Socket serverSocket;
-    /**
-     * Array of clients using a server
-     */
-    private ArrayList<ClientManager> clients = new ArrayList<>();
-    private int port;
+    private final int port = 1234;
+    private int playerOnTurn;
+    private ServerSocket server;
+    private int numberOfPlayers = 0;
+    private TileDrawingPool currentDrawingPool;
 
-    /**
-     * Creates a server for given number of players.
-     * @param numberOfPlayers number of players in the game
-     * @param port port to start server on
-     */
-    public Server(int numberOfPlayers, int port){
+    private Player player;        //tu mam rozkminę co zrobić bo to jest ten przekazywqany z klienta
 
+    public static void main(String[] args) {
+        Server server = new Server();
+    }
+    public Server(){
+        connectedClients = new ArrayList<>();
+        playerOnTurn = 1;
+        try {
+            server = new ServerSocket(port);
+            System.out.println("Server started. Waiting for clients...");
+            while(true){
+                initConnection();
+            }
+        }
+        catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    /**
-     * Removes ClientManager object from clients ArrayList
-     */
+    private void initConnection() {
+        Socket clientSocket;
+        if (numberOfPlayers < 4){
+            try {
+                clientSocket = server.accept();
+                if (clientSocket.isConnected()){
+                    new Thread(() -> {
+                        System.out.println("client " + numberOfPlayers + ": connected");
+                        numberOfPlayers++;
+                        ClientManager clientManager = new ClientManager(clientSocket, numberOfPlayers, this);
+                        connectedClients.add(clientManager);
+                        clientManager.readMessages();
+                        clientManager.close();
+
+                    }).start();
+                }
+            }
+            catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+    public synchronized void nextTurn(){
+        int recentPlayer = playerOnTurn;
+        if (playerOnTurn +1 > numberOfPlayers){
+            playerOnTurn = 1;
+        }
+        else{
+            playerOnTurn++;
+        }
+        for(ClientManager client: connectedClients){
+            client.setTableReady(true);
+            if(getPlayerOnTurn() == recentPlayer){
+                client.setTableReady(false);
+            }
+        }
+    }
+
+    //TODO: get current table, nwm dziwne to jest
+    public synchronized void setCurrentTable(TileDrawingPool currentDrawingPool) {
+        this.currentDrawingPool = currentDrawingPool;
+    }
+
+    public synchronized int getPlayerOnTurn(){
+        return playerOnTurn;
+    }
     public void addClientManager(ClientManager clientManager){
-        clients.add(clientManager);
+        connectedClients.add(clientManager);
     }
     public void removeClientManager(ClientManager clientManager){
-        clients.remove(clientManager);
+        connectedClients.remove(clientManager);
     }
-    public Session getSession(){
+    /*public Session getSession(){
         return session;
-    }
+    }*/
 
-    public void setSession(Session session){
+    /*public void setSession(Session session){
         this.session = session;
-    }
+    }*/
     public int getNumberOfPlayers(){
         return numberOfPlayers;
     }
@@ -48,10 +101,13 @@ public class Server implements Runnable{
     public int getPort() {
         return port;
     }
+    public void endTurn(){
 
-    public Socket getServerSocket() {
-        return serverSocket;
     }
+
+    /*public Socket getServerSocket() {
+        return serverSocket;
+    }*/
 
     /**
      * Returns public IP address of server

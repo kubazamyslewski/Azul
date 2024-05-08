@@ -27,7 +27,10 @@ public class Mosaic {
       *
       */
     public void printMosaic() {
-      System.out.println("Mosaic:");
+
+      String RED = "\u001B[31m";
+
+      System.out.println(RED + "Mosaic:");
       System.out.println("[1 - BLACK, 2 - WHITE, 3 - RED, 4 - YELLOW, 5 - BLUE]");
       for (int i = 0; i < 5; i++) {
         for (int j = 0; j < 5; j++) {
@@ -73,19 +76,19 @@ public class Mosaic {
         case 1:
           switch(color) {
             case BLACK:
-              this.mosaic[row][3] = Tile.BLACK;
+              this.mosaic[row-1][3] = Tile.BLACK;
               break;
             case WHITE:
-              this.mosaic[row][4] = Tile.WHITE;
+              this.mosaic[row-1][4] = Tile.WHITE;
               break;
             case RED:
-              this.mosaic[row][2] = Tile.RED;
+              this.mosaic[row-1][2] = Tile.RED;
               break;
             case YELLOW:
-              this.mosaic[row][1] = Tile.YELLOW;
+              this.mosaic[row-1][1] = Tile.YELLOW;
               break;
             case BLUE:
-              this.mosaic[row][0] = Tile.BLUE;
+              this.mosaic[row-1][0] = Tile.BLUE;
               break;
             default:
               throw new WrongTileColourException("This tile color cannot be placed on the mosaic!");
@@ -93,19 +96,19 @@ public class Mosaic {
         case 2:
           switch(color) {
             case BLACK:
-              this.mosaic[row][4] = Tile.BLACK;
+              this.mosaic[row-1][4] = Tile.BLACK;
               break;
             case WHITE:
-              this.mosaic[row][0] = Tile.WHITE;
+              this.mosaic[row-1][0] = Tile.WHITE;
               break;
             case RED:
-              this.mosaic[row][3] = Tile.RED;
+              this.mosaic[row-1][3] = Tile.RED;
               break;
             case YELLOW:
-              this.mosaic[row][2] = Tile.YELLOW;
+              this.mosaic[row-1][2] = Tile.YELLOW;
               break;
             case BLUE:
-              this.mosaic[row][1] = Tile.BLUE;
+              this.mosaic[row-1][1] = Tile.BLUE;
               break;
             default:
               throw new WrongTileColourException("This tile color cannot be placed on the mosaic!");
@@ -113,19 +116,19 @@ public class Mosaic {
         case 3:
           switch(color) {
             case BLACK:
-              this.mosaic[row][0] = Tile.BLACK;
+              this.mosaic[row-1][0] = Tile.BLACK;
               break;
             case WHITE:
-              this.mosaic[row][1] = Tile.WHITE;
+              this.mosaic[row-1][1] = Tile.WHITE;
               break;
             case RED:
-              this.mosaic[row][4] = Tile.RED;
+              this.mosaic[row-1][4] = Tile.RED;
               break;
             case YELLOW:
-              this.mosaic[row][3] = Tile.YELLOW;
+              this.mosaic[row-1][3] = Tile.YELLOW;
               break;
             case BLUE:
-              this.mosaic[row][2] = Tile.BLUE;
+              this.mosaic[row-1][2] = Tile.BLUE;
               break;
             default:
               throw new WrongTileColourException("This tile color cannot be placed on the mosaic!");
@@ -133,19 +136,19 @@ public class Mosaic {
         case 4:
           switch(color) {
             case BLACK:
-              this.mosaic[row][1] = Tile.BLACK;
+              this.mosaic[row-1][1] = Tile.BLACK;
               break;
             case WHITE:
-              this.mosaic[row][2] = Tile.WHITE;
+              this.mosaic[row-1][2] = Tile.WHITE;
               break;
             case RED:
-              this.mosaic[row][0] = Tile.RED;
+              this.mosaic[row-1][0] = Tile.RED;
               break;
             case YELLOW:
-              this.mosaic[row][4] = Tile.YELLOW;
+              this.mosaic[row-1][4] = Tile.YELLOW;
               break;
             case BLUE:
-              this.mosaic[row][3] = Tile.BLUE;
+              this.mosaic[row-1][3] = Tile.BLUE;
               break;
             default:
               throw new WrongTileColourException("This tile color cannot be placed on the mosaic!");
@@ -153,19 +156,19 @@ public class Mosaic {
         case 5:
           switch(color) {
             case BLACK:
-              this.mosaic[row][2] = Tile.BLACK;
+              this.mosaic[row-1][2] = Tile.BLACK;
               break;
             case WHITE:
-              this.mosaic[row][3] = Tile.WHITE;
+              this.mosaic[row-1][3] = Tile.WHITE;
               break;
             case RED:
-              this.mosaic[row][1] = Tile.RED;
+              this.mosaic[row-1][1] = Tile.RED;
               break;
             case YELLOW:
-              this.mosaic[row][0] = Tile.YELLOW;
+              this.mosaic[row-1][0] = Tile.YELLOW;
               break;
             case BLUE:
-              this.mosaic[row][4] = Tile.BLUE;
+              this.mosaic[row-1][4] = Tile.BLUE;
               break;
             default:
               throw new WrongTileColourException("This tile color cannot be placed on the mosaic!");
@@ -268,6 +271,7 @@ public class Mosaic {
     }
 
     public int countTouchingTiles(int row, int column) {
+      row--;
       boolean[][] check = checkMosaic();
       int rowCount = 0;
       int columnCount = 0;

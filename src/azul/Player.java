@@ -25,6 +25,7 @@ public class Player {
 		this.playerBoard = new Board(this.game.getLinkedBox(), this);
 	}
 
+
 	public int getPlayerScore() {
 		return playerScore;
 	}
@@ -69,7 +70,10 @@ public class Player {
 	 */
 	//TODO: as of right now picking a tile from middle results in exception being thrown
 	public void takeTile() throws ColorNotInTheMiddleException, WrongTileColourException, FirstTileInWorkshopException, ColorNotInWorkshopException {
-		System.out.println("PLAYER: " + this.playerID);
+
+		String YELLOW = "\u001B[33m";
+
+		System.out.println(YELLOW + "PLAYER: " + this.playerID);
 		this.game.getLinkedTileDrawingPool().printState();
 		this.getBoard().printBoard();
 

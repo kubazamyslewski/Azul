@@ -44,6 +44,7 @@ public class GameSession {
 
         System.out.println("Game setup complete.");
         System.out.println("Player count: " + playerCount);
+        System.out.println();
 
     }
 
@@ -57,6 +58,8 @@ public class GameSession {
 
     public int getPlayerCount() { return playerCount; }
 
+    public Bag getLinkedBag() { return this.linkedBag; }
+
     public Player[] getPlayers(){return this.players;}
 
     public int getIndexFromPlayerID(int playerID) {
@@ -69,6 +72,9 @@ public class GameSession {
     }
 
     public void runRound() throws FirstTileInWorkshopException, ColorNotInTheMiddleException, WrongTileColourException, ColorNotInWorkshopException, IncorrectAmountOfTilesOnFloorException {
+        this.getLinkedBox().printBoxContents();
+        this.getLinkedBag().printBagContents();
+
         providersOfferPhase();
         mosaicLayingPhase();
     }
@@ -101,10 +107,11 @@ public class GameSession {
             player.getBoard().getWall().checkWallAndPushToMosaic();
             score.applyFloorPenalty(player);
         }
+        System.out.println();
 
         System.out.println("CurrentScoreBoard:");
         for (Player player : this.players) {
-            System.out.println("Player " + player.getPlayerID() + ": " + player.getPlayerScore() + " points;");
+            System.out.println("Player " + player.getPlayerID() + ": " + player.getPlayerScore() + " points");
         }
 
         System.out.println();
@@ -113,8 +120,7 @@ public class GameSession {
     public void checkIfOver() {
         for (Player player : this.players) {
             boolean isFinished = player.getBoard().getMosaic().isRowCompleted();
-            if (!isFinished) continue;
-            else this.isOver = true;
+            if (isFinished) this.isOver = true;
         }
     }
 
@@ -123,6 +129,9 @@ public class GameSession {
             score.scoreColumns(player);
             score.scoreRows(player);
             score.scoreFullColors(player);
+        }
+        for (Player player : this.players) {
+            System.out.println("Final score of Player " + player.getPlayerID() + ": " + player.getPlayerScore());
         }
     }
 
@@ -150,7 +159,6 @@ public class GameSession {
 
     }
 
-    //TODO add needed checks to cli
-    //TODO fix pushing rows to mosaic
-    //TODO further debugging
+    //TODO add needed checks to cli maybe
+    //TODO further debugging maybe
 }

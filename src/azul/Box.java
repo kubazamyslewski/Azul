@@ -24,6 +24,16 @@ public class Box {
       }
     }
 
+    public void printBoxContents() {
+      String BLUE = "\u001B[34m";
+      System.out.println(BLUE + "Box contents:");
+      System.out.println("Size: " + this.size());
+      System.out.println("Black: " + this.boxMap.get(Tile.BLACK).size() + " White: " + this.boxMap.get(Tile.WHITE).size() +
+              " Red: " + this.boxMap.get(Tile.RED).size() + " Yellow: " + this.boxMap.get(Tile.YELLOW).size() +
+              " Blue: " + this.boxMap.get(Tile.BLUE).size());
+      System.out.println();
+    }
+
     /**
      * Adds a tile to the contents of the box.
      *
@@ -79,5 +89,11 @@ public class Box {
         tilesFromTheBox[4] = counter;
 
         return tilesFromTheBox;
+    }
+
+    public int size() {
+      return this.boxMap.get(Tile.BLACK).size() + this.boxMap.get(Tile.WHITE).size() +
+              this.boxMap.get(Tile.RED).size() + this.boxMap.get(Tile.YELLOW).size() +
+              this.boxMap.get(Tile.BLUE).size();
     }
 }

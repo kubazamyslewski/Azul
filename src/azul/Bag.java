@@ -39,6 +39,16 @@ public class Bag {
       addToBag(Tile.BLUE,blues);
     }
 
+  public void printBagContents() {
+    String BLUE = "\u001B[34m";
+    System.out.println(BLUE + "Bag contents:");
+    System.out.println("Size: " + this.size());
+    System.out.println("Black: " + this.bagMap.get(Tile.BLACK).size() + " White: " + this.bagMap.get(Tile.WHITE).size() +
+            " Red: " + this.bagMap.get(Tile.RED).size() + " Yellow: " + this.bagMap.get(Tile.YELLOW).size() +
+            " Blue: " + this.bagMap.get(Tile.BLUE).size());
+    System.out.println();
+  }
+
     /**
    * Adds a certain amount of tiles of a specified color to the bag.
    * @param color - color of the tiles to be added

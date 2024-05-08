@@ -67,8 +67,11 @@ public class TileDrawingPool {
 		return middle.isEmpty() && isEmpty;
 	}
 	public void printState() throws FirstTileInWorkshopException {
+
+		String GREEN = "\u001B[32m";
+
 		System.out.println();
-		System.out.println("Workshops:");
+		System.out.println(GREEN + "Workshops:");
 		for (int i = 0; i < workshops.length; i++) {
 			Workshop workshop = workshops[i];
 			System.out.print("Workshop " + (i + 1) + ": ");
@@ -79,7 +82,7 @@ public class TileDrawingPool {
 								workshop.getTileQuantity(Tile.BLUE));
 		}
 		System.out.println();
-		System.out.println("Middle:");
+		System.out.println(GREEN + "Middle:");
 		printTileQuantity(middle.getTileQuantity(Tile.BLACK),
 							middle.getTileQuantity(Tile.WHITE),
 							middle.getTileQuantity(Tile.RED),

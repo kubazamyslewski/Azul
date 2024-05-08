@@ -22,7 +22,10 @@ public class Floor {
      * Displays the floor
      */
     public void displayFloor() {
-        System.out.println("Floor:");
+
+        String RED = "\u001B[31m";
+
+        System.out.println(RED + "Floor:");
         for(Tile t : this.tilesOnTheFloor) {
             System.out.print(t + " ");
         }

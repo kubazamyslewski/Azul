@@ -35,12 +35,16 @@ public class Wall {
     * Prints the wall to the console
     */
     public void printWall() {
-      System.out.println("Wall:");
-      System.out.println("Row 1 (1 fields): Color[" + this.getColorOfTheRow(1) + "] Filled: " + this.countTilesInRow(1));
-      System.out.println("Row 2 (2 fields): Color[" + this.getColorOfTheRow(2) + "] Filled: " + this.countTilesInRow(2));
-      System.out.println("Row 3 (3 fields): Color[" + this.getColorOfTheRow(3) + "] Filled: " + this.countTilesInRow(3));
-      System.out.println("Row 4 (4 fields): Color[" + this.getColorOfTheRow(4) + "] Filled: " + this.countTilesInRow(4));
-      System.out.println("Row 5 (5 fields): Color[" + this.getColorOfTheRow(5) + "] Filled: " + this.countTilesInRow(5));
+
+      String RED = "\u001B[31m";
+
+      System.out.println(RED + "Wall:");
+      for (int i = 0; i < 5; i++) {
+        for (Tile t : this.wallMap.get(i)) {
+          System.out.print(t + " ");
+        }
+        System.out.println();
+      }
       System.out.println();
     }
 
@@ -68,8 +72,7 @@ public class Wall {
 
       if (row < 1 || row > 5) throw new IllegalArgumentException("No such row on the wall!");
 
-      if (this.wallMap.get(row-1)[0] != null) return this.wallMap.get(row-1)[0];
-      else return null;
+      return this.wallMap.get(row-1)[0];
     }
 
     /**
@@ -144,7 +147,7 @@ public class Wall {
       for (Tile t : wallMap.get(row-1)) {
         parentBoard.getLinkedBox().add(t);
       }
-      Arrays.fill(wallMap.get(row), null);
+      Arrays.fill(wallMap.get(row-1), null);
 
     }
 

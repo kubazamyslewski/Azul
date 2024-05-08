@@ -50,7 +50,7 @@ public class ClientManager implements Runnable {
             switch(line){
                 //TODO: napisać komendy
                 case "numberOfPlayers":
-                    startTurn();
+
                     break;
                 case "DISCONNECT":
                     read = false;
@@ -70,10 +70,12 @@ public class ClientManager implements Runnable {
     }
 
     private synchronized void startGame() {
+        //TODO: napisać to do końca i przekazać dane do serwera
         System.out.println("Game started");
         try {
             TileDrawingPool tileDrawingPool = (TileDrawingPool) inStream.readObject();
             Player player = (Player) inStream.readObject();
+            System.out.println("Map received from client");
         }
         catch (Exception e) {
             throw new RuntimeException(e);
@@ -98,6 +100,9 @@ public class ClientManager implements Runnable {
             throw new RuntimeException(e);
         }
     }
+
+
+    //TODO: disconnect
     public void disconnectClient(){
 
     }
@@ -105,9 +110,9 @@ public class ClientManager implements Runnable {
     /**
      * Informs client about starting turn.
      */
-    public void startTurn(){
+    /*public void startTurn(){
 
-    }
+    }*/
     public void setTableReady(boolean tableReady) {isTableReady = tableReady;}
 
 
@@ -115,16 +120,13 @@ public class ClientManager implements Runnable {
     /**
      * Informs client about end of turn.
      */
+    /*
     public void endTurn(){
 
     }
-
-    /**
-     * Informs client about accepted move
-     */
     public void ok(){
 
-    }
+    }*/
 
     /**
      * Informs client about rejected move.
@@ -143,15 +145,17 @@ public class ClientManager implements Runnable {
             throw new RuntimeException(e);
         }
     }
+    /*
     public synchronized boolean isGameStarted() {
         return gameStarted;
     }
 
     public synchronized void setGameStarted(boolean gameStarted) {
         this.gameStarted = gameStarted;
-    }
+    }*/
     @Override
     public void run(){
 
     }
 }
+

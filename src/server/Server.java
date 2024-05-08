@@ -6,7 +6,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 
 public class Server implements Runnable{
-    private ArrayList<ClientManager> connectedClients = new ArrayList<>();
+    private ArrayList<ClientManager> connectedClients;
 
     private final int port = 1234;
     private int playerOnTurn;
@@ -72,7 +72,7 @@ public class Server implements Runnable{
         }
     }
 
-    //TODO: get current table, nwm dziwne to jest
+    //TODO: get current table
     public synchronized void setCurrentTable(TileDrawingPool currentDrawingPool) {
         this.currentDrawingPool = currentDrawingPool;
     }
@@ -80,13 +80,14 @@ public class Server implements Runnable{
     public synchronized int getPlayerOnTurn(){
         return playerOnTurn;
     }
+    /*
     public void addClientManager(ClientManager clientManager){
         connectedClients.add(clientManager);
     }
     public void removeClientManager(ClientManager clientManager){
         connectedClients.remove(clientManager);
     }
-    /*public Session getSession(){
+    public Session getSession(){
         return session;
     }*/
 
@@ -100,26 +101,17 @@ public class Server implements Runnable{
     public int getPort() {
         return port;
     }
-    public void endTurn(){
 
-    }
-
-    /*public Socket getServerSocket() {
-        return serverSocket;
-    }*/
-
-    /**
-     * Returns public IP address of server
-     * @return String representing public IPv4 address of server
-     */
     public String getPublicIP(){
         return "ADRES IP";
     }
 
     /**
-     * Stops server
+     * stops server
      */
+
     public void stopServer(){
+
 
     }
 

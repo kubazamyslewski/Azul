@@ -2,54 +2,48 @@ package client;
 
 import azul.Player;
 import gui.Interface;
-import server.Session;
+import server.Server;
+import server.ConnectedClient;
 
-import java.io.BufferedReader;
-import java.io.PrintWriter;
+
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.net.Socket;
+import java.util.Scanner;
 
-/**
- * Class representing client connected to a server as a player in game
- */
-public class Client implements Runnable {
-    private String host;
-    private int port;
-    private BufferedReader input;
-    private PrintWriter output;
+public class Client{
     private Socket socket;
-    private Session session;
-    private Interface GUI;
+    private DataOutputStream out;
+    private Scanner in;
 
-    public Client(String host, Interface GUI, int port, Socket socket, Session session, Player player) {
-        this.host = host;
-        this.port = port;
-        this.socket = socket;
-        this.session = session;
-        this.GUI = GUI;
+    public Client(){
+        try{
+            socket = new Socket("127.0.0.1", Server.PORT);
+            out = new DataOutputStream(socket.getOutputStream());
+            in = new Scanner(System.in);
+            writeMessages();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    /**
-     * Updates client's GUI
-     */
-    public void updateGUI(){
-
+    private void writeMessages() throws IOException {
+        String line = "";
+        while(!line.equals(Server.DISCONNECT_MESSAGE)){
+            line = in.nextLine();
+            out.writeUTF(line);
+        }
+        close();
     }
 
-    /**
-     * Sends move to server.
-     */
-    public void sendMove(){
-
+    private void close() throws IOException {
+        socket.close();
+        out.close();
+        in.close();
     }
 
-    /**
-     * Stops client.
-     */
-    public void stopClient(){
-
-    }
-    @Override
-    public void run(){
-
+    public static void main(String[] args) {
+        new Client();
     }
 }
+

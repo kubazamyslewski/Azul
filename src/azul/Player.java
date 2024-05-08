@@ -5,7 +5,6 @@ import Exceptions.ColorNotInWorkshopException;
 import Exceptions.FirstTileInWorkshopException;
 import Exceptions.WrongTileColourException;
 import client.GameSession;
-import server.Session;
 
 /**
  * Handles a single player
@@ -211,7 +210,4 @@ public class Player {
 	 * Allows a player to Surrender
 	 * @param session
 	 */
-	void surrender(Session session) {
-
-	}
 }

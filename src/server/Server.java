@@ -13,6 +13,7 @@ import java.util.List;
 public class Server {
     private ServerSocket server;
     public static final int PORT = 3030;
+    private TileDrawingPool currentTileDrawingPool;
     public static final String DISCONNECT_MESSAGE = "DISCONNECT";
     private List<ConnectedClient> connectedClients;
     private int playerOnTurn;
@@ -40,7 +41,7 @@ public class Server {
                 new Thread(()->{
                     numberOfPlayers ++;
                     index++;
-                    ConnectedClient client = new ConnectedClient(clientSocket,index, this);
+                    ConnectedClient client = new ConnectedClient(clientSocket, index, this);
                     connectedClients.add(client);
                     client.readMessages();
                     client.close();
@@ -57,6 +58,10 @@ public class Server {
     }
     public int getPlayerOnTurn(){
         return playerOnTurn;
+    }
+
+    public synchronized void setCurrentPool(TileDrawingPool currentTileDrawingPool) {
+        this.currentTileDrawingPool = currentTileDrawingPool;
     }
 
 

@@ -49,17 +49,17 @@ public class ConnectedClient {
                     System.out.println("Game is starting!!!");
                     break;
                 case "CAN_I_MOVE":
-                    //sendIfCanMove();
+                    sendIfCanMove();
             }
         }
     }
-    /*private void sendIfCanMove() {
+    private void sendIfCanMove() {
         try {
             out.writeBoolean(Server.getPlayerOnTurn() == id);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }*/
+    }
 
     public void close(){
         try{

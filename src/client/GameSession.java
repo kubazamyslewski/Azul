@@ -1,9 +1,6 @@
 package client;
 
-import Exceptions.ColorNotInTheMiddleException;
-import Exceptions.ColorNotInWorkshopException;
-import Exceptions.FirstTileInWorkshopException;
-import Exceptions.WrongTileColourException;
+import Exceptions.*;
 import azul.*;
 import java.util.Scanner;
 
@@ -11,6 +8,8 @@ import java.util.Scanner;
 public class GameSession {
 
     private int playerCount;
+
+    private boolean isOver = false;
 
     private Player[] players;
 
@@ -21,6 +20,8 @@ public class GameSession {
     private Box linkedBox;
 
     private Scanner inputHandler = new Scanner(System.in);
+
+    private Score score = new Score(this.getPlayers());
 
     public GameSession() throws FirstTileInWorkshopException {
 
@@ -46,6 +47,8 @@ public class GameSession {
 
     }
 
+    public Score getScore() { return this.score; }
+
     public Scanner getInputHandler() { return this.inputHandler; }
 
     public Box getLinkedBox() { return this.linkedBox; }
@@ -65,8 +68,9 @@ public class GameSession {
         return -1;
     }
 
-    public void runRound() throws FirstTileInWorkshopException, ColorNotInTheMiddleException, WrongTileColourException, ColorNotInWorkshopException {
+    public void runRound() throws FirstTileInWorkshopException, ColorNotInTheMiddleException, WrongTileColourException, ColorNotInWorkshopException, IncorrectAmountOfTilesOnFloorException {
         providersOfferPhase();
+        mosaicLayingPhase();
     }
 
     private void providersOfferPhase() throws FirstTileInWorkshopException, ColorNotInTheMiddleException, WrongTileColourException, ColorNotInWorkshopException {
@@ -89,10 +93,64 @@ public class GameSession {
 
     }
 
+    private void mosaicLayingPhase() throws WrongTileColourException, IncorrectAmountOfTilesOnFloorException {
 
+        System.out.println("------- Start of the mosaic laying phase --------");
 
-    public static void main(String[] args) throws FirstTileInWorkshopException, ColorNotInTheMiddleException, WrongTileColourException, ColorNotInWorkshopException {
-        GameSession game = new GameSession();
-        game.runRound();
+        for (Player player : this.players) {
+            player.getBoard().getWall().checkWallAndPushToMosaic();
+            score.applyFloorPenalty(player);
+        }
+
+        System.out.println("CurrentScoreBoard:");
+        for (Player player : this.players) {
+            System.out.println("Player " + player.getPlayerID() + ": " + player.getPlayerScore() + " points;");
+        }
+
+        System.out.println();
     }
+
+    public void checkIfOver() {
+        for (Player player : this.players) {
+            boolean isFinished = player.getBoard().getMosaic().isRowCompleted();
+            if (!isFinished) continue;
+            else this.isOver = true;
+        }
+    }
+
+    public void applyFinishingScore() {
+        for (Player player : this.players) {
+            score.scoreColumns(player);
+            score.scoreRows(player);
+            score.scoreFullColors(player);
+        }
+    }
+
+    public void setupNewRound() throws FirstTileInWorkshopException {
+
+        for (Workshop w : this.linkedTileDrawingPool.getWorkshops()) {
+            w.refill();
+        }
+    }
+
+
+
+    public static void main(String[] args) throws FirstTileInWorkshopException, ColorNotInTheMiddleException, WrongTileColourException, ColorNotInWorkshopException, IncorrectAmountOfTilesOnFloorException {
+        GameSession game = new GameSession();
+
+        while (!game.isOver) {
+            game.runRound();
+            game.checkIfOver();
+            if (!game.isOver) {
+                game.setupNewRound();
+            }
+
+        }
+        game.applyFinishingScore();
+
+    }
+
+    //TODO add needed checks to cli
+    //TODO fix pushing rows to mosaic
+    //TODO further debugging
 }

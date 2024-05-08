@@ -18,6 +18,16 @@ public class Floor {
         this.tilesOnTheFloor = new Tile[7];
     }
 
+    /**
+     * Displays the floor
+     */
+    public void displayFloor() {
+        System.out.println("Floor:");
+        for(Tile t : this.tilesOnTheFloor) {
+            System.out.print(t + " ");
+        }
+        System.out.println();
+    }
 
     /**
      * Returns the number of tiles placed on the floor.
@@ -47,7 +57,7 @@ public class Floor {
      */
     public void clearFloor(){
         for(int i = 6; i >= 0; i--) {
-            this.parentBoard.getLinkedBox().add(this.tilesOnTheFloor[i]);
+            if(this.tilesOnTheFloor[i] != null) this.parentBoard.getLinkedBox().add(this.tilesOnTheFloor[i]);
             this.tilesOnTheFloor[i] = null;
             this.amountOfTiles--;
         }

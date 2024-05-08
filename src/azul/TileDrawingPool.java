@@ -85,6 +85,8 @@ public class TileDrawingPool {
 							middle.getTileQuantity(Tile.RED),
 							middle.getTileQuantity(Tile.YELLOW),
 							middle.getTileQuantity(Tile.BLUE));
+
+		System.out.println();
 	}
 
 	public static void printTileQuantity(int tileQuantity, int tileQuantity2, int tileQuantity3, int tileQuantity4, int tileQuantity5) {

@@ -36,8 +36,20 @@ public class Workshop implements Storage {
 	 * Adds a tile from a bag to the workshop
 	 */
 	public void addTile() {
-		Tile tileToAdd = parentTileDrawingPool.getLinkedBag().pop();
-		this.workshopMap.get(tileToAdd).push(tileToAdd);
+		if(!this.parentTileDrawingPool.getLinkedBag().isEmpty()) {
+			Tile tileToAdd = parentTileDrawingPool.getLinkedBag().pop();
+			this.workshopMap.get(tileToAdd).push(tileToAdd);
+		}
+	}
+
+	public void refill() throws FirstTileInWorkshopException {
+		if (this.isEmpty()) {
+			for(int i = 0; i < 4; i++) {
+				if(this.parentTileDrawingPool.getLinkedBag().isEmpty()) this.parentTileDrawingPool.getLinkedBag().refillTheBagFromTheBox();
+				this.addTile();
+			}
+		}
+		else System.out.println("Workshop not empty between rounds somehow..........");
 	}
     
 	@Override
@@ -49,7 +61,7 @@ public class Workshop implements Storage {
 	@Override
 	public int getTileQuantity(Tile color) throws FirstTileInWorkshopException{
 		if (!this.workshopMap.get(Tile.FIRST).isEmpty()) throw new FirstTileInWorkshopException("First tile cannot be present in a workshop");
-		return workshopMap.get(color).size();
+		return this.workshopMap.get(color).size();
 	}
 	
 	@Override

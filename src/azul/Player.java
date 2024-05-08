@@ -23,12 +23,14 @@ public class Player {
 		this.game = game;
 		this.playerID = idGenerator++;
 		this.playerScore = 0;
-		this.playerBoard = new Board(this.game.getLinkedBox());
+		this.playerBoard = new Board(this.game.getLinkedBox(), this);
 	}
 
 	public int getPlayerScore() {
 		return playerScore;
 	}
+
+	public GameSession getGame() { return this.game; }
 
 	public void setPlayerScore(int playerScore) {
 		this.playerScore = playerScore;
@@ -70,11 +72,12 @@ public class Player {
 	public void takeTile() throws ColorNotInTheMiddleException, WrongTileColourException, FirstTileInWorkshopException, ColorNotInWorkshopException {
 		System.out.println("PLAYER: " + this.playerID);
 		this.game.getLinkedTileDrawingPool().printState();
+		this.getBoard().printBoard();
 
 		String tilePool;
 		int rowChoice;
 		Tile chosenColor = null;
-		Score score = new Score(this.game.getPlayers());
+		Score score = this.game.getScore();
 
 		do {
 			// checks whether middle is empty, if so go to picking workshop
@@ -85,6 +88,8 @@ public class Player {
 				tilePool = "workshop";
 			}
 
+
+			// TODO add a check whether there is any not empty workshop
 			switch (tilePool) {
 				case "workshop":
 					Workshop chosenWorkshop = null;
@@ -99,7 +104,8 @@ public class Player {
 					rowChoice = this.chooseRow(chosenColor);
 
 					chosenWorkshop.getTileColorFromWorkshop(this.game.getPlayers()[this.game.getIndexFromPlayerID(this.playerID)], chosenColor, rowChoice);
-					score.scoreNewTile(this.game.getPlayers()[this.game.getIndexFromPlayerID(this.playerID)], chosenColor, rowChoice);
+
+					//moved scoring to mosaic filling method
 					break;
 
 				case "middle":
@@ -110,7 +116,8 @@ public class Player {
 					rowChoice = this.chooseRow(chosenColor);
 
 					this.game.getLinkedTileDrawingPool().getMiddle().getTileColorFromMiddle(this.game.getPlayers()[this.game.getIndexFromPlayerID(this.playerID)], chosenColor, rowChoice);
-					score.scoreNewTile(this.game.getPlayers()[this.game.getIndexFromPlayerID(this.playerID)], chosenColor, rowChoice);
+
+					//moved scoring to mosaic filling method
 					break;
 
 				default:
@@ -180,6 +187,8 @@ public class Player {
 
 		return chosenColor;
 	}
+
+	//TODO chceck stating whether the player has not got tiles of this color in this row of the mosaic
 	private int chooseRow(Tile chosenColor) {
 		int rowChoice;
 		boolean isRowCorrect;

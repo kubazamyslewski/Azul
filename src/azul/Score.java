@@ -118,5 +118,6 @@ public class Score {
 			player.setPlayerScore(player.getPlayerScore() - (3 * (floorTiles - 5) + 8));
 		}
 		else throw new IncorrectAmountOfTilesOnFloorException("Too many tiles on the floor!");
+		player.getBoard().getFloor().clearFloor();
 	}
 }

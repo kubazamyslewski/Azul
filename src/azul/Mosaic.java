@@ -24,6 +24,22 @@ public class Mosaic {
     }
 
     /**
+      *
+      */
+    public void printMosaic() {
+      System.out.println("Mosaic:");
+      System.out.println("[1 - BLACK, 2 - WHITE, 3 - RED, 4 - YELLOW, 5 - BLUE]");
+      for (int i = 0; i < 5; i++) {
+        for (int j = 0; j < 5; j++) {
+          if (this.mosaic[i][j] != null) System.out.print(this.mosaic[i][j].valueOfColor + " ");
+          else System.out.print("0" + " ");
+        }
+        System.out.println();
+      }
+    }
+
+
+    /**
      * Converts the mosaic to a boolean matrix of size 5x5 to check where tiles are placed.
      * @return two-dimensional boolean array stating where the Tiles are on the mosaic
      */
@@ -157,6 +173,7 @@ public class Mosaic {
         default:
           throw new IllegalArgumentException("Such row does not exist!");
       }
+      this.parentBoard.getOwner().getGame().getScore().scoreNewTile(this.parentBoard.getOwner(), color, row);
     }
 
     /**

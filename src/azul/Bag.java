@@ -53,7 +53,7 @@ public class Bag {
     /**
      * Refills the bag based on the contents of the box.
      */
-    public void addToBagFromTheBox (){
+    public void refillTheBagFromTheBox (){
       int[] tilesToAdd = this.linkedBox.retrieveContents();
       addToBag(Tile.BLACK, tilesToAdd[0]);
       addToBag(Tile.WHITE, tilesToAdd[1]);

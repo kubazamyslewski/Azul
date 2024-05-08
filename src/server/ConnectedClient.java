@@ -1,5 +1,6 @@
 package server;
 
+import java.io.*;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -22,8 +23,8 @@ public class ConnectedClient {
         this.id = id;
         try {
             System.out.println("Client "+id+ ": Client Connected");
-            this.in = new DataInputStream(new BufferedInputStream(clientSocket.getInputStream()));
-            this.out = new DataOutputStream(clientSocket.getOutputStream());
+            in = new DataInputStream(new BufferedInputStream(clientSocket.getInputStream()));
+            out = new DataOutputStream(clientSocket.getOutputStream());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -35,7 +36,7 @@ public class ConnectedClient {
         while (read){
             try{
                 line = in.readUTF();
-
+                //System.out.println(line);
             }
             catch (Exception e){
                 throw new RuntimeException(e);
@@ -46,18 +47,26 @@ public class ConnectedClient {
                     System.out.println("Player " + id + " Disconnected");
                     break;
                 case "START":
-
-                //TODO: napisać resztę komend
                     System.out.println("Game is starting!!!");
                     break;
                 case "CAN_I_MOVE":
                     sendIfCanMove();
+                    break;
+                default:
+                    throw new IllegalStateException("Unexpected value: " + line);
             }
         }
     }
     private void sendIfCanMove() {
         try {
-            out.writeBoolean(server.getPlayerOnTurn() == id);
+            boolean canMove = server.getPlayerOnTurn() == id;
+            out.writeBoolean(canMove);
+            if (canMove) {
+                out.writeUTF("Możesz się ruszyć.");
+            } else {
+                out.writeUTF("Nie możesz się ruszyć.");
+            }
+            out.flush();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -72,4 +81,3 @@ public class ConnectedClient {
         }
     }
 }
-

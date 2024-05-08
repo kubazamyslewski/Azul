@@ -14,9 +14,11 @@ public class ConnectedClient {
     private boolean isTableReady = false;
 
     private int id;
+    private Server server;
 
-    public ConnectedClient(Socket clientSocket, int id) {
+    public ConnectedClient(Socket clientSocket, int id, Server server) {
         this.clientSocket = clientSocket;
+        this.server = server;
         this.id = id;
         try {
             System.out.println("Client "+id+ ": Client Connected");
@@ -55,7 +57,7 @@ public class ConnectedClient {
     }
     private void sendIfCanMove() {
         try {
-            out.writeBoolean(Server.getPlayerOnTurn() == id);
+            out.writeBoolean(server.getPlayerOnTurn() == id);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

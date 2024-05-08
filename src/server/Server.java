@@ -40,7 +40,7 @@ public class Server {
                 new Thread(()->{
                     numberOfPlayers ++;
                     index++;
-                    ConnectedClient client = new ConnectedClient(clientSocket,index);
+                    ConnectedClient client = new ConnectedClient(clientSocket,index, this);
                     connectedClients.add(client);
                     client.readMessages();
                     client.close();

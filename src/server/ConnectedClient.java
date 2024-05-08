@@ -7,12 +7,20 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 
+import azul.Player;
+import azul.TileDrawingPool;
+
 public class ConnectedClient {
 
     private  DataOutputStream out;
     private Socket clientSocket;
     private DataInputStream in;
+    private ObjectInputStream inStream;
+    private ObjectOutputStream outStream;
     private boolean isTableReady = false;
+    private TileDrawingPool currentTileDrawingPool;
+    private Player player;
+
 
     private int id;
     private Server server;
@@ -47,6 +55,7 @@ public class ConnectedClient {
                     System.out.println("Player " + id + " Disconnected");
                     break;
                 case "START":
+                    startGame();
                     System.out.println("Game is starting!!!");
                     break;
                 case "CAN_I_MOVE":
@@ -57,6 +66,25 @@ public class ConnectedClient {
             }
         }
     }
+
+    private void startGame() {
+        System.out.println("Game started!");
+        try{
+            TileDrawingPool tileDrawingPool =(TileDrawingPool)inStream.readObject();
+            server.setCurrentPool(tileDrawingPool);
+            Player player = (Player)inStream.readObject();
+            setCurrentPlayer(player);
+        }
+        catch (Exception e){
+            System.out.println("Nie można wczytać obiektów");
+        }
+
+    }
+
+    public synchronized void setCurrentPlayer(Player player) {
+        this.player = player;
+    }
+
     private void sendIfCanMove() {
         try {
             boolean canMove = server.getPlayerOnTurn() == id;

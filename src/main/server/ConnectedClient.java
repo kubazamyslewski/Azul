@@ -20,6 +20,7 @@ public class ConnectedClient {
     private boolean isTableReady = false;
     private TileDrawingPool currentTileDrawingPool;
     private Player player;
+    private boolean isMyTurn;
 
 
     private int id;
@@ -29,6 +30,7 @@ public class ConnectedClient {
         this.clientSocket = clientSocket;
         this.server = server;
         this.id = id;
+
         try {
             System.out.println("Client "+id+ ": Client Connected");
             in = new DataInputStream(new BufferedInputStream(clientSocket.getInputStream()));
@@ -61,6 +63,19 @@ public class ConnectedClient {
                 case "CAN_I_MOVE":
                     sendIfCanMove();
                     break;
+                case "NEXT":
+                    //System.out.println("id " + id + "server.getPlayerOnTurn " + server.getPlayerOnTurn());
+                    if (id == server.getPlayerOnTurn()){
+                        sendNextTurn();
+                        server.nextPlayer();
+                        //System.out.println("spoko");
+                        break;
+                    }
+                    else{
+                        System.out.println("spierdalaj");
+                        sendNextTurn();
+                        break;
+                    }
                 default:
                     throw new IllegalStateException("Unexpected value: " + line);
             }
@@ -69,6 +84,11 @@ public class ConnectedClient {
 
     private void startGame() {
         System.out.println("Game started!");
+        if (id == server.getPlayerOnTurn()){
+            isMyTurn = true;
+        } else {
+            isMyTurn = false;
+        }
         try{
             TileDrawingPool tileDrawingPool =(TileDrawingPool)inStream.readObject();
             server.setCurrentPool(tileDrawingPool);
@@ -86,14 +106,26 @@ public class ConnectedClient {
     }
 
     private void sendIfCanMove() {
+        boolean canMove = server.getPlayerOnTurn() == id;
+        if (canMove) {
+            sendMessage("Możesz się ruszyć.");
+        } else {
+            sendMessage("Nie możesz się ruszyć.");
+        }
+    }
+
+    private void sendNextTurn (){
+        boolean canMove = server.getPlayerOnTurn() == id;
+        if (canMove) {
+            sendMessage("Nastąpiła zmiana gracza");
+        } else {
+            sendMessage("Nie możesz się ruszyć.");
+        }
+    }
+
+    private void sendMessage(String message) {
         try {
-            boolean canMove = server.getPlayerOnTurn() == id;
-            out.writeBoolean(canMove);
-            if (canMove) {
-                out.writeUTF("Możesz się ruszyć.");
-            } else {
-                out.writeUTF("Nie możesz się ruszyć.");
-            }
+            out.writeUTF(message);
             out.flush();
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -107,5 +139,9 @@ public class ConnectedClient {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public int getPlayerNumber() {
+        return id;
     }
 }

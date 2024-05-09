@@ -15,11 +15,11 @@ public class Server {
     private List<ConnectedClient> connectedClients;
     private int playerOnTurn;
     private int numberOfPlayers=0;
-    private int index = 0;
+    private int index = -1;
 
     public Server(){
         connectedClients = new ArrayList<>();
-        playerOnTurn = 1;
+        playerOnTurn = 0;
         try{
             server = new ServerSocket(PORT);
             while(true) {
@@ -50,8 +50,18 @@ public class Server {
 
     }
 
-    public void nextTurn (){
-
+    //TODO: zmiana tego booleana w rzeczywistym kliencie gry
+    public void nextPlayer(){
+        int playerThatWasOnTurn = playerOnTurn;
+        playerOnTurn = (playerOnTurn + 1) % numberOfPlayers;
+        for (ConnectedClient client : connectedClients){
+            if(client.getPlayerNumber() == playerThatWasOnTurn){
+                //client.setIsMyTurn(false);
+            }
+            if(client.getPlayerNumber() == playerOnTurn){
+                //client.setIsMyTurn(true);
+            }
+        }
     }
     public int getPlayerOnTurn(){
         return playerOnTurn;

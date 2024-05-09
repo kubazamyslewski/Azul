@@ -5,6 +5,7 @@ import java.net.Socket;
 import java.util.Scanner;
 
 public class Client {
+    private boolean isMyTurn = false;
     private Socket socket;
     private DataOutputStream out;
     private DataInputStream in; // Zmieniamy na DataInputStream
@@ -26,14 +27,14 @@ public class Client {
         String line = "";
         while (!line.equals(main.server.Server.DISCONNECT_MESSAGE)) {
             line = scanner.nextLine();
+            //System.out.println(line);
             out.writeUTF(line);
             out.flush(); // Upewniamy się, że dane są natychmiastowo wysyłane do serwera
 
-            if (line.equals("CAN_I_MOVE")) {
-                boolean canMove = in.readBoolean(); // Odczytujemy boolean
-                String message = in.readUTF(); // Odczytujemy String
-                System.out.println("Can move: " + canMove);
-                System.out.println("Message from main.server: " + message);
+            // Po wysłaniu żądania CAN_I_MOVE, klient oczekuje na odpowiedź od serwera
+            if (line.equals("CAN_I_MOVE") || line.equals("NEXT")) {
+                String message = in.readUTF();
+                System.out.println(message);
             }
         }
         close();
@@ -45,7 +46,12 @@ public class Client {
         in.close();
         scanner.close();
     }
-
+    private boolean getIsMyTurn (){
+        return isMyTurn;
+    }
+    private void setIsMyTurn (boolean whoseTurn){
+        isMyTurn = whoseTurn;
+    }
     public static void main(String[] args) {
         new Client();
     }

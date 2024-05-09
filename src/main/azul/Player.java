@@ -34,8 +34,6 @@ public class Player {
 		this.playerBoard = new Board(this.game.getLinkedBox(), this);
 	}
 
-	public
-
 
 	public int getPlayerScore() {
 		return playerScore;
@@ -220,9 +218,4 @@ public class Player {
 		} while ((rowChoice < 1 || rowChoice > 5) || !isRowCorrect);
 		return rowChoice - 1;
 	}
-	
-	/**
-	 * Allows a player to Surrender
-	 * @param session
-	 */
 }

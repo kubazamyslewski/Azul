@@ -25,12 +25,7 @@ public class NetworkGameSession {
 
   public NetworkGameSession(int amountOfPlayers) throws FirstTileInWorkshopException {
 
-    do {
-      this.playerCount = amountOfPlayers;
-      if (playerCount < 2 || playerCount > 4) {
-        System.out.println("Incorrect number of players!");
-      }
-    } while (playerCount < 2 || playerCount > 4);
+    this.playerCount = amountOfPlayers;
 
     this.linkedBox = new Box();
     this.linkedBag = new Bag(this.linkedBox, 20, 20, 20, 20, 20);
@@ -44,6 +39,5 @@ public class NetworkGameSession {
     System.out.println("Game setup complete.");
     System.out.println("Player count: " + playerCount);
     System.out.println();
-
   }
 }

@@ -3,13 +3,17 @@ package main.client;
 import java.io.*;
 import java.net.Socket;
 import java.util.Scanner;
+import main.server.NetworkGameSession;
+import main.client.Move;
+import main.azul.Tile;
 
 public class Client {
     private boolean isMyTurn = false;
     private Socket socket;
     private DataOutputStream out;
     private DataInputStream in; // Zmieniamy na DataInputStream
-    private Scanner scanner;
+    private Scanner scanner = new Scanner(System.in);;
+    private NetworkGameSession networkGame;
 
 
     public Client() {
@@ -17,7 +21,6 @@ public class Client {
             socket = new Socket("127.0.0.1", main.server.Server.PORT);
             out = new DataOutputStream(socket.getOutputStream());
             in = new DataInputStream(socket.getInputStream()); // Zmieniamy na DataInputStream
-            scanner = new Scanner(System.in);
             writeMessages();
         } catch (IOException e) {
             e.printStackTrace();
@@ -39,6 +42,14 @@ public class Client {
             }
         }
         close();
+    }
+
+    public void composeMove() {
+        System.out.println("Choose (workshop/middle):");
+        String workshopOrMiddle = scanner.nextLine();
+        System.out.println("Choose color:");
+        Tile color;
+        int colorChoice = scanner.nextInt();
     }
 
     private void close() throws IOException {

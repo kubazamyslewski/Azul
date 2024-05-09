@@ -85,10 +85,7 @@ public class ConnectedClient {
     private void startGame() {
         System.out.println("Game started!");
         try{
-            TileDrawingPool tileDrawingPool =(TileDrawingPool)inStream.readObject();
-            server.setCurrentPool(tileDrawingPool);
-            Player player = (Player)inStream.readObject();   //tutaj jest próba ale nie wiadomo czy działa to
-            setCurrentPlayer(player);
+            server.startGame();
         }
         catch (Exception e){
             System.out.println("Nie udało się wystartować gry");

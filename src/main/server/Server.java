@@ -11,7 +11,6 @@ import java.util.List;
 public class Server {
     private ServerSocket server;
     public static final int PORT = 3030;
-    private TileDrawingPool currentTileDrawingPool;
     public static final String DISCONNECT_MESSAGE = "DISCONNECT";
     private List<ConnectedClient> connectedClients;
     private int playerOnTurn;
@@ -49,8 +48,8 @@ public class Server {
         }
     }
 
-    public void startGame (){
-        NetworkGameSession gameSession = new NetworkGameSession()
+    public void startGame() throws FirstTileInWorkshopException {
+        NetworkGameSession gameSession = new NetworkGameSession(numberOfPlayers);
     }
 
     //TODO: zmiana tego booleana w rzeczywistym kliencie gry

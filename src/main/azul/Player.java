@@ -18,12 +18,14 @@ public class Player {
 	private final Board playerBoard;
 	private final int playerID;
 	private int playerScore;
+	private boolean isStartingPlayer;
 	private NetworkGameSession networkGame;
 
 	public Player(GameSession game) {
 		this.game = game;
 		this.playerID = idGenerator++;
 		this.playerScore = 0;
+		this.isStartingPlayer = false;
 		this.playerBoard = new Board(this.game.getLinkedBox(), this);
 	}
 
@@ -31,6 +33,7 @@ public class Player {
 		this.networkGame = game;
 		this.playerID = idGenerator++;
 		this.playerScore = 0;
+		this.isStartingPlayer = false;
 		this.playerBoard = new Board(this.game.getLinkedBox(), this);
 	}
 
@@ -52,32 +55,30 @@ public class Player {
 	}
 	/**
 	 * Checks whether a player has the tile with number 1 on it
-	 * @return
+	 * @return boolean - true if player will start the next round, false otherwise
 	 */
 	public boolean isStartingPlayer() {
-        return this.playerBoard.getFloor().containsFirstTile();
+        return this.isStartingPlayer;
     }
 	
 	/**
-	 * Assigns Tile 1 to a player and removes it from another player
-	 * @param player Player from which the tile is removed
+	 * Removes starting player attribute
 	 */
-	void changeStartingPlayer(Player player) {
-		
+	public void changeStartingPlayer() {
+		this.isStartingPlayer = false;
 	}
 	
 	
 	/**
-	 * Assigns Tile 1 to a player
+	 * Marks the player as the starting player for the next round
 	 */
-	void setStartingPlayer() {
-		
+	public void setStartingPlayer() {
+		this.isStartingPlayer = true;
 	}
 	
 	/**
 	 * Allows a player to take a tile from a Workshop or The Middle of The Table
 	 */
-	//TODO: as of right now picking a tile from middle results in exception being thrown
 	public void takeTile() throws ColorNotInTheMiddleException, WrongTileColourException, FirstTileInWorkshopException, ColorNotInWorkshopException {
 
 		String YELLOW = "\u001B[33m";
@@ -89,8 +90,7 @@ public class Player {
 		boolean anyWorkshopsNotEmpty = false;
 		String tilePool;
 		int rowChoice;
-		Tile chosenColor = null;
-		Score score = this.game.getScore();
+		Tile chosenColor;
 
         for (Workshop w : this.game.getLinkedTileDrawingPool().getWorkshops()) {
             if (!w.isEmpty()) {
@@ -113,7 +113,7 @@ public class Player {
 
         switch (tilePool) {
             case "workshop":
-                Workshop chosenWorkshop = null;
+                Workshop chosenWorkshop;
                 do {
                     chosenWorkshop = this.chooseWorkshop();
                 } while (chosenWorkshop.isEmpty());

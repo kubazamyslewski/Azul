@@ -82,15 +82,8 @@ public class ConnectedClient {
         }
     }
 
-    //nie działa ten start game na razie ogranicza się do wypisanie game started na serwerze
-    //TODO przesłanie obiektów
     private void startGame() {
         System.out.println("Game started!");
-        if (id == server.getPlayerOnTurn()){
-            isMyTurn = true;
-        } else {
-            isMyTurn = false;
-        }
         try{
             TileDrawingPool tileDrawingPool =(TileDrawingPool)inStream.readObject();
             server.setCurrentPool(tileDrawingPool);
@@ -98,13 +91,9 @@ public class ConnectedClient {
             setCurrentPlayer(player);
         }
         catch (Exception e){
-            System.out.println("Nie można wczytać obiektów");
+            System.out.println("Nie udało się wystartować gry");
         }
 
-    }
-
-    public synchronized void setCurrentPlayer(Player player) {
-        this.player = player;
     }
 
     private void sendIfCanMove() {

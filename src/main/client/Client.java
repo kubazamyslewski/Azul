@@ -11,6 +11,7 @@ public class Client {
     private DataInputStream in; // Zmieniamy na DataInputStream
     private Scanner scanner;
 
+
     public Client() {
         try {
             socket = new Socket("127.0.0.1", main.server.Server.PORT);

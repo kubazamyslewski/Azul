@@ -15,7 +15,7 @@ public class ConnectedClient {
     private  DataOutputStream out;
     private Socket clientSocket;
     private DataInputStream in;
-    private ObjectInputStream inStream;
+    private ObjectInputStream inStream;      //kiedyś do przeysłania obiektów
     private ObjectOutputStream outStream;
     private boolean isTableReady = false;
     private TileDrawingPool currentTileDrawingPool;
@@ -82,6 +82,8 @@ public class ConnectedClient {
         }
     }
 
+    //nie działa ten start game na razie ogranicza się do wypisanie game started na serwerze
+    //TODO przesłanie obiektów
     private void startGame() {
         System.out.println("Game started!");
         if (id == server.getPlayerOnTurn()){
@@ -92,7 +94,7 @@ public class ConnectedClient {
         try{
             TileDrawingPool tileDrawingPool =(TileDrawingPool)inStream.readObject();
             server.setCurrentPool(tileDrawingPool);
-            Player player = (Player)inStream.readObject();
+            Player player = (Player)inStream.readObject();   //tutaj jest próba ale nie wiadomo czy działa to
             setCurrentPlayer(player);
         }
         catch (Exception e){

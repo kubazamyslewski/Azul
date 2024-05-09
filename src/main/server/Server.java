@@ -47,7 +47,7 @@ public class Server {
     }
 
     public void startGame (){
-
+        NetworkGameSession gameSession = new NetworkGameSession()
     }
 
     //TODO: zmiana tego booleana w rzeczywistym kliencie gry

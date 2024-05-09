@@ -5,6 +5,7 @@ import main.Exceptions.ColorNotInWorkshopException;
 import main.Exceptions.FirstTileInWorkshopException;
 import main.Exceptions.WrongTileColourException;
 import main.client.GameSession;
+import main.server.NetworkGameSession;
 
 /**
  * Handles a single player
@@ -13,10 +14,11 @@ public class Player {
 
 	private static int idGenerator = 1;
 
-	private final GameSession game;
+	private GameSession game;
 	private final Board playerBoard;
 	private final int playerID;
 	private int playerScore;
+	private NetworkGameSession networkGame;
 
 	public Player(GameSession game) {
 		this.game = game;
@@ -24,6 +26,15 @@ public class Player {
 		this.playerScore = 0;
 		this.playerBoard = new Board(this.game.getLinkedBox(), this);
 	}
+
+	public Player(NetworkGameSession game) {
+		this.networkGame = game;
+		this.playerID = idGenerator++;
+		this.playerScore = 0;
+		this.playerBoard = new Board(this.game.getLinkedBox(), this);
+	}
+
+	public
 
 
 	public int getPlayerScore() {

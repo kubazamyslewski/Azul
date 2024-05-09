@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="dc.created" content="2024-04-04">
-<meta name="description" content="declaration: package: server, class: Session">
+<meta name="description" content="declaration: package: main.server, class: Session">
 <meta name="generator" content="javadoc/ClassWriterImpl">
 <link rel="stylesheet" type="text/css" href="../stylesheet.css" title="Style">
 <link rel="stylesheet" type="text/css" href="../script-dir/jquery-ui.min.css" title="Style">
@@ -69,17 +69,17 @@ loadScripts(document, 'script');</script>
 <main role="main">
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
-<div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">server</a></div>
+<div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">main.server</a></div>
 <h1 title="Class Session" class="title">Class Session</h1>
 </div>
 <div class="inheritance" title="Inheritance Tree"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">java.lang.Object</a>
-<div class="inheritance">server.Session</div>
+<div class="inheritance">main.server.Session</div>
 </div>
 <section class="class-description" id="class-description">
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">Session</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
-<div class="block">Class representing current state of the game on the server.</div>
+<div class="block">Class representing current state of the game on the main.server.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -92,10 +92,10 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Field</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color"><code>private <a href="../azul/Bag.html" title="class in azul">Bag</a></code></div>
+<div class="col-first even-row-color"><code>private <a href="../azul/Bag.html" title="class in main.azul">Bag</a></code></div>
 <div class="col-second even-row-color"><code><a href="#bag" class="member-name-link">bag</a></code></div>
 <div class="col-last even-row-color">&nbsp;</div>
-<div class="col-first odd-row-color"><code>private <a href="../azul/Box.html" title="class in azul">Box</a></code></div>
+<div class="col-first odd-row-color"><code>private <a href="../azul/Box.html" title="class in main.azul">Box</a></code></div>
 <div class="col-second odd-row-color"><code><a href="#box" class="member-name-link">box</a></code></div>
 <div class="col-last odd-row-color">&nbsp;</div>
 <div class="col-first even-row-color"><code>private int</code></div>
@@ -104,16 +104,16 @@ loadScripts(document, 'script');</script>
 <div class="col-first odd-row-color"><code>private int</code></div>
 <div class="col-second odd-row-color"><code><a href="#numberOfPlayers" class="member-name-link">numberOfPlayers</a></code></div>
 <div class="col-last odd-row-color">&nbsp;</div>
-<div class="col-first even-row-color"><code>private <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Queue.html" title="class or interface in java.util" class="external-link">Queue</a>&lt;<a href="../azul/Player.html" title="class in azul">Player</a>&gt;</code></div>
+<div class="col-first even-row-color"><code>private <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Queue.html" title="class or interface in java.util" class="external-link">Queue</a>&lt;<a href="../azul/Player.html" title="class in main.azul">Player</a>&gt;</code></div>
 <div class="col-second even-row-color"><code><a href="#playerOrder" class="member-name-link">playerOrder</a></code></div>
 <div class="col-last even-row-color">&nbsp;</div>
-<div class="col-first odd-row-color"><code>private <a href="../azul/Player.html" title="class in azul">Player</a>[]</code></div>
+<div class="col-first odd-row-color"><code>private <a href="../azul/Player.html" title="class in main.azul">Player</a>[]</code></div>
 <div class="col-second odd-row-color"><code><a href="#players" class="member-name-link">players</a></code></div>
 <div class="col-last odd-row-color">&nbsp;</div>
-<div class="col-first even-row-color"><code>private <a href="Server.html" title="class in server">Server</a></code></div>
-<div class="col-second even-row-color"><code><a href="#server" class="member-name-link">server</a></code></div>
+<div class="col-first even-row-color"><code>private <a href="Server.html" title="class in main.server">Server</a></code></div>
+<div class="col-second even-row-color"><code><a href="#server" class="member-name-link">main.server</a></code></div>
 <div class="col-last even-row-color">&nbsp;</div>
-<div class="col-first odd-row-color"><code>private <a href="../azul/TileDrawingPool.html" title="class in azul">TileDrawingPool</a></code></div>
+<div class="col-first odd-row-color"><code>private <a href="../azul/TileDrawingPool.html" title="class in main.azul">TileDrawingPool</a></code></div>
 <div class="col-second odd-row-color"><code><a href="#tileDrawingPool" class="member-name-link">tileDrawingPool</a></code></div>
 <div class="col-last odd-row-color">&nbsp;</div>
 <div class="col-first even-row-color"><code>private int</code></div>
@@ -135,9 +135,9 @@ loadScripts(document, 'script');</script>
 <div class="block">Creates a game session for a local gameplay.</div>
 </div>
 <div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(int,server.Server)" class="member-name-link">Session</a><wbr>(int&nbsp;numberOfPlayers,
- <a href="Server.html" title="class in server">Server</a>&nbsp;server)</code></div>
+ <a href="Server.html" title="class in main.server">Server</a>&nbsp;main.server)</code></div>
 <div class="col-last odd-row-color">
-<div class="block">Creates a game session on existing server</div>
+<div class="block">Creates a game session on existing main.server</div>
 </div>
 </div>
 </section>
@@ -153,10 +153,10 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../azul/Bag.html" title="class in azul">Bag</a></code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../azul/Bag.html" title="class in main.azul">Bag</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getBag()" class="member-name-link">getBag</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../azul/Box.html" title="class in azul">Box</a></code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../azul/Box.html" title="class in main.azul">Box</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getBox()" class="member-name-link">getBox</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
@@ -165,10 +165,10 @@ loadScripts(document, 'script');</script>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getNumberOfPlayers()" class="member-name-link">getNumberOfPlayers</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../azul/Player.html" title="class in azul">Player</a></code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../azul/Player.html" title="class in main.azul">Player</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getPlayer(int)" class="member-name-link">getPlayer</a><wbr>(int&nbsp;playerNumber)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../azul/TileDrawingPool.html" title="class in azul">TileDrawingPool</a></code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../azul/TileDrawingPool.html" title="class in main.azul">TileDrawingPool</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getTileDrawingPool()" class="member-name-link">getTileDrawingPool</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
@@ -220,37 +220,37 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="bag">
 <h3>bag</h3>
-<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type"><a href="../azul/Bag.html" title="class in azul">Bag</a></span>&nbsp;<span class="element-name">bag</span></div>
+<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type"><a href="../azul/Bag.html" title="class in main.azul">Bag</a></span>&nbsp;<span class="element-name">bag</span></div>
 </section>
 </li>
 <li>
 <section class="detail" id="tileDrawingPool">
 <h3>tileDrawingPool</h3>
-<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type"><a href="../azul/TileDrawingPool.html" title="class in azul">TileDrawingPool</a></span>&nbsp;<span class="element-name">tileDrawingPool</span></div>
+<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type"><a href="../azul/TileDrawingPool.html" title="class in main.azul">TileDrawingPool</a></span>&nbsp;<span class="element-name">tileDrawingPool</span></div>
 </section>
 </li>
 <li>
 <section class="detail" id="box">
 <h3>box</h3>
-<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type"><a href="../azul/Box.html" title="class in azul">Box</a></span>&nbsp;<span class="element-name">box</span></div>
+<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type"><a href="../azul/Box.html" title="class in main.azul">Box</a></span>&nbsp;<span class="element-name">box</span></div>
 </section>
 </li>
 <li>
 <section class="detail" id="players">
 <h3>players</h3>
-<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type"><a href="../azul/Player.html" title="class in azul">Player</a>[]</span>&nbsp;<span class="element-name">players</span></div>
+<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type"><a href="../azul/Player.html" title="class in main.azul">Player</a>[]</span>&nbsp;<span class="element-name">players</span></div>
 </section>
 </li>
 <li>
 <section class="detail" id="server">
-<h3>server</h3>
-<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type"><a href="Server.html" title="class in server">Server</a></span>&nbsp;<span class="element-name">server</span></div>
+<h3>main.server</h3>
+<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type"><a href="Server.html" title="class in main.server">Server</a></span>&nbsp;<span class="element-name">main.server</span></div>
 </section>
 </li>
 <li>
 <section class="detail" id="playerOrder">
 <h3>playerOrder</h3>
-<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Queue.html" title="class or interface in java.util" class="external-link">Queue</a>&lt;<a href="../azul/Player.html" title="class in azul">Player</a>&gt;</span>&nbsp;<span class="element-name">playerOrder</span></div>
+<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Queue.html" title="class or interface in java.util" class="external-link">Queue</a>&lt;<a href="../azul/Player.html" title="class in main.azul">Player</a>&gt;</span>&nbsp;<span class="element-name">playerOrder</span></div>
 </section>
 </li>
 </ul>
@@ -265,12 +265,12 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="&lt;init&gt;(int,server.Server)">
 <h3>Session</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Session</span><wbr><span class="parameters">(int&nbsp;numberOfPlayers,
- <a href="Server.html" title="class in server">Server</a>&nbsp;server)</span></div>
-<div class="block">Creates a game session on existing server</div>
+ <a href="Server.html" title="class in main.server">Server</a>&nbsp;main.server)</span></div>
+<div class="block">Creates a game session on existing main.server</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>numberOfPlayers</code> - </dd>
-<dd><code>server</code> - existing server for a session to be hosted on</dd>
+<dd><code>main.server</code> - existing main.server for a session to be hosted on</dd>
 </dl>
 </section>
 </li>
@@ -320,25 +320,25 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="getBag()">
 <h3>getBag</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../azul/Bag.html" title="class in azul">Bag</a></span>&nbsp;<span class="element-name">getBag</span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../azul/Bag.html" title="class in main.azul">Bag</a></span>&nbsp;<span class="element-name">getBag</span>()</div>
 </section>
 </li>
 <li>
 <section class="detail" id="getTileDrawingPool()">
 <h3>getTileDrawingPool</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../azul/TileDrawingPool.html" title="class in azul">TileDrawingPool</a></span>&nbsp;<span class="element-name">getTileDrawingPool</span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../azul/TileDrawingPool.html" title="class in main.azul">TileDrawingPool</a></span>&nbsp;<span class="element-name">getTileDrawingPool</span>()</div>
 </section>
 </li>
 <li>
 <section class="detail" id="getBox()">
 <h3>getBox</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../azul/Box.html" title="class in azul">Box</a></span>&nbsp;<span class="element-name">getBox</span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../azul/Box.html" title="class in main.azul">Box</a></span>&nbsp;<span class="element-name">getBox</span>()</div>
 </section>
 </li>
 <li>
 <section class="detail" id="getPlayer(int)">
 <h3>getPlayer</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../azul/Player.html" title="class in azul">Player</a></span>&nbsp;<span class="element-name">getPlayer</span><wbr><span class="parameters">(int&nbsp;playerNumber)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../azul/Player.html" title="class in main.azul">Player</a></span>&nbsp;<span class="element-name">getPlayer</span><wbr><span class="parameters">(int&nbsp;playerNumber)</span></div>
 </section>
 </li>
 <li>

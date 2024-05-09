@@ -1,5 +1,5 @@
-azul
-client
-gamestate
-gui
-server
+main.azul
+main.client
+main.gamestate
+main.gui
+main.server

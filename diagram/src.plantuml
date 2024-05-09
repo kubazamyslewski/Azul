@@ -4,7 +4,7 @@
 top to bottom direction
 skinparam linetype ortho
 
-package azul{
+package main.azul{
 class Bag {
   + Bag(int, int, int, int, int):
   + pop(): Tile
@@ -26,7 +26,7 @@ class Board {
    tilesPushedToMosaic: Tile[]
 }
 }
-package gui{
+package main.gui{
 class BoardGUI {
   + BoardGUI():
   + setMosaic(): void
@@ -36,14 +36,14 @@ class BoardGUI {
   + setPoints(): void
 }
 }
-package azul{
+package main.azul{
 class Box {
   + Box():
   + get(): List<Object[]>
   + add(Tile): void
 }
 }
-package client{
+package main.client{
 class Client {
   + Client(String, Interface, int, Socket, Session, Player):
   + stopClient(): void
@@ -58,7 +58,7 @@ class ClientCommunication {
   + run(): void
 }
 }
-package server{
+package main.server{
 class ClientManager {
   + ClientManager(Socket, int, Server):
   + sendMessage(String): void
@@ -70,7 +70,7 @@ class ClientManager {
   + startTurn(): void
 }
 }
-package azul{
+package main.azul{
 class Floor {
   + Floor():
   + exportFloor(): Tile[]
@@ -81,7 +81,7 @@ class Floor {
    numberOfTilesOnTheFloor: int
 }
 }
-package gui{
+package main.gui{
 class InputWorkshopGUI {
   + InputWorkshopGUI(WorkshopGUI):
   ~ buttonPressed(int): void
@@ -92,13 +92,13 @@ class Interface {
   + PlayerView(int, boolean, String, int): void
 }
 }
-package gamestate{
+package main.gamestate{
 class Loader {
   + Loader():
   + loadGame(String): void
 }
 }
-package azul{
+package main.azul{
 class Middle {
   + Middle():
   + removeAll(Box): void
@@ -118,7 +118,7 @@ class Mosaic {
    rowCompleted: boolean
 }
 }
-package gui{
+package main.gui{
 class MosaicGUI {
   + MosaicGUI():
   + checkPatternLines(): void
@@ -130,7 +130,7 @@ class MouseHandler {
   + mousePressed(MouseEvent): void
 }
 }
-package azul{
+package main.azul{
 class Player {
   + Player():
   ~ takeTile(Storage): void
@@ -145,13 +145,13 @@ class Round {
   + finishLastRound(Session): void
 }
 }
-package gamestate{
+package main.gamestate{
 class Saver {
   + Saver():
   + saveGame(Board, String): void
 }
 }
-package azul{
+package main.azul{
 class Score {
   + Score():
   + reset(Player): void
@@ -163,7 +163,7 @@ class Score {
   + scoreNewTile(Player): void
 }
 }
-package server{
+package main.server{
 class Server {
   + Server(int, int):
   - session: Session
@@ -204,7 +204,7 @@ class Session {
    box: Box
 }
 }
-package azul{
+package main.azul{
 interface Storage << interface >> {
   + removeAll(Box, Tile): void
   + remove(Box, Tile, int): void
@@ -215,21 +215,21 @@ interface Storage << interface >> {
    empty: boolean
 }
 }
-package gui{
+package main.gui{
 class TableGUI {
   + TableGUI():
   + setColor(): void
   + ActivePlayerStatus(): void
 }
 }
-package azul{
+package main.azul{
 enum Tile << enumeration >> {
   + Tile():
   + values(): Tile[]
   + valueOf(String): Tile
 }
 }
-package azul{
+package main.azul{
 class TileDrawingPool {
   + TileDrawingPool():
   - workshops: Workshop[]
@@ -241,14 +241,14 @@ class TileDrawingPool {
    workshops: Workshop[]
 }
 }
-package gui{
+package main.gui{
 class TileGUI {
   + TileGUI(boolean):
   + changeImage(Tile): void
   + displayThis(boolean): void
 }
 }
-package azul{
+package main.azul{
 class Workshop {
   + Workshop(Bag):
   + removeAll(Box): void
@@ -261,7 +261,7 @@ class Workshop {
    full: boolean
 }
 }
-package gui{
+package main.gui{
 class WorkshopButton {
   + WorkshopButton(int, InputWorkshopGUI):
   + displayAsSelected(boolean): void
@@ -284,8 +284,8 @@ Board               "1" *-[#595959,plain]-> "mosaic\n*" Tile
 Box                 "1" *-[#595959,plain]-> "blackTiles\n*" Tile
 Client              "1" *-[#595959,plain]-> "GUI\n1" Interface
 Client              "1" *-[#595959,plain]-> "session\n1" Session
-ClientCommunication "1" *-[#595959,plain]-> "client\n1" Client
-ClientManager       "1" *-[#595959,plain]-> "server\n1" Server
+ClientCommunication "1" *-[#595959,plain]-> "main.client\n1" Client
+ClientManager       "1" *-[#595959,plain]-> "main.server\n1" Server
 ClientManager       "1" *-[#595959,plain]-> "serverCommunication\n1" ServerCommunication
 InputWorkshopGUI    "1" *-[#595959,plain]-> "buttons\n*" WorkshopButton
 InputWorkshopGUI     -[#595959,dashed]->  WorkshopButton      : "«create»"
@@ -299,7 +299,7 @@ ServerCommunication "1" *-[#595959,plain]-> "clientManager\n1" ClientManager
 Session             "1" *-[#595959,plain]-> "bag\n1" Bag
 Session             "1" *-[#595959,plain]-> "box\n1" Box
 Session             "1" *-[#595959,plain]-> "players\n*" Player
-Session             "1" *-[#595959,plain]-> "server\n1" Server
+Session             "1" *-[#595959,plain]-> "main.server\n1" Server
 Workshop             -[#008200,dashed]-^  Storage
 WorkshopButton       +-[#820000,plain]-  InputWorkshopGUI
 WorkshopButton      "1" *-[#595959,plain]-> "inputWorkshopGUI\n1" InputWorkshopGUI

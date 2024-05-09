@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="dc.created" content="2024-04-04">
-<meta name="description" content="declaration: package: server, class: ServerCommunication">
+<meta name="description" content="declaration: package: main.server, class: ServerCommunication">
 <meta name="generator" content="javadoc/ClassWriterImpl">
 <link rel="stylesheet" type="text/css" href="../stylesheet.css" title="Style">
 <link rel="stylesheet" type="text/css" href="../script-dir/jquery-ui.min.css" title="Style">
@@ -69,11 +69,11 @@ loadScripts(document, 'script');</script>
 <main role="main">
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
-<div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">server</a></div>
+<div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">main.server</a></div>
 <h1 title="Class ServerCommunication" class="title">Class ServerCommunication</h1>
 </div>
 <div class="inheritance" title="Inheritance Tree"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">java.lang.Object</a>
-<div class="inheritance">server.ServerCommunication</div>
+<div class="inheritance">main.server.ServerCommunication</div>
 </div>
 <section class="class-description" id="class-description">
 <dl class="notes">
@@ -96,7 +96,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Field</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color"><code>(package private) <a href="ClientManager.html" title="class in server">ClientManager</a></code></div>
+<div class="col-first even-row-color"><code>(package private) <a href="ClientManager.html" title="class in main.server">ClientManager</a></code></div>
 <div class="col-second even-row-color"><code><a href="#clientManager" class="member-name-link">clientManager</a></code></div>
 <div class="col-last even-row-color">&nbsp;</div>
 <div class="col-first odd-row-color"><code>private <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/BufferedReader.html" title="class or interface in java.io" class="external-link">BufferedReader</a></code></div>
@@ -114,7 +114,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(java.net.Socket,server.ClientManager)" class="member-name-link">ServerCommunication</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/net/Socket.html" title="class or interface in java.net" class="external-link">Socket</a>&nbsp;socket,
- <a href="ClientManager.html" title="class in server">ClientManager</a>&nbsp;clientManager)</code></div>
+ <a href="ClientManager.html" title="class in main.server">ClientManager</a>&nbsp;clientManager)</code></div>
 <div class="col-last even-row-color">&nbsp;</div>
 </div>
 </section>
@@ -133,7 +133,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#handleMessage(java.lang.String)" class="member-name-link">handleMessage</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;message)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Describes server's actions after receiving certain messages</div>
+<div class="block">Describes main.server's actions after receiving certain messages</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#run()" class="member-name-link">run</a>()</code></div>
@@ -164,7 +164,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <li>
 <section class="detail" id="clientManager">
 <h3>clientManager</h3>
-<div class="member-signature"><span class="return-type"><a href="ClientManager.html" title="class in server">ClientManager</a></span>&nbsp;<span class="element-name">clientManager</span></div>
+<div class="member-signature"><span class="return-type"><a href="ClientManager.html" title="class in main.server">ClientManager</a></span>&nbsp;<span class="element-name">clientManager</span></div>
 </section>
 </li>
 </ul>
@@ -179,7 +179,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="&lt;init&gt;(java.net.Socket,server.ClientManager)">
 <h3>ServerCommunication</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">ServerCommunication</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/net/Socket.html" title="class or interface in java.net" class="external-link">Socket</a>&nbsp;socket,
- <a href="ClientManager.html" title="class in server">ClientManager</a>&nbsp;clientManager)</span></div>
+ <a href="ClientManager.html" title="class in main.server">ClientManager</a>&nbsp;clientManager)</span></div>
 </section>
 </li>
 </ul>
@@ -194,10 +194,10 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="handleMessage(java.lang.String)">
 <h3>handleMessage</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">handleMessage</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;message)</span></div>
-<div class="block">Describes server's actions after receiving certain messages</div>
+<div class="block">Describes main.server's actions after receiving certain messages</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>message</code> - message received from a client</dd>
+<dd><code>message</code> - message received from a main.client</dd>
 </dl>
 </section>
 </li>

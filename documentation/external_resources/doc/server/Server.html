@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="dc.created" content="2024-04-04">
-<meta name="description" content="declaration: package: server, class: Server">
+<meta name="description" content="declaration: package: main.server, class: Server">
 <meta name="generator" content="javadoc/ClassWriterImpl">
 <link rel="stylesheet" type="text/css" href="../stylesheet.css" title="Style">
 <link rel="stylesheet" type="text/css" href="../script-dir/jquery-ui.min.css" title="Style">
@@ -69,11 +69,11 @@ loadScripts(document, 'script');</script>
 <main role="main">
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
-<div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">server</a></div>
+<div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">main.server</a></div>
 <h1 title="Class Server" class="title">Class Server</h1>
 </div>
 <div class="inheritance" title="Inheritance Tree"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">java.lang.Object</a>
-<div class="inheritance">server.Server</div>
+<div class="inheritance">main.server.Server</div>
 </div>
 <section class="class-description" id="class-description">
 <dl class="notes">
@@ -96,10 +96,10 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Field</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color"><code>private <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/ArrayList.html" title="class or interface in java.util" class="external-link">ArrayList</a>&lt;<a href="ClientManager.html" title="class in server">ClientManager</a>&gt;</code></div>
+<div class="col-first even-row-color"><code>private <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/ArrayList.html" title="class or interface in java.util" class="external-link">ArrayList</a>&lt;<a href="ClientManager.html" title="class in main.server">ClientManager</a>&gt;</code></div>
 <div class="col-second even-row-color"><code><a href="#clients" class="member-name-link">clients</a></code></div>
 <div class="col-last even-row-color">
-<div class="block">Array of clients using a server</div>
+<div class="block">Array of clients using a main.server</div>
 </div>
 <div class="col-first odd-row-color"><code>private int</code></div>
 <div class="col-second odd-row-color"><code><a href="#numberOfPlayers" class="member-name-link">numberOfPlayers</a></code></div>
@@ -110,7 +110,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <div class="col-first odd-row-color"><code>private <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/net/Socket.html" title="class or interface in java.net" class="external-link">Socket</a></code></div>
 <div class="col-second odd-row-color"><code><a href="#serverSocket" class="member-name-link">serverSocket</a></code></div>
 <div class="col-last odd-row-color">&nbsp;</div>
-<div class="col-first even-row-color"><code>private <a href="Session.html" title="class in server">Session</a></code></div>
+<div class="col-first even-row-color"><code>private <a href="Session.html" title="class in main.server">Session</a></code></div>
 <div class="col-second even-row-color"><code><a href="#session" class="member-name-link">session</a></code></div>
 <div class="col-last even-row-color">&nbsp;</div>
 </div>
@@ -127,7 +127,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(int,int)" class="member-name-link">Server</a><wbr>(int&nbsp;numberOfPlayers,
  int&nbsp;port)</code></div>
 <div class="col-last even-row-color">
-<div class="block">Creates a server for given number of players.</div>
+<div class="block">Creates a main.server for given number of players.</div>
 </div>
 </div>
 </section>
@@ -144,7 +144,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addClientManager(server.ClientManager)" class="member-name-link">addClientManager</a><wbr>(<a href="ClientManager.html" title="class in server">ClientManager</a>&nbsp;clientManager)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addClientManager(server.ClientManager)" class="member-name-link">addClientManager</a><wbr>(<a href="ClientManager.html" title="class in main.server">ClientManager</a>&nbsp;clientManager)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Removes ClientManager object from clients ArrayList</div>
 </div>
@@ -157,27 +157,27 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getPublicIP()" class="member-name-link">getPublicIP</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns public IP address of server</div>
+<div class="block">Returns public IP address of main.server</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/net/Socket.html" title="class or interface in java.net" class="external-link">Socket</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getServerSocket()" class="member-name-link">getServerSocket</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Session.html" title="class in server">Session</a></code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Session.html" title="class in main.server">Session</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getSession()" class="member-name-link">getSession</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#removeClientManager(server.ClientManager)" class="member-name-link">removeClientManager</a><wbr>(<a href="ClientManager.html" title="class in server">ClientManager</a>&nbsp;clientManager)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#removeClientManager(server.ClientManager)" class="member-name-link">removeClientManager</a><wbr>(<a href="ClientManager.html" title="class in main.server">ClientManager</a>&nbsp;clientManager)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#run()" class="member-name-link">run</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setSession(server.Session)" class="member-name-link">setSession</a><wbr>(<a href="Session.html" title="class in server">Session</a>&nbsp;session)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setSession(server.Session)" class="member-name-link">setSession</a><wbr>(<a href="Session.html" title="class in main.server">Session</a>&nbsp;session)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#stopServer()" class="member-name-link">stopServer</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Stops server</div>
+<div class="block">Stops main.server</div>
 </div>
 </div>
 </div>
@@ -199,7 +199,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <li>
 <section class="detail" id="session">
 <h3>session</h3>
-<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type"><a href="Session.html" title="class in server">Session</a></span>&nbsp;<span class="element-name">session</span></div>
+<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type"><a href="Session.html" title="class in main.server">Session</a></span>&nbsp;<span class="element-name">session</span></div>
 </section>
 </li>
 <li>
@@ -217,8 +217,8 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <li>
 <section class="detail" id="clients">
 <h3>clients</h3>
-<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/ArrayList.html" title="class or interface in java.util" class="external-link">ArrayList</a>&lt;<a href="ClientManager.html" title="class in server">ClientManager</a>&gt;</span>&nbsp;<span class="element-name">clients</span></div>
-<div class="block">Array of clients using a server</div>
+<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/ArrayList.html" title="class or interface in java.util" class="external-link">ArrayList</a>&lt;<a href="ClientManager.html" title="class in main.server">ClientManager</a>&gt;</span>&nbsp;<span class="element-name">clients</span></div>
+<div class="block">Array of clients using a main.server</div>
 </section>
 </li>
 <li>
@@ -240,11 +240,11 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <h3>Server</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Server</span><wbr><span class="parameters">(int&nbsp;numberOfPlayers,
  int&nbsp;port)</span></div>
-<div class="block">Creates a server for given number of players.</div>
+<div class="block">Creates a main.server for given number of players.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>numberOfPlayers</code> - number of players in the game</dd>
-<dd><code>port</code> - port to start server on</dd>
+<dd><code>port</code> - port to start main.server on</dd>
 </dl>
 </section>
 </li>
@@ -259,26 +259,26 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <li>
 <section class="detail" id="addClientManager(server.ClientManager)">
 <h3>addClientManager</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">addClientManager</span><wbr><span class="parameters">(<a href="ClientManager.html" title="class in server">ClientManager</a>&nbsp;clientManager)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">addClientManager</span><wbr><span class="parameters">(<a href="ClientManager.html" title="class in main.server">ClientManager</a>&nbsp;clientManager)</span></div>
 <div class="block">Removes ClientManager object from clients ArrayList</div>
 </section>
 </li>
 <li>
 <section class="detail" id="removeClientManager(server.ClientManager)">
 <h3>removeClientManager</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">removeClientManager</span><wbr><span class="parameters">(<a href="ClientManager.html" title="class in server">ClientManager</a>&nbsp;clientManager)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">removeClientManager</span><wbr><span class="parameters">(<a href="ClientManager.html" title="class in main.server">ClientManager</a>&nbsp;clientManager)</span></div>
 </section>
 </li>
 <li>
 <section class="detail" id="getSession()">
 <h3>getSession</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Session.html" title="class in server">Session</a></span>&nbsp;<span class="element-name">getSession</span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Session.html" title="class in main.server">Session</a></span>&nbsp;<span class="element-name">getSession</span>()</div>
 </section>
 </li>
 <li>
 <section class="detail" id="setSession(server.Session)">
 <h3>setSession</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setSession</span><wbr><span class="parameters">(<a href="Session.html" title="class in server">Session</a>&nbsp;session)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setSession</span><wbr><span class="parameters">(<a href="Session.html" title="class in main.server">Session</a>&nbsp;session)</span></div>
 </section>
 </li>
 <li>
@@ -303,10 +303,10 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="getPublicIP()">
 <h3>getPublicIP</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getPublicIP</span>()</div>
-<div class="block">Returns public IP address of server</div>
+<div class="block">Returns public IP address of main.server</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>String representing public IPv4 address of server</dd>
+<dd>String representing public IPv4 address of main.server</dd>
 </dl>
 </section>
 </li>
@@ -314,7 +314,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="stopServer()">
 <h3>stopServer</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">stopServer</span>()</div>
-<div class="block">Stops server</div>
+<div class="block">Stops main.server</div>
 </section>
 </li>
 <li>

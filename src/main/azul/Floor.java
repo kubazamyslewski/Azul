@@ -27,7 +27,11 @@ public class Floor {
 
         System.out.println(RED + "Floor:");
         for(Tile t : this.tilesOnTheFloor) {
-            System.out.print(t + " ");
+            if(t == null){
+                System.out.print("_ ");
+            }else {
+                System.out.print(t + " ");
+            }
         }
         System.out.println();
     }

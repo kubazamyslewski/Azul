@@ -41,7 +41,12 @@ public class Wall {
       System.out.println(RED + "Wall:");
       for (int i = 0; i < 5; i++) {
         for (Tile t : this.wallMap.get(i)) {
-          System.out.print(t + " ");
+            if(t==null) {
+                System.out.print("_ ");
+            }
+            else {
+                System.out.print(t + " ");
+            }
         }
         System.out.println();
       }

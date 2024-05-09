@@ -77,61 +77,61 @@ public class Player {
 		this.game.getLinkedTileDrawingPool().printState();
 		this.getBoard().printBoard();
 
+		boolean anyWorkshopsNotEmpty = false;
 		String tilePool;
 		int rowChoice;
 		Tile chosenColor = null;
 		Score score = this.game.getScore();
 
-		do {
-			// checks whether middle is empty, if so go to picking workshop
-			if (!this.game.getLinkedTileDrawingPool().getMiddle().colorsEmpty()) {
-				System.out.print("Choose tile pool (middle/workshop): ");
-				tilePool = this.game.getInputHandler().next();
-			} else {
-				tilePool = "workshop";
-			}
+        for (Workshop w : this.game.getLinkedTileDrawingPool().getWorkshops()) {
+            if (!w.isEmpty()) {
+                anyWorkshopsNotEmpty = true;
+                break;
+            }
+        }
+        // logic checking if middle or workshops are empty
+        if (!this.game.getLinkedTileDrawingPool().getMiddle().colorsEmpty() && anyWorkshopsNotEmpty) {
+            do {
+                System.out.print("Choose tile pool (middle/workshop): ");
+                tilePool = this.game.getInputHandler().next();
+            } while (!tilePool.equals("workshop") && !tilePool.equals("middle"));
+        }else if(!anyWorkshopsNotEmpty){
+            tilePool = "middle";
+        }
+        else {
+            tilePool = "workshop";
+        }
 
+        switch (tilePool) {
+            case "workshop":
+                Workshop chosenWorkshop = null;
+                do {
+                    chosenWorkshop = this.chooseWorkshop();
+                } while (chosenWorkshop.isEmpty());
 
-			// TODO add a check whether there is any not empty workshop
-			switch (tilePool) {
-				case "workshop":
-					Workshop chosenWorkshop = null;
-					do {
-						chosenWorkshop = this.chooseWorkshop();
-					} while (chosenWorkshop.isEmpty());
+                do {
+                    chosenColor = this.chooseColorFromWorkshop(chosenWorkshop);
+                } while (chosenColor == null);
 
-					do {
-						chosenColor = this.chooseColorFromWorkshop(chosenWorkshop);
-					} while (chosenColor == null);
+                rowChoice = this.chooseRow(chosenColor);
 
-					rowChoice = this.chooseRow(chosenColor);
+                chosenWorkshop.getTileColorFromWorkshop(this.game.getPlayers()[this.game.getIndexFromPlayerID(this.playerID)], chosenColor, rowChoice);
+                break;
 
-					chosenWorkshop.getTileColorFromWorkshop(this.game.getPlayers()[this.game.getIndexFromPlayerID(this.playerID)], chosenColor, rowChoice);
+            case "middle":
+                do {
+                    chosenColor = this.chooseColorFromMiddle();
+                } while (chosenColor == null);
 
-					//moved scoring to mosaic filling method
-					break;
+                rowChoice = this.chooseRow(chosenColor);
 
-				case "middle":
-					do {
-						chosenColor = this.chooseColorFromMiddle();
-					} while (chosenColor == null);
+                this.game.getLinkedTileDrawingPool().getMiddle().getTileColorFromMiddle(this.game.getPlayers()[this.game.getIndexFromPlayerID(this.playerID)], chosenColor, rowChoice);
+                break;
+        }
 
-					rowChoice = this.chooseRow(chosenColor);
-
-					this.game.getLinkedTileDrawingPool().getMiddle().getTileColorFromMiddle(this.game.getPlayers()[this.game.getIndexFromPlayerID(this.playerID)], chosenColor, rowChoice);
-
-					//moved scoring to mosaic filling method
-					break;
-
-				default:
-					System.out.println("Invalid input.");
-					break;
-			}
-
-			System.out.println("Player " + playerID + " points: " + getPlayerScore());
-			System.out.println();
-		} while (!(tilePool.equals("workshop") || tilePool.equals("middle")));
-	}
+        System.out.println("Player " + playerID + " points: " + getPlayerScore());
+        System.out.println();
+    }
 
 	private Workshop chooseWorkshop() throws FirstTileInWorkshopException {
 		int workshopChoice;
@@ -191,7 +191,6 @@ public class Player {
 		return chosenColor;
 	}
 
-	//TODO chceck stating whether the player has not got tiles of this color in this row of the mosaic
 	private int chooseRow(Tile chosenColor) {
 		int rowChoice;
 		boolean isRowCorrect;
@@ -206,12 +205,11 @@ public class Player {
 				isRowCorrect = false;
 				System.out.println("You cannot put this color in that row!");
 			}
+			if (this.playerBoard.getMosaic().checkRowForColor(chosenColor, rowChoice-1)) {
+				System.out.println("This color is already in the mosaic!");
+				isRowCorrect = false;
+			}
 		} while ((rowChoice < 1 || rowChoice > 5) || !isRowCorrect);
 		return rowChoice - 1;
 	}
-	
-	/**
-	 * Allows a player to Surrender
-	 * @param session
-	 */
 }

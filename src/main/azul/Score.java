@@ -111,7 +111,7 @@ public class Score implements Serializable {
 	 */
 	public void applyFloorPenalty(Player player) throws IncorrectAmountOfTilesOnFloorException {
 		int floorTiles = player.getBoard().getFloor().getAmountOfTiles();
-		if (floorTiles > 0 && floorTiles <= 2) {
+		if (floorTiles >= 0 && floorTiles <= 2) {
 			player.setPlayerScore(player.getPlayerScore() - floorTiles);
 		} else if (floorTiles > 2 && floorTiles <= 5) {
 			player.setPlayerScore(player.getPlayerScore() - (2 * (floorTiles - 2) + 2));

@@ -81,7 +81,7 @@ public class Player implements Serializable {
 	/**
 	 * Allows a player to take a tile from a Workshop or The Middle of The Table
 	 */
-	//TODO: as of right now picking a tile from middle results in exception being thrown
+	//TODO: handle a case in which none of the rows can be filled with a given tile
 	public void takeTile() throws ColorNotInTheMiddleException, WrongTileColourException, FirstTileInWorkshopException, ColorNotInWorkshopException {
 
 		String YELLOW = "\u001B[33m";

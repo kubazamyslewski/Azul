@@ -20,12 +20,14 @@ public class Player implements Serializable {
 	private final Board playerBoard;
 	private final int playerID;
 	private int playerScore;
+	private boolean isStartingPlayer;
 	private NetworkGameSession networkGame;
 
 	public Player(GameSession game) {
 		this.game = game;
 		this.playerID = idGenerator++;
 		this.playerScore = 0;
+		this.isStartingPlayer = false;
 		this.playerBoard = new Board(this.game.getLinkedBox(), this);
 	}
 
@@ -33,6 +35,7 @@ public class Player implements Serializable {
 		this.networkGame = game;
 		this.playerID = idGenerator++;
 		this.playerScore = 0;
+		this.isStartingPlayer = false;
 		this.playerBoard = new Board(this.networkGame.getLinkedBox(), this);
 	}
 
@@ -53,27 +56,26 @@ public class Player implements Serializable {
 		return this.playerID;
 	}
 	/**
-	 * Checks whether a player has the tile with number 1 on it
-	 * @return
+	 * Checks whether a player will start the next round
+	 * @return boolean - true if player will start the next round, false otherwise
 	 */
 	public boolean isStartingPlayer() {
-        return this.playerBoard.getFloor().containsFirstTile();
+        return this.isStartingPlayer;
     }
 	
 	/**
-	 * Assigns Tile 1 to a player and removes it from another player
-	 * @param player Player from which the tile is removed
+	 * Marks player as not starting next round
 	 */
-	void changeStartingPlayer(Player player) {
-		
+	public void changeStartingPlayer() {
+		this.isStartingPlayer = false;
 	}
 	
 	
 	/**
-	 * Assigns Tile 1 to a player
+	 * Marks player as starting next round
 	 */
-	void setStartingPlayer() {
-		
+	public void setStartingPlayer() {
+		this.isStartingPlayer = true;
 	}
 	
 	/**

@@ -23,7 +23,7 @@ public class GameSession {
 
     private Score score = new Score(this.getPlayers());
 
-    public GameSession() throws FirstTileInWorkshopException {
+    public GameSession() {
 
         do {
             System.out.print("Enter the amount of players (2-4): ");
@@ -41,6 +41,7 @@ public class GameSession {
         for (int i = 0; i < players.length; i++) {
             this.players[i] = new Player(this);
         }
+        this.players[0].setStartingPlayer();
 
         System.out.println("Game setup complete.");
         System.out.println("Player count: " + playerCount);
@@ -71,6 +72,15 @@ public class GameSession {
         return -1;
     }
 
+    private int getStartingPlayerIndex(){
+        for(Player player : this.players){
+            if(player.isStartingPlayer()){
+                return getIndexFromPlayerID(player.getPlayerID());
+            }
+        }
+        return 0;
+    }
+
     public void runRound() throws FirstTileInWorkshopException, ColorNotInTheMiddleException, WrongTileColourException, ColorNotInWorkshopException, IncorrectAmountOfTilesOnFloorException {
         this.getLinkedBox().printBoxContents();
         this.getLinkedBag().printBagContents();
@@ -86,15 +96,15 @@ public class GameSession {
         this.linkedTileDrawingPool.printState();
 
         this.linkedTileDrawingPool.getMiddle().add(Tile.FIRST);
-        boolean isEmpty = false;
+        boolean isEmpty;
+        int currentPlayerIndex = getStartingPlayerIndex();
         do {
-            for (Player player : this.players) {
-                if(this.linkedTileDrawingPool.isEmpty()) {
-                    isEmpty = true;
-                    break;
-                }
-                player.takeTile();
-            }
+            Player currentPlayer = this.players[currentPlayerIndex];
+            currentPlayer.takeTile();
+
+            currentPlayerIndex = (currentPlayerIndex + 1) % this.players.length;
+
+            isEmpty = this.linkedTileDrawingPool.isEmpty();
         } while (!isEmpty);
 
     }
@@ -105,6 +115,10 @@ public class GameSession {
 
         for (Player player : this.players) {
             player.getBoard().getWall().checkWallAndPushToMosaic();
+            player.changeStartingPlayer();
+            if (player.getBoard().getFloor().containsFirstTile()){
+                player.setStartingPlayer();
+            }
             score.applyFloorPenalty(player);
         }
         System.out.println();
@@ -133,6 +147,7 @@ public class GameSession {
         for (Player player : this.players) {
             System.out.println("Final score of Player " + player.getPlayerID() + ": " + player.getPlayerScore());
         }
+        System.out.println("Winner: Player "+score.getCurrentWinner().getPlayerID());
     }
 
     public void setupNewRound() throws FirstTileInWorkshopException {
@@ -158,7 +173,4 @@ public class GameSession {
         game.applyFinishingScore();
 
     }
-
-    //TODO add needed checks to cli maybe
-    //TODO further debugging maybe
 }

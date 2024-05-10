@@ -3,10 +3,12 @@ package main.azul;
 
 import main.Exceptions.IncorrectAmountOfTilesOnFloorException;
 
+import java.io.Serializable;
+
 /**
  * Handles scores of all players
  */
-public class Score {
+public class Score implements Serializable {
 	
 	private Player[] players;
 	public Score(Player[] players) {

@@ -1,9 +1,11 @@
 package main.azul;
 
+import java.io.Serializable;
+
 /**
  * Part of the board for tiles that give point penalties
  */
-public class Floor {
+public class Floor implements Serializable {
 
     private final Board parentBoard;
     private final Tile[] tilesOnTheFloor;

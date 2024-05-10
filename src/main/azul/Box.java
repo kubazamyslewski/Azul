@@ -1,5 +1,6 @@
 package main.azul;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
@@ -7,7 +8,7 @@ import java.util.Stack;
 /**
  * Class representing the box of tiles.
  */
-public class Box {
+public class Box implements Serializable {
 
     /**
     * Map representing contents of the box.

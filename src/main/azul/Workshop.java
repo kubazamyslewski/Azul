@@ -4,6 +4,7 @@ import main.Exceptions.ColorNotInWorkshopException;
 import main.Exceptions.FirstTileInWorkshopException;
 import main.Exceptions.WrongTileColourException;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
@@ -11,7 +12,7 @@ import java.util.Stack;
 /**
  * Single Workshop
  */
-public class Workshop implements Storage {
+public class Workshop implements Storage, Serializable {
 
 	private final Map<Tile, Stack<Tile>> workshopMap;
 

@@ -7,10 +7,12 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 
+import main.Exceptions.*;
 import main.azul.Player;
 import main.azul.TileDrawingPool;
+import main.client.Move;
 
-public class ConnectedClient {
+public class ClientHandler {
 
     private  DataOutputStream out;
     private Socket clientSocket;
@@ -26,8 +28,11 @@ public class ConnectedClient {
     private int id;
     private Server server;
 
-    public ConnectedClient(Socket clientSocket, int id, Server server) {
+    public int getId() { return this.id; }
+
+    public ClientHandler(Socket clientSocket, int id, Server server) {
         this.clientSocket = clientSocket;
+
         this.server = server;
         this.id = id;
 
@@ -35,6 +40,7 @@ public class ConnectedClient {
             System.out.println("Client "+id+ ": Client Connected");
             in = new DataInputStream(new BufferedInputStream(clientSocket.getInputStream()));
             out = new DataOutputStream(clientSocket.getOutputStream());
+            out.writeUTF(Integer.toString(id));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -88,10 +94,11 @@ public class ConnectedClient {
             server.startGame();
         }
         catch (Exception e){
-            System.out.println("Nie udało się wystartować gry");
+            System.err.println("Nie udało się wystartować gry: " + e);
         }
 
     }
+
 
     private void sendIfCanMove() {
         boolean canMove = server.getPlayerOnTurn() == id;
@@ -128,6 +135,31 @@ public class ConnectedClient {
             e.printStackTrace();
         }
     }
+
+    public void callPlayer(NetworkGameSession gameSession) {
+        NetworkGameSession current = new NetworkGameSession(gameSession);
+        try {
+            outStream = new ObjectOutputStream(clientSocket.getOutputStream());
+            outStream.writeObject(current);
+            inStream = new ObjectInputStream(clientSocket.getInputStream());
+            Move playerMove = (Move)inStream.readObject();
+            this.server.processMove(playerMove);
+        } catch (IOException e) {
+            System.err.println(e);
+        } catch (ClassNotFoundException e) {
+            System.err.println(e);
+        } catch (ColorNotInTheMiddleException e) {
+            System.err.println(e);
+        } catch (ColorNotInWorkshopException e) {
+            System.err.println(e);
+        } catch (FirstTileInWorkshopException e) {
+            System.err.println(e);
+        } catch (WrongTileColourException e) {
+            System.err.println(e);
+        }
+    }
+
+
 
     public int getPlayerNumber() {
         return id;

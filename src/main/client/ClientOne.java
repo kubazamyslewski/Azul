@@ -1,15 +1,14 @@
 package main.client;
 
+import main.Exceptions.FirstTileInWorkshopException;
+import main.azul.Tile;
+import main.server.NetworkGameSession;
+
 import java.io.*;
 import java.net.Socket;
 import java.util.Scanner;
 
-import main.Exceptions.FirstTileInWorkshopException;
-import main.server.NetworkGameSession;
-import main.client.Move;
-import main.azul.Tile;
-
-public class Client {
+public class ClientOne {
     private int id;
     private boolean isMyTurn = false;
     private boolean isReady = false;
@@ -23,7 +22,7 @@ public class Client {
     private NetworkGameSession networkGameState;
 
 
-    public Client() {
+    public ClientOne() {
         try {
             socket = new Socket("127.0.0.1", main.server.Server.PORT);
             out = new DataOutputStream(socket.getOutputStream());
@@ -42,15 +41,13 @@ public class Client {
     }
 
 
-    public void waitForStart() {boolean isStarted = false;
-
-        try {
-            out.writeUTF(scanner.nextLine());
-            out.flush();
+    public void waitForStart() {
+            try {
+                out.writeUTF(scanner.nextLine());
+                out.flush();
+            } catch (IOException e) {
+                System.err.println(e);
             }
-        catch
-        (IOException e)
-        {System.err.println(e);}
 
     }
 
@@ -197,7 +194,7 @@ public class Client {
     }
 
     public static void main(String[] args) {
-        new Client();
+        new ClientOne();
     }
 }
 

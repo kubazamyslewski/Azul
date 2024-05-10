@@ -1,9 +1,11 @@
 package main.azul;
 
+import java.io.Serializable;
+
 /**
  * Player's board representation.
  */
-public class Board {
+public class Board implements Serializable {
 
     private final Floor floor;
     private final Wall wall;

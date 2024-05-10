@@ -2,6 +2,7 @@ package main.azul;
 
 import main.Exceptions.WrongTileColourException;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -10,7 +11,7 @@ import java.util.Stack;
 /**
  * Class representing the area where players put tiles before putting them on the mosaic
  */
-public class Wall {
+public class Wall implements Serializable {
 
     private final Board parentBoard;
 

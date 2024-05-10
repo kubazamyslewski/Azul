@@ -7,10 +7,12 @@ import main.Exceptions.WrongTileColourException;
 import main.client.GameSession;
 import main.server.NetworkGameSession;
 
+import java.io.Serializable;
+
 /**
  * Handles a single player
  */
-public class Player {
+public class Player implements Serializable {
 
 	private static int idGenerator = 1;
 
@@ -31,7 +33,7 @@ public class Player {
 		this.networkGame = game;
 		this.playerID = idGenerator++;
 		this.playerScore = 0;
-		this.playerBoard = new Board(this.game.getLinkedBox(), this);
+		this.playerBoard = new Board(this.networkGame.getLinkedBox(), this);
 	}
 
 

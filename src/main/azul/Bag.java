@@ -1,5 +1,6 @@
 package main.azul;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -8,7 +9,7 @@ import java.util.Stack;
 /**
  * Class representing the bag of tiles.
  */
-public class Bag {
+public class Bag implements Serializable {
 
     /**
     * Map representing contents of the bag.

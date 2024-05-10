@@ -2,10 +2,12 @@ package main.azul;
 
 import main.Exceptions.WrongTileColourException;
 
+import java.io.Serializable;
+
 /**
  * Mosaic representation.
  */
-public class Mosaic {
+public class Mosaic implements Serializable {
 
     /**
      * A two-dimensional array representing the square mosaic

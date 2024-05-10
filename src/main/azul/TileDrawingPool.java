@@ -2,13 +2,14 @@ package main.azul;
 
 import main.Exceptions.FirstTileInWorkshopException;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * An area on a table, that all players can take tiles from
  */
-public class TileDrawingPool {
+public class TileDrawingPool implements Serializable {
 	
 	private final List<Tile> availableColors = new ArrayList<>();
 	private final Middle middle;

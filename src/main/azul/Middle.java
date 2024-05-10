@@ -3,6 +3,7 @@ package main.azul;
 import main.Exceptions.ColorNotInTheMiddleException;
 import main.Exceptions.WrongTileColourException;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
@@ -10,7 +11,7 @@ import java.util.Stack;
 /**
  * An area in the middle of the table where leftover tiles from workshops go
  */
-public class Middle implements Storage {
+public class Middle implements Storage, Serializable {
 
     /**
      * Map representing contents of the middle.

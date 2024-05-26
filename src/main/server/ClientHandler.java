@@ -78,7 +78,6 @@ public class ClientHandler {
                         break;
                     }
                     else{
-                        System.out.println("spierdalaj");
                         sendNextTurn();
                         break;
                     }

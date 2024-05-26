@@ -43,7 +43,7 @@ public class Server {
     public int getPlayersReady() { return this.playersReady; }
 
     private void initConnections() throws IOException {
-        if (numberOfPlayers<4){
+        if (numberOfPlayers<3){
             Socket clientSocket = server.accept();
             if(clientSocket.isConnected())
                 new Thread(()->{

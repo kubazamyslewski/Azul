@@ -5,6 +5,7 @@ import main.azul.Board;
 import main.azul.Player;
 import main.client.GameSession;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Game {
@@ -12,6 +13,7 @@ public class Game {
     private List<PlayerBoard> playerBoards;
     private WorkshopBoard workshopBoard;
     public Game() throws FirstTileInWorkshopException {
+        playerBoards = new ArrayList<>();
         gameSession = new GameSession();
         initializeWorkshop();
         for(int i = 0; i < gameSession.getPlayerCount(); i++){

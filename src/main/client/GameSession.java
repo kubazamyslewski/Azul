@@ -173,4 +173,40 @@ public class GameSession {
         game.applyFinishingScore();
 
     }
+
+    public void setPlayerCount(int playerCount) {
+        this.playerCount = playerCount;
+    }
+
+    public boolean isOver() {
+        return isOver;
+    }
+
+    public void setOver(boolean over) {
+        isOver = over;
+    }
+
+    public void setPlayers(Player[] players) {
+        this.players = players;
+    }
+
+    public void setLinkedTileDrawingPool(TileDrawingPool linkedTileDrawingPool) {
+        this.linkedTileDrawingPool = linkedTileDrawingPool;
+    }
+
+    public void setLinkedBag(Bag linkedBag) {
+        this.linkedBag = linkedBag;
+    }
+
+    public void setLinkedBox(Box linkedBox) {
+        this.linkedBox = linkedBox;
+    }
+
+    public void setInputHandler(Scanner inputHandler) {
+        this.inputHandler = inputHandler;
+    }
+
+    public void setScore(Score score) {
+        this.score = score;
+    }
 }

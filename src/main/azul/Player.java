@@ -123,6 +123,7 @@ public class Player implements Serializable {
                 } while (chosenWorkshop.isEmpty());
 
                 do {
+
                     chosenColor = this.chooseColorFromWorkshop(chosenWorkshop);
                 } while (chosenColor == null);
 
@@ -164,6 +165,7 @@ public class Player implements Serializable {
 
 		return chosenWorkshop;
 	}
+
 	private Tile chooseColorFromWorkshop(Workshop workshop) throws FirstTileInWorkshopException {
 		int colorChoice;
 		Tile chosenColor = null;

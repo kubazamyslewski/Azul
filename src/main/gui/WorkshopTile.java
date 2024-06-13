@@ -54,9 +54,16 @@ public class WorkshopTile extends JButton{
         // Code to execute when the button is clicked
         System.out.println("workshopID " + workshopID + " clicked! Color: " + color);
         Player p = gameSession.getCurrentPlayer();
-        p.setWorkshopChoice(workshopID+1);
-        p.setWorkshopClicked(true);
-        p.setTilePool("workshop");
+        if(workshopID==6){
+            p.setWorkshopClicked(true);
+            p.setTilePool("middle");
+        }
+        else{
+            p.setWorkshopChoice(workshopID+1);
+            p.setWorkshopClicked(true);
+            p.setTilePool("workshop");
+        }
+
 //        for (Player player : gameSession.getPlayers()) {
 //            player.setWorkshopChoice(workshopID+1);
 //            player.setWorkshopClicked(true);

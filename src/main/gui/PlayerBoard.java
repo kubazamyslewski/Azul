@@ -83,7 +83,7 @@ public class PlayerBoard extends JFrame {
                 }
                 TileGUI tileGUI = new TileGUI(color, j, i, gameSession);
                 buildRowButtons.add(tileGUI);
-                tileGUI.setBounds(317 - j * 67, 267 + i * 67);
+                tileGUI.setBounds(317 - j * 71, 267 + i * 68);
                 panel.add(tileGUI);
             }
         }

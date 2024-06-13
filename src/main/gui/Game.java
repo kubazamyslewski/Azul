@@ -21,6 +21,7 @@ public class Game {
         while (!gameSession.isOver()) {
             try{
                 gameSession.runRound();
+                System.out.println(gameSession.getCurrentPlayer().getPlayerScore());
                 gameSession.checkIfOver();
                 if (!gameSession.isOver()) {
                     gameSession.setupNewRound();

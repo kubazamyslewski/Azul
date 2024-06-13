@@ -4,6 +4,7 @@ import main.azul.Mosaic;
 import main.azul.Player;
 import main.azul.Tile;
 import main.azul.Wall;
+import main.azul.Floor;
 import main.client.GameSession;
 
 import javax.imageio.ImageIO;
@@ -11,6 +12,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -83,6 +85,12 @@ public class PlayerBoard extends JFrame {
     private void loadBoard() {
         Mosaic mosaic = this.gameSession.getPlayers()[this.gameSession.getIndexFromPlayerID(model.getPlayerID())].getBoard().getMosaic();
         Wall wall = this.gameSession.getPlayers()[this.gameSession.getIndexFromPlayerID(model.getPlayerID())].getBoard().getWall();
+        Floor floor = this.gameSession.getPlayers()[this.gameSession.getIndexFromPlayerID(model.getPlayerID())].getBoard().getFloor();
+
+        int tileSize = 60;
+        int offsetX = 317;
+        int offsetY = 267;
+
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < i + 1; j++) {
                 Tile t = wall.getWallMap().get(i)[j];
@@ -94,10 +102,11 @@ public class PlayerBoard extends JFrame {
                 }
                 TileGUI tileGUI = new TileGUI(color, j, i, gameSession);
                 buildRowButtons.add(tileGUI);
-                tileGUI.setBounds(317 - j * 71, 267 + i * 68);
+                tileGUI.setBounds(offsetX - j * 71, offsetY + i * 68, tileSize, tileSize);
                 panel.add(tileGUI);
             }
         }
+
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
                 String color;
@@ -123,7 +132,7 @@ public class PlayerBoard extends JFrame {
                     protected void paintComponent(Graphics g) {
                         super.paintComponent(g);
                         if (backgroundImage != null) {
-                            g.drawImage(backgroundImage, 0, 0, this);
+                            g.drawImage(backgroundImage, 0, 0, this.getWidth(), this.getHeight(), this);
                         }
                     }
                 };
@@ -132,10 +141,31 @@ public class PlayerBoard extends JFrame {
                 } else {
                     p.setVisible(false);
                 }
-                p.setBounds(417 + j * 67, 267 + (i * 67), 60, 60);
+                p.setBounds(417 + j * 67, offsetY + (i * 67), tileSize, tileSize);
                 panel.add(p);
             }
         }
+
+        // Add floor tiles with increased spacing
+        int floorTileSize = 60;
+        int floorSpacing = 14; // Adjust this value to change the spacing between floor tiles
+        Tile[] floorTiles = floor.getTilesOnTheFloor();
+        for (int i = 0; i < floorTiles.length; i++) {
+            if (floorTiles[i] != null) {
+                String color = floorTiles[i].getColor();
+                JLabel floorTile = new JLabel();
+                try {
+                    File file = new File("resources/images/" + color + ".png");
+                    Image tileImage = ImageIO.read(file);
+                    floorTile.setIcon(new ImageIcon(tileImage));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                floorTile.setBounds(37 + i * (floorTileSize + floorSpacing), 655, floorTileSize, floorTileSize); // Position the tiles at the bottom
+                panel.add(floorTile);
+            }
+        }
+
         updateWanderingTile();
     }
 
@@ -160,8 +190,8 @@ public class PlayerBoard extends JFrame {
     }
 
     private void updateWanderingTile() {
-        int score = model.getPlayerScore() -1;
-        if (score == -1){
+        int score = model.getPlayerScore() - 1;
+        if (score < 0) {
             wanderingTile.setVisible(false);
             return;
         }

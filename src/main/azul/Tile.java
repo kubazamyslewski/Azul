@@ -11,7 +11,8 @@ public enum Tile implements Serializable {
   WHITE(2),
   RED(3),
   YELLOW(4),
-  BLUE(5);
+  BLUE(5),
+  BLANK(6);
 
   final int valueOfColor;
 
@@ -24,6 +25,7 @@ public enum Tile implements Serializable {
   }
   public String getColor(){
     return switch (this.valueOfColor) {
+      case 0 -> "ONE";
       case 1 -> "BLACK";
       case 2 -> "WHITE";
       case 3 -> "RED";

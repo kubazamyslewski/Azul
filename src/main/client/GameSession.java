@@ -152,22 +152,6 @@ public class GameSession {
     }
 
 
-
-    public static void main(String[] args) throws FirstTileInWorkshopException, ColorNotInTheMiddleException, WrongTileColourException, ColorNotInWorkshopException, IncorrectAmountOfTilesOnFloorException {
-        GameSession game = new GameSession();
-
-        while (!game.isOver) {
-            game.runRound();
-            game.checkIfOver();
-            if (!game.isOver) {
-                game.setupNewRound();
-            }
-
-        }
-        game.applyFinishingScore();
-
-    }
-
     public void setPlayerCount(int playerCount) {
         this.playerCount = playerCount;
     }

@@ -57,6 +57,7 @@ public class Floor implements Serializable {
      * @param tile - A tile to be added to the floor.
      */
     public void addTileToFloor(Tile tile) {
+        System.out.println("ADD" + amountOfTiles);
         if (amountOfTiles < tilesOnTheFloor.length) this.tilesOnTheFloor[this.amountOfTiles++] = tile;
         else this.parentBoard.getLinkedBox().add(tile);
     }
@@ -68,8 +69,10 @@ public class Floor implements Serializable {
         for(int i = 6; i >= 0; i--) {
             if(this.tilesOnTheFloor[i] != null) this.parentBoard.getLinkedBox().add(this.tilesOnTheFloor[i]);
             this.tilesOnTheFloor[i] = null;
-            this.amountOfTiles--;
+
         }
+        this.amountOfTiles = 0;
+        System.out.println("CLEAR" + amountOfTiles);
     }
     public boolean containsFirstTile() {
         for (int i = 0; i < amountOfTiles; i++) {

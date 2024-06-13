@@ -6,19 +6,21 @@ import main.azul.TileDrawingPool;
 import main.azul.Workshop;
 import main.client.GameSession;
 
-import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 
 public class WorkshopBoard extends JFrame {
     JPanel panel;
     private Image backgroundImage;
     private TileDrawingPool linkedTileDrawingPool;
     private GameSession gameSession;
+    private Timer timer;
+
     public WorkshopBoard(TileDrawingPool linkedTileDrawingPool, GameSession gameSession) throws FirstTileInWorkshopException {
         this.linkedTileDrawingPool = linkedTileDrawingPool;
         this.gameSession = gameSession;
@@ -46,25 +48,17 @@ public class WorkshopBoard extends JFrame {
 
         this.setContentPane(panel);
         this.setVisible(true);
-        new Thread(() -> {
-            while (true) {
-                try {
-                    this.update(gameSession.getLinkedTileDrawingPool());
-                } catch (FirstTileInWorkshopException e) {
-                    e.printStackTrace();
-                }
 
-                // Sleep for a while to prevent high CPU usage
-                try {
-                    Thread.sleep(10); // Sleep for 1 second
-                } catch (InterruptedException e) {
-                    // If the thread is interrupted, stop the execution
-                    e.printStackTrace();
-                }
+        // Initialize the timer
+        timer = new Timer(1000, e -> {
+            try {
+                update(gameSession.getLinkedTileDrawingPool());
+            } catch (FirstTileInWorkshopException ex) {
+                ex.printStackTrace();
             }
-        }).start();
+        });
+        timer.start();
     }
-
 
     public void update(TileDrawingPool linkedTileDrawingPool) throws FirstTileInWorkshopException {
         this.linkedTileDrawingPool = linkedTileDrawingPool;
@@ -73,9 +67,10 @@ public class WorkshopBoard extends JFrame {
         panel.revalidate();
         panel.repaint();
     }
+
     private List<WorkshopTile> getTilesFromWorkspace(Workshop w) throws FirstTileInWorkshopException {
         List<WorkshopTile> tiles = new ArrayList<>();
-        Tile[] colors = {Tile.BLUE, Tile.BLACK, Tile.RED,Tile.WHITE,Tile.YELLOW};
+        Tile[] colors = {Tile.BLUE, Tile.BLACK, Tile.RED, Tile.WHITE, Tile.YELLOW};
         for (Tile color : colors) {
             int quantity = w.getTileQuantity(color);
             for (int i = 0; i < quantity; i++) {
@@ -84,9 +79,10 @@ public class WorkshopBoard extends JFrame {
         }
         return tiles;
     }
-    private List<WorkshopTile> getTilesFromMiddle(){
+
+    private List<WorkshopTile> getTilesFromMiddle() {
         List<WorkshopTile> tiles = new ArrayList<>();
-        Tile[] colors = {Tile.BLUE, Tile.BLACK, Tile.RED,Tile.WHITE,Tile.YELLOW};
+        Tile[] colors = {Tile.BLUE, Tile.BLACK, Tile.RED, Tile.WHITE, Tile.YELLOW};
         for (Tile color : colors) {
             int quantity = linkedTileDrawingPool.getMiddle().getTileQuantity(color);
             for (int i = 0; i < quantity; i++) {
@@ -95,8 +91,9 @@ public class WorkshopBoard extends JFrame {
         }
         return tiles;
     }
+
     public void loadTiles() throws FirstTileInWorkshopException {
-        for(int i = 0; i < 5; i++) {
+        for (int i = 0; i < 5; i++) {
             int x = 0;
             int y = 0;
             switch (i) {
@@ -123,26 +120,34 @@ public class WorkshopBoard extends JFrame {
             }
             int j = 0;
             for (WorkshopTile t : getTilesFromWorkspace(linkedTileDrawingPool.getWorkshops()[i])) {
-                switch (j){
-                    case 0:t.setBounds(x, y);break;
-                    case 1:t.setBounds(x+60, y);break;
-                    case 2:t.setBounds(x, y+60);break;
-                    case 3:t.setBounds(x+60, y+60);break;
+                switch (j) {
+                    case 0:
+                        t.setBounds(x, y);
+                        break;
+                    case 1:
+                        t.setBounds(x + 60, y);
+                        break;
+                    case 2:
+                        t.setBounds(x, y + 60);
+                        break;
+                    case 3:
+                        t.setBounds(x + 60, y + 60);
+                        break;
                 }
                 t.setWorkshopID(i);
                 panel.add(t);
                 j++;
             }
-            int w=0;
-            for(WorkshopTile t : getTilesFromMiddle()){
-                if(w<=3){
-                    t.setBounds(w*60+270, 300);
-                }else{
-                    t.setBounds((w-3)*60+270, 360);
-                }
-                panel.add(t);
-                w++;
+        }
+        int w = 0;
+        for (WorkshopTile t : getTilesFromMiddle()) {
+            if (w <= 3) {
+                t.setBounds(w * 60 + 270, 300);
+            } else {
+                t.setBounds((w - 4) * 60 + 270, 360);
             }
+            panel.add(t);
+            w++;
         }
     }
 }

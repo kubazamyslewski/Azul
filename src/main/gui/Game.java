@@ -1,7 +1,6 @@
 package main.gui;
 
 import main.Exceptions.FirstTileInWorkshopException;
-import main.azul.Board;
 import main.azul.Player;
 import main.client.GameSession;
 

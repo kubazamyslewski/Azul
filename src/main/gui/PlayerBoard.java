@@ -25,6 +25,7 @@ public class PlayerBoard extends JFrame {
     private int playerID;
     private Image backgroundImage;
     private GameSession gameSession;
+    private Timer timer;
 
     public PlayerBoard(Player m, GameSession gameSession){
         this.gameSession = gameSession;
@@ -58,18 +59,17 @@ public class PlayerBoard extends JFrame {
 
         this.setContentPane(panel);
         this.setVisible(true);
-        new Thread(() -> {
-            while (true) {
-                this.update();
-                try {
-                    Thread.sleep(10); // Sleep for 1 second
-                } catch (InterruptedException e) {
-                    // If the thread is interrupted, stop the execution
-                    e.printStackTrace();
-                }
+
+        // Initialize the timer
+        timer = new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                update();
             }
-        }).start();
+        });
+        timer.start();
     }
+
     private void loadBoard(){
         Mosaic mosaic = this.gameSession.getPlayers()[this.gameSession.getIndexFromPlayerID(model.getPlayerID())].getBoard().getMosaic();
         Wall wall = this.gameSession.getPlayers()[this.gameSession.getIndexFromPlayerID(model.getPlayerID())].getBoard().getWall();
@@ -89,19 +89,16 @@ public class PlayerBoard extends JFrame {
                 }catch (NullPointerException e){
                     color = "BLANK";
                 }
-                //jave pojebało i to jest konieczne
                 String c = color;
                 JPanel p = new JPanel() {
                     private Image backgroundImage;
                     {try {
-
                         URL url = getClass().getResource("/images/"+c+".png");
                         backgroundImage = ImageIO.read(url);
                     } catch (IOException e) {e.printStackTrace();}}
                     @Override
                     protected void paintComponent(Graphics g) {
                         super.paintComponent(g);
-                        // Draw the image on the panel
                         if (backgroundImage != null) {
                             g.drawImage(backgroundImage, 0, 0, this);
                         }
@@ -113,22 +110,24 @@ public class PlayerBoard extends JFrame {
                     p.setVisible(false);
                 }
                 p.setBounds(417+j*67, 267 + (i * 67),60,60);
-                panel.add(p); // Add the new panel to the main panel
+                panel.add(p);
             }
         }
     }
+
     private void update(){
         panel.removeAll();
         this.loadBoard();
         panel.revalidate();
         panel.repaint();
     }
+
     public void setInactive(){
         if(gameSession.getCurrentPlayer().getPlayerID() != model.getPlayerID()){
             JLabel label = new JLabel("not your turn");
             label.setBounds(400, 400, 100, 100);
-            label.setOpaque(true); // This line is necessary for the background color to show
-            label.setBackground(Color.RED); // Set the background color to red
+            label.setOpaque(true);
+            label.setBackground(Color.RED);
             this.add(label);
             label.setVisible(true);
         }

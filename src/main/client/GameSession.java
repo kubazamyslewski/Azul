@@ -27,15 +27,7 @@ public class GameSession {
     private Score score = new Score(this.getPlayers());
 
     public GameSession() {
-
-        do {
-            System.out.print("Enter the amount of players (2-4): ");
-            playerCount = inputHandler.nextInt();
-            if (playerCount < 2 || playerCount > 4) {
-                System.out.println("Incorrect number of players!");
-            }
-        } while (playerCount < 2 || playerCount > 4);
-
+        this.playerCount = 2;
         this.linkedBox = new Box();
         this.linkedBag = new Bag(this.linkedBox, 20, 20, 20, 20, 20);
         this.linkedTileDrawingPool = new TileDrawingPool(this.linkedBag, this.playerCount);

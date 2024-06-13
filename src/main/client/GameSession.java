@@ -44,7 +44,6 @@ public class GameSession {
         this.players[0].setStartingPlayer();
 
         System.out.println("Game setup complete.");
-        System.out.println("Player count: " + playerCount);
         System.out.println();
 
     }

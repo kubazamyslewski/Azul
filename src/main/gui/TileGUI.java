@@ -1,5 +1,8 @@
 package main.gui;
 
+import main.azul.Player;
+import main.client.GameSession;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -12,8 +15,10 @@ public class TileGUI extends JButton {
     private String color;
     private int row;
     private int col;
+    private GameSession gameSession;
 
-    public TileGUI(String color, int x, int y) {
+    public TileGUI(String color, int x, int y, GameSession gameSession) {
+        this.gameSession = gameSession;
         this.row = y;
         this.col = x;
         this.color = color;
@@ -42,5 +47,10 @@ public class TileGUI extends JButton {
     private void buttonClicked() {
         // Code to execute when the button is clicked
         System.out.println("Button at row " + row + " and column " + col + " clicked!");
+        for (Player player : gameSession.getPlayers()) {
+            player.setRowChoice(row+1);
+            player.setRowClicked(true);
+        }
+
     }
 }

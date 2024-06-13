@@ -2,6 +2,7 @@ package main.gui;
 
 import main.azul.Board;
 import main.azul.Player;
+import main.client.GameSession;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -19,12 +20,15 @@ public class PlayerBoard extends JFrame {
     private List<JButton> buildRowButtons;
     private int playerID;
     private Image backgroundImage;
+    private GameSession gameSession;
 
-    public PlayerBoard(Player m){
+    public PlayerBoard(Player m, GameSession gameSession){
+        this.gameSession = gameSession;
         buildRowButtons = new ArrayList<>();
         model = m;
         this.setSize(800, 800);
-
+        String name = "Player " + m.getPlayerID();
+        this.setTitle(name);
         this.setResizable(false);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
@@ -48,7 +52,7 @@ public class PlayerBoard extends JFrame {
 
         for(int i = 0; i < 5; i++){
             for(int j = 0; j < i+1; j++){
-                TileGUI tileGUI = new TileGUI("BLANK",j,i);
+                TileGUI tileGUI = new TileGUI("BLANK",j,i, gameSession);
                 buildRowButtons.add(tileGUI);
                 tileGUI.setBounds(317-j*67, 267+i*67);
                 panel.add(tileGUI);

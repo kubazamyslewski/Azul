@@ -15,6 +15,12 @@ import java.io.Serializable;
 public class Player implements Serializable {
 
 	private static int idGenerator = 1;
+	private int colorChoice = 0;
+	private int rowChoice = 0;
+	private int workshopChoice = 0;
+	private boolean workshopClicked = false;
+	private boolean rowClicked = false;
+	private String tilePool = "";
 
 	private GameSession game;
 	private final Board playerBoard;
@@ -83,6 +89,12 @@ public class Player implements Serializable {
 	 */
 	//TODO: handle a case in which none of the rows can be filled with a given tile
 	public void takeTile() throws ColorNotInTheMiddleException, WrongTileColourException, FirstTileInWorkshopException, ColorNotInWorkshopException {
+		colorChoice = 0;
+		rowChoice = 0;
+		workshopChoice = 0;
+		workshopClicked = false;
+		rowClicked = false;
+		tilePool = "";
 
 		String YELLOW = "\u001B[33m";
 
@@ -91,7 +103,7 @@ public class Player implements Serializable {
 		this.getBoard().printBoard();
 
 		boolean anyWorkshopsNotEmpty = false;
-		String tilePool;
+		//String tilePool;
 		int rowChoice;
 		Tile chosenColor = null;
 		Score score = this.game.getScore();
@@ -106,7 +118,14 @@ public class Player implements Serializable {
         if (!this.game.getLinkedTileDrawingPool().getMiddle().colorsEmpty() && anyWorkshopsNotEmpty) {
             do {
                 System.out.print("Choose tile pool (middle/workshop): ");
-                tilePool = this.game.getInputHandler().next();
+                //tilePool = this.game.getInputHandler().next();
+				do{
+					try {
+						Thread.sleep(50);
+					} catch (InterruptedException e) {
+						throw new RuntimeException(e);
+					}
+				}while (!workshopClicked);
             } while (!tilePool.equals("workshop") && !tilePool.equals("middle"));
         }else if(!anyWorkshopsNotEmpty){
             tilePool = "middle";
@@ -148,11 +167,18 @@ public class Player implements Serializable {
     }
 
 	private Workshop chooseWorkshop() throws FirstTileInWorkshopException {
-		int workshopChoice;
+		//workshopChoice;
 		Workshop chosenWorkshop = null;
 		do {
 			System.out.print("Choose workshop (1 - " + (2 * game.getPlayerCount() + 1) + "): ");
-			workshopChoice = this.game.getInputHandler().nextInt();
+			//workshopChoice = this.game.getInputHandler().nextInt();
+			do{
+                try {
+                    Thread.sleep(50);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }while (!workshopClicked);
 			if (workshopChoice < 1 || workshopChoice > (2 * game.getPlayerCount() + 1)) {
 				System.out.println("This workshop does not exist!");
 				continue;
@@ -162,16 +188,16 @@ public class Player implements Serializable {
 				System.out.println("This workshop is empty!");
 			}
 		} while (chosenWorkshop == null || chosenWorkshop.isEmpty());
-
+		workshopChoice = 0;
 		return chosenWorkshop;
 	}
 
 	private Tile chooseColorFromWorkshop(Workshop workshop) throws FirstTileInWorkshopException {
-		int colorChoice;
+		//int colorChoice;
 		Tile chosenColor = null;
 		do {
 			System.out.print("Choose color [1 - BLACK, 2 - WHITE, 3 - RED, 4 - YELLOW, 5 - BLUE]: ");
-			colorChoice = this.game.getInputHandler().nextInt();
+			//colorChoice = this.game.getInputHandler().nextInt();
 			if (colorChoice < 1 || colorChoice > 5) {
 				System.out.println("Incorrect color!");
 				continue;
@@ -182,16 +208,16 @@ public class Player implements Serializable {
 				chosenColor = null;
 			}
 		} while (chosenColor == null);
-
+		colorChoice = 0;
 		return chosenColor;
 	}
 
 	private Tile chooseColorFromMiddle() {
-		int colorChoice;
+		//int colorChoice;
 		Tile chosenColor = null;
 		do {
 			System.out.print("Choose color [1 - BLACK, 2 - WHITE, 3 - RED, 4 - YELLOW, 5 - BLUE]: ");
-			colorChoice = this.game.getInputHandler().nextInt();
+			//colorChoice = this.game.getInputHandler().nextInt();
 			if (colorChoice < 1 || colorChoice > 5) {
 				System.out.println("Incorrect color!");
 				continue;
@@ -202,17 +228,24 @@ public class Player implements Serializable {
 				chosenColor = null;
 			}
 		} while (chosenColor == null);
-
+		colorChoice = 0;
 		return chosenColor;
 	}
 
 	private int chooseRow(Tile chosenColor) {
-		int rowChoice;
+		//int rowChoice;
 		boolean isRowCorrect;
 		do {
 			isRowCorrect = true;
 			System.out.print("Choose row: ");
-			rowChoice = this.game.getInputHandler().nextInt();
+			//rowChoice = this.game.getInputHandler().nextInt();
+			do{
+				try {
+					Thread.sleep(50);
+				} catch (InterruptedException e) {
+					throw new RuntimeException(e);
+				}
+			}while (!rowClicked);
 			if (rowChoice < 1 || rowChoice > 5) {
 				System.out.println("This row does not exist!");
 			}
@@ -225,6 +258,32 @@ public class Player implements Serializable {
 				isRowCorrect = false;
 			}
 		} while ((rowChoice < 1 || rowChoice > 5) || !isRowCorrect);
-		return rowChoice - 1;
+		int temp = rowChoice;
+		rowChoice = 0;
+		return temp - 1;
+	}
+
+	public void setColorChoice(int colorChoice) {
+		this.colorChoice = colorChoice;
+	}
+
+	public void setRowChoice(int rowChoice) {
+		this.rowChoice = rowChoice;
+	}
+
+	public void setWorkshopChoice(int workshopChoice) {
+		this.workshopChoice = workshopChoice;
+	}
+
+	public void setWorkshopClicked(boolean workshopClicked) {
+		this.workshopClicked = workshopClicked;
+	}
+
+	public void setRowClicked(boolean rowClicked) {
+		this.rowClicked = rowClicked;
+	}
+
+	public void setTilePool(String tilePool) {
+		this.tilePool = tilePool;
 	}
 }

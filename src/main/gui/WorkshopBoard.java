@@ -4,6 +4,8 @@ import main.Exceptions.FirstTileInWorkshopException;
 import main.azul.Tile;
 import main.azul.TileDrawingPool;
 import main.azul.Workshop;
+import main.client.GameSession;
+
 import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -16,8 +18,10 @@ public class WorkshopBoard extends JFrame {
     JPanel panel;
     private Image backgroundImage;
     private TileDrawingPool linkedTileDrawingPool;
-    public WorkshopBoard(TileDrawingPool linkedTileDrawingPool) throws FirstTileInWorkshopException {
+    private GameSession gameSession;
+    public WorkshopBoard(TileDrawingPool linkedTileDrawingPool, GameSession gameSession) throws FirstTileInWorkshopException {
         this.linkedTileDrawingPool = linkedTileDrawingPool;
+        this.gameSession = gameSession;
         this.setSize(800, 800);
 
         this.setResizable(false);
@@ -56,7 +60,7 @@ public class WorkshopBoard extends JFrame {
         for (Tile color : colors) {
             int quantity = w.getTileQuantity(color);
             for (int i = 0; i < quantity; i++) {
-                tiles.add(new WorkshopTile(color.toString()));
+                tiles.add(new WorkshopTile(color.toString(), gameSession));
             }
         }
         return tiles;
@@ -67,7 +71,7 @@ public class WorkshopBoard extends JFrame {
         for (Tile color : colors) {
             int quantity = linkedTileDrawingPool.getMiddle().getTileQuantity(color);
             for (int i = 0; i < quantity; i++) {
-                tiles.add(new WorkshopTile(color.toString()));
+                tiles.add(new WorkshopTile(color.toString(), gameSession));
             }
         }
         return tiles;

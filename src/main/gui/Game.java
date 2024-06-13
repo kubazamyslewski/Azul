@@ -33,10 +33,10 @@ public class Game {
         gameSession.applyFinishingScore();
     }
     public void initializeWorkshop() throws FirstTileInWorkshopException {
-        workshopBoard = new WorkshopBoard(gameSession.getLinkedTileDrawingPool());
+        workshopBoard = new WorkshopBoard(gameSession.getLinkedTileDrawingPool(), gameSession);
     }
     public void initializeBoard(Player i){
-        playerBoards.add(new PlayerBoard(i));
+        playerBoards.add(new PlayerBoard(i, gameSession));
     }
     public static void main(String[] args) throws FirstTileInWorkshopException {
         new Game();

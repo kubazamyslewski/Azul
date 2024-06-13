@@ -16,6 +16,9 @@ public class GameSession {
     private TileDrawingPool linkedTileDrawingPool;
 
     private Bag linkedBag;
+    private Player currentPlayer;
+
+
 
     private Box linkedBox;
 
@@ -98,7 +101,7 @@ public class GameSession {
         boolean isEmpty;
         int currentPlayerIndex = getStartingPlayerIndex();
         do {
-            Player currentPlayer = this.players[currentPlayerIndex];
+            currentPlayer = this.players[currentPlayerIndex];
             currentPlayer.takeTile();
 
             currentPlayerIndex = (currentPlayerIndex + 1) % this.players.length;
@@ -203,6 +206,14 @@ public class GameSession {
 
     public void setInputHandler(Scanner inputHandler) {
         this.inputHandler = inputHandler;
+    }
+
+    public Player getCurrentPlayer() {
+        return currentPlayer;
+    }
+
+    public void setCurrentPlayer(Player currentPlayer) {
+        this.currentPlayer = currentPlayer;
     }
 
     public void setScore(Score score) {

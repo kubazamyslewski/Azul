@@ -46,7 +46,26 @@ public class WorkshopBoard extends JFrame {
 
         this.setContentPane(panel);
         this.setVisible(true);
+        new Thread(() -> {
+            while (true) {
+                try {
+                    this.update(gameSession.getLinkedTileDrawingPool());
+                } catch (FirstTileInWorkshopException e) {
+                    e.printStackTrace();
+                }
+
+                // Sleep for a while to prevent high CPU usage
+                try {
+                    Thread.sleep(10); // Sleep for 1 second
+                } catch (InterruptedException e) {
+                    // If the thread is interrupted, stop the execution
+                    e.printStackTrace();
+                }
+            }
+        }).start();
     }
+
+
     public void update(TileDrawingPool linkedTileDrawingPool) throws FirstTileInWorkshopException {
         this.linkedTileDrawingPool = linkedTileDrawingPool;
         panel.removeAll();
@@ -116,9 +135,13 @@ public class WorkshopBoard extends JFrame {
             }
             int w=0;
             for(WorkshopTile t : getTilesFromMiddle()){
-                t.setBounds((w%2)*60+300, (w%2)*60+300);
+                if(w<=3){
+                    t.setBounds(w*60+270, 300);
+                }else{
+                    t.setBounds((w-3)*60+270, 360);
+                }
                 panel.add(t);
-                j++;
+                w++;
             }
         }
     }

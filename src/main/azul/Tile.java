@@ -22,4 +22,14 @@ public enum Tile implements Serializable {
   public boolean equals(Tile other) {
     return this.valueOfColor == other.valueOfColor;
   }
+  public String getColor(){
+    return switch (this.valueOfColor) {
+      case 1 -> "BLACK";
+      case 2 -> "WHITE";
+      case 3 -> "RED";
+      case 4 -> "YELLOW";
+      case 5 -> "BLUE";
+      default -> "BLANK";
+    };
+  }
 }

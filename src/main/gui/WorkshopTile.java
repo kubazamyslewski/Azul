@@ -53,36 +53,45 @@ public class WorkshopTile extends JButton{
     private void buttonClicked() {
         // Code to execute when the button is clicked
         System.out.println("workshopID " + workshopID + " clicked! Color: " + color);
-        for (Player player : gameSession.getPlayers()) {
-            player.setWorkshopChoice(workshopID+1);
-            player.setWorkshopClicked(true);
-            player.setTilePool("workshop");
-        }
+        Player p = gameSession.getCurrentPlayer();
+        p.setWorkshopChoice(workshopID+1);
+        p.setWorkshopClicked(true);
+        p.setTilePool("workshop");
+//        for (Player player : gameSession.getPlayers()) {
+//            player.setWorkshopChoice(workshopID+1);
+//            player.setWorkshopClicked(true);
+//            player.setTilePool("workshop");
+//        }
         switch (color) {
             case "BLUE":
-                for (Player player : gameSession.getPlayers()) {
-                    player.setColorChoice(5);
-                }
+                p.setColorChoice(5);
+//                for (Player player : gameSession.getPlayers()) {
+//                    player.setColorChoice(5);
+//                }
                 break;
             case "BLACK":
-                for (Player player : gameSession.getPlayers()) {
-                    player.setColorChoice(1);
-                }
+                p.setColorChoice(1);
+//                for (Player player : gameSession.getPlayers()) {
+//                    player.setColorChoice(1);
+//                }
                 break;
             case "RED":
-                for (Player player : gameSession.getPlayers()) {
-                    player.setColorChoice(3);
-                }
+                p.setColorChoice(3);
+//                for (Player player : gameSession.getPlayers()) {
+//                    player.setColorChoice(3);
+//                }
                 break;
             case "WHITE":
-                for (Player player : gameSession.getPlayers()) {
-                    player.setColorChoice(2);
-                }
+                p.setColorChoice(2);
+//                for (Player player : gameSession.getPlayers()) {
+//                    player.setColorChoice(2);
+//                }
                 break;
             case "YELLOW":
-                for (Player player : gameSession.getPlayers()) {
-                    player.setColorChoice(4);
-                }
+                p.setColorChoice(4);
+//                for (Player player : gameSession.getPlayers()) {
+//                    player.setColorChoice(4);
+//                }
                 break;
         }
     }

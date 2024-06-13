@@ -119,6 +119,7 @@ public class Player implements Serializable {
             do {
                 System.out.print("Choose tile pool (middle/workshop): ");
                 //tilePool = this.game.getInputHandler().next();
+				//tu fred chyba nie jest konieczny
 				do{
 					try {
 						Thread.sleep(50);
@@ -139,6 +140,7 @@ public class Player implements Serializable {
                 Workshop chosenWorkshop = null;
                 do {
                     chosenWorkshop = this.chooseWorkshop();
+
                 } while (chosenWorkshop.isEmpty());
 
                 do {
@@ -187,6 +189,7 @@ public class Player implements Serializable {
 			if (chosenWorkshop.isEmpty()) {
 				System.out.println("This workshop is empty!");
 			}
+
 		} while (chosenWorkshop == null || chosenWorkshop.isEmpty());
 		workshopChoice = 0;
 		return chosenWorkshop;

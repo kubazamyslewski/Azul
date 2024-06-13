@@ -23,6 +23,7 @@ public class PlayerBoard extends JFrame {
     private List<JButton> buildRowButtons;
     private int playerID;
     private Image backgroundImage;
+    private JLabel wanderingTile;
     private GameSession gameSession;
     private Timer timer;
 
@@ -53,6 +54,16 @@ public class PlayerBoard extends JFrame {
             }
         };
         panel.setLayout(null);
+        wanderingTile = new JLabel();
+        try {
+            URL tileUrl = getClass().getResource("/images/black_tile.png");
+            Image tileImage = ImageIO.read(tileUrl);
+            wanderingTile.setIcon(new ImageIcon(tileImage));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        wanderingTile.setBounds(10, 10, 50, 50); // Initial position and size
+        panel.add(wanderingTile);
 
         this.loadBoard();
 
@@ -125,6 +136,7 @@ public class PlayerBoard extends JFrame {
                 panel.add(p);
             }
         }
+        updateWanderingTile();
     }
 
     private void update() {
@@ -145,5 +157,20 @@ public class PlayerBoard extends JFrame {
         }
         this.revalidate();
         this.repaint();
+    }
+
+    private void updateWanderingTile() {
+        int score = model.getPlayerScore() -1;
+        if (score == -1){
+            wanderingTile.setVisible(false);
+            return;
+        }
+        wanderingTile.setVisible(true);
+        // Calculate the x and y positions based on the score
+        int xPosition = 40 + (score % 20) * 35; // Assuming each score box is 35 pixels wide
+        int yPosition = 40 + (score / 20) * 35; // Adjusting for the row change after every 20 points
+
+        wanderingTile.setBounds(xPosition, yPosition, 25, 25); // Update position based on score
+        panel.add(wanderingTile); // Re-add the wandering tile to the panel
     }
 }

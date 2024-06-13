@@ -1,6 +1,7 @@
 package main.gui;
 
 import main.Exceptions.FirstTileInWorkshopException;
+import main.azul.Board;
 import main.azul.Player;
 import main.client.GameSession;
 
@@ -21,7 +22,6 @@ public class Game {
         while (!gameSession.isOver()) {
             try{
                 gameSession.runRound();
-                System.out.println(gameSession.getCurrentPlayer().getPlayerScore());
                 gameSession.checkIfOver();
                 if (!gameSession.isOver()) {
                     gameSession.setupNewRound();
@@ -41,4 +41,6 @@ public class Game {
     public static void main(String[] args) throws FirstTileInWorkshopException {
         new Game();
     }
+
+
 }

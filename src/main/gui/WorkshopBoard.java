@@ -148,6 +148,7 @@ public class WorkshopBoard extends JFrame {
             }
             panel.add(t);
             w++;
+            t.setWorkshopID(6);
         }
     }
 }

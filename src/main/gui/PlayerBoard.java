@@ -1,9 +1,8 @@
 package main.gui;
 
-import main.Exceptions.FirstTileInWorkshopException;
-import main.azul.Board;
 import main.azul.Mosaic;
 import main.azul.Player;
+import main.azul.Tile;
 import main.azul.Wall;
 import main.client.GameSession;
 
@@ -27,7 +26,7 @@ public class PlayerBoard extends JFrame {
     private GameSession gameSession;
     private Timer timer;
 
-    public PlayerBoard(Player m, GameSession gameSession){
+    public PlayerBoard(Player m, GameSession gameSession) {
         this.gameSession = gameSession;
         buildRowButtons = new ArrayList<>();
         model = m;
@@ -70,32 +69,45 @@ public class PlayerBoard extends JFrame {
         timer.start();
     }
 
-    private void loadBoard(){
+    private void loadBoard() {
         Mosaic mosaic = this.gameSession.getPlayers()[this.gameSession.getIndexFromPlayerID(model.getPlayerID())].getBoard().getMosaic();
         Wall wall = this.gameSession.getPlayers()[this.gameSession.getIndexFromPlayerID(model.getPlayerID())].getBoard().getWall();
-        for(int i = 0; i < 5; i++){
-            for(int j = 0; j < i+1; j++){
-                TileGUI tileGUI = new TileGUI("BLANK",j,i, gameSession);
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < i + 1; j++) {
+                Tile t = wall.getWallMap().get(i)[j];
+                String color;
+                if (t == null) {
+                    color = "BLANK";
+                } else {
+                    color = t.getColor();
+                }
+                TileGUI tileGUI = new TileGUI(color, j, i, gameSession);
                 buildRowButtons.add(tileGUI);
-                tileGUI.setBounds(317-j*67, 267+i*67);
+                tileGUI.setBounds(317 - j * 67, 267 + i * 67);
                 panel.add(tileGUI);
             }
         }
-        for(int i = 0; i < 5; i++){
-            for(int j=0;j<5;j++){
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 5; j++) {
                 String color;
-                try{
-                    color = mosaic.getPlacedTile(i,j).getColor();
-                }catch (NullPointerException e){
+                try {
+                    color = mosaic.getPlacedTile(i, j).getColor();
+                } catch (NullPointerException e) {
                     color = "BLANK";
                 }
                 String c = color;
                 JPanel p = new JPanel() {
                     private Image backgroundImage;
-                    {try {
-                        URL url = getClass().getResource("/images/"+c+".png");
-                        backgroundImage = ImageIO.read(url);
-                    } catch (IOException e) {e.printStackTrace();}}
+
+                    {
+                        try {
+                            URL url = getClass().getResource("/images/" + c + ".png");
+                            backgroundImage = ImageIO.read(url);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
                     @Override
                     protected void paintComponent(Graphics g) {
                         super.paintComponent(g);
@@ -104,26 +116,26 @@ public class PlayerBoard extends JFrame {
                         }
                     }
                 };
-                if(!c.equals("BLANK")){
+                if (!c.equals("BLANK")) {
                     p.setVisible(true);
-                }else {
+                } else {
                     p.setVisible(false);
                 }
-                p.setBounds(417+j*67, 267 + (i * 67),60,60);
+                p.setBounds(417 + j * 67, 267 + (i * 67), 60, 60);
                 panel.add(p);
             }
         }
     }
 
-    private void update(){
+    private void update() {
         panel.removeAll();
         this.loadBoard();
         panel.revalidate();
         panel.repaint();
     }
 
-    public void setInactive(){
-        if(gameSession.getCurrentPlayer().getPlayerID() != model.getPlayerID()){
+    public void setInactive() {
+        if (gameSession.getCurrentPlayer().getPlayerID() != model.getPlayerID()) {
             JLabel label = new JLabel("not your turn");
             label.setBounds(400, 400, 100, 100);
             label.setOpaque(true);
